@@ -19,7 +19,7 @@ const Router = Ember.Router.extend({
 
   willTransition: function(oldInfos, newInfos, transition) {
     this._super(...arguments);
-    if (transition.targetName === 'login') {
+    if (this.get('session.userPromise')) {
       return;
     }
     if (!this.get('session.user')) {
