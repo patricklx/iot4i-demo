@@ -3,7 +3,9 @@
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'demoapp',
+    podModulePrefix: 'demoapp/pods',
     environment: environment,
+    iotUri: 'https://iot4insurance-api-dfaeeb6a-1466-4a84-ac30-51dea3e7fff4.mybluemix.net',
     rootURL: '/',
     locationType: 'auto',
     EmberENV: {

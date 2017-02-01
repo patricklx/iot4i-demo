@@ -1,13 +1,7 @@
-/*jshint node:true*/
-module.exports = {
-  "framework": "qunit",
-  "test_page": "tests/index.html?hidepassed",
-  "disable_watching": true,
-  "launch_in_ci": [
-    "PhantomJS"
-  ],
-  "launch_in_dev": [
-    "PhantomJS",
-    "Chrome"
-  ]
-};
+var request = require('request');
+request('https://jsonplaceholder.typicode.com/posts/1',{json: true}, function (error, response, body) {
+if (!error && response.statusCode == 200) {
+  console.log(response);
+  console.log(body) // Show the HTML for the Google homepage.
+}
+})

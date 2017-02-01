@@ -1,0 +1,10 @@
+<div class="page-header">
+  <h1>Welcome {{session.user.username}}</h1>
+
+
+  {{#paper-button raised=true onClick=(action "createUser")}}Create User{{/paper-button}}
+
+  {{#if loading}}
+    {{paper-progress-circular}}
+  {{/if}}
+</div>
