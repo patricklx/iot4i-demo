@@ -12,11 +12,11 @@
     {{#paper-content}}
       {{#paper-list}}
 
-        {{#menu-item active=(eq routing.currentRouteName 'settings') onClick=(action 'transitionTo' "settings")}}
+        {{#menu-item active=(eq currentRouteName 'settings') onClick=(action 'transitionTo' "settings")}}
           Settings
         {{/menu-item}}
 
-        {{#menu-item active=(eq routing.currentRouteName 'shields') onClick=(action 'transitionTo' "shields")}}
+        {{#menu-item active=(eq currentRouteName 'shields') onClick=(action 'transitionTo' "shields")}}
           Shields
         {{/menu-item}}
 
