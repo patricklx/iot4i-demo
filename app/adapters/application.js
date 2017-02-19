@@ -11,7 +11,12 @@ export default DS.RESTAdapter.extend({
     };
   }),
 
+  urlForFindAll(modelName, snapshot) {
+    modelName = Ember.String.camelize(modelName);
+    return this.get('host') + `/${modelName}/all`;
+  },
+
   pathForType(type) {
-    return type.constructor.modelName;
+    return type.constructor.modelName || type;
   }
 });

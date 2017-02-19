@@ -1,0 +1,37 @@
+
+<div style="height: 500px;width: 100%;">
+  {{#leaflet-map lat=lat lng=lng zoom=zoom as |layers|}}
+
+    {{layers.tile url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
+
+    {{#each model as |user|}}
+      {{#layers.circle-marker location=user.geoLocation onClick=(action (mut currentUser) user) as |marker|}}
+        {{#marker.tooltip}}
+          <strong>
+            {{user.username}}
+          </strong>
+          <br>
+          <small>{{user.address}}</small>
+          <br>
+          Hazards: {{user.hazardEvents.length}}
+        {{/marker.tooltip}}
+      {{/layers.circle-marker}}
+    {{/each}}
+
+  {{/leaflet-map}}
+</div>
+
+
+{{#paper-list}}
+  {{#each currentUser.hazardEvents as |hazard|}}
+    {{#paper-item class="md-3-line"}}
+      <div class="md-list-item-text">
+        <h3>{{hazard.hazardUuid}}</h3>
+        <h4>{{hazard.user.username}}</h4>
+        <p>{{hazard.title}}</p>
+      </div>
+      {{paper-divider}}
+      {{#paper-button}}Details{{/paper-button}}
+    {{/paper-item}}
+  {{/each}}
+{{/paper-list}}

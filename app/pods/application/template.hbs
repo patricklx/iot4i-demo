@@ -7,8 +7,13 @@
     onToggle=(action (mut leftSideBarOpen))
   }}
     {{#paper-toolbar as |toolbar|}}
-      {{#paper-toolbar-tools}}Menu{{/paper-toolbar-tools}}
+      {{#paper-toolbar-tools }}
+        {{#paper-button onClick=(action 'transitionTo' 'index')}}
+          {{paper-icon "home"}} Home
+        {{/paper-button}}
+      {{/paper-toolbar-tools}}
     {{/paper-toolbar}}
+
     {{#paper-content}}
       {{#paper-list}}
 
@@ -18,6 +23,10 @@
 
         {{#menu-item active=(eq currentRouteName 'shields') onClick=(action 'transitionTo' "shields")}}
           Shields
+        {{/menu-item}}
+
+        {{#menu-item active=(eq currentRouteName 'hazards') onClick=(action 'transitionTo' "hazards")}}
+          Hazards
         {{/menu-item}}
 
       {{/paper-list}}

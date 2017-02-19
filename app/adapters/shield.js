@@ -1,8 +1,9 @@
 import AppAdapter from './application';
 
 export default AppAdapter.extend({
-  urlForFindAll(id, modelName, snapshot) {
-    return this.get('host') + `/shield/all`;
+
+  urlForFindRecord(id, modelName, snapshot) {
+    return this.get('host') + `/shield/byuuid/${id}`;
   },
 
   queryRecord(store, type, query) {

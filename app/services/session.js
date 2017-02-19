@@ -26,13 +26,11 @@ export default Ember.Service.extend({
     this.set('credentials', {name:name, password:password});
     let p = this.get('store').adapterFor('user').login(name, password);
     return p.then((data) => {
-      this.get('store').pushPayload('user', {data:  data});
-      this.set('userPromise', this.get('store').find('user', data.username));
-      this.get('userPromise').then((user) => {
+      this.set('userPromise', this.get('store').queryRecord('user', {username: data.username}));
+      return this.get('userPromise').then((user) => {
         this.set('user', user);
-        localStorage.setItem('credentials', JSON.stringify(this.get('credentials')))
+        localStorage.setItem('credentials', JSON.stringify(this.get('credentials')));
       });
-      return this.get('userPromise');
     });
   }
 });
