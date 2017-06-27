@@ -28,7 +28,7 @@ const Router = Ember.Router.extend({
         transition.retry();
       }, () => {
         this.transitionTo('login');
-      })
+      });
     }
   }
 });
@@ -36,6 +36,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('login', { path: 'login' });
   this.route('shields', { path: 'shields' });
+  this.route('hazards', { path: 'hazards' });
   this.route('settings', { path: 'settings' });
   this.route('trylogin', { path: 'trylogin' });
   this.route('shields', { path: 'shields' });

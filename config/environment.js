@@ -5,7 +5,9 @@ module.exports = function(environment) {
     modulePrefix: 'demoapp',
     podModulePrefix: 'demoapp/pods',
     environment: environment,
-    iotUri: 'https://iot4insurance-api-dfaeeb6a-1466-4a84-ac30-51dea3e7fff4.mybluemix.net',
+    tenantId: '1c4860afd0d5529f693fbe4729de95ec',
+    iotUri: 'http://localhost:10010',
+    backendUri: 'http://iot4i-starter-backend.mybluemix.net',
     rootURL: '/',
     locationType: 'auto',
     EmberENV: {

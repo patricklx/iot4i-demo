@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
       this.set('loading', true);
       let p = this.get('session').login(
         this.get('name'),
-        this.get('password'),
+        this.get('password')
       );
 
       p.then(() => {

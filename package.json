@@ -25,6 +25,7 @@
     "ember-cli-htmlbars-inline-precompile": "^0.3.3",
     "ember-cli-inject-live-reload": "^1.4.1",
     "ember-cli-jshint": "^2.0.1",
+    "ember-cli-moment-shim": "3.3.3",
     "ember-cli-qunit": "^3.0.1",
     "ember-cli-release": "^0.2.9",
     "ember-cli-sass": "^6.1.1",
@@ -34,10 +35,14 @@
     "ember-cli-uglify": "^1.2.0",
     "ember-component-css": "0.2.10",
     "ember-data": "^2.11.0",
+    "ember-debug-logger": "1.0.0",
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.6.0",
+    "ember-moment": "7.3.1",
     "ember-paper": "1.0.0-alpha.14",
     "ember-resolver": "^2.0.3",
+    "ember-simple-auth": "1.3.0",
+    "ember-simple-auth-token": "2.1.0",
     "ember-source": "^2.11.0",
     "ember-welcome-page": "^2.0.2",
     "loader.js": "^4.0.10"
@@ -45,5 +50,6 @@
   "engines": {
     "node": ">= 0.12.0"
   },
-  "private": true
+  "private": true,
+  "dependencies": {}
 }

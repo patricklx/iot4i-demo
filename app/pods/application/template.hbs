@@ -20,10 +20,14 @@
           Shields
         {{/menu-item}}
 
+        {{#menu-item active=(eq currentRouteName 'hazards') onClick=(action 'transitionTo' "hazards")}}
+          Hazards
+        {{/menu-item}}
+
       {{/paper-list}}
     {{/paper-content}}
   {{/paper-sidenav}}
-  <div class="flex layout-column">
+  <div class="flex layout-column" style="margin-left: 270px;">
     {{#paper-toolbar theme='default' as |toolbar|}}
       {{#paper-toolbar-tools}}
 
