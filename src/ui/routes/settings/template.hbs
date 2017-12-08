@@ -1,0 +1,17 @@
+{{#paper-form onSubmit=(action "submit") as |form|}}
+  <fieldset>
+    <legend>User Attributes</legend>
+  <div class="layout-row">
+    {{form.input label="Phonenumber" value=session.user.phonenumber onChange=(action (mut session.user.phonenumber)) required=true}}
+  </div>
+  <div class="layout-row">
+    {{#form.submit-button raised=true primary=true disabled=(or form.isInvalid loading)}}
+      {{#if loading}}
+        {{paper-progress-circular accent=true diameter=30}}
+      {{else}}
+        Submit
+      {{/if}}
+    {{/form.submit-button}}
+  </div>
+  </fieldset>
+{{/paper-form}}

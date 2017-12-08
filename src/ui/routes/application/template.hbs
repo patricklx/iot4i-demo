@@ -1,0 +1,65 @@
+{{#paper-sidenav-container class="inner-sidenav"}}
+
+  {{#paper-sidenav
+    class="md-whiteframe-z2 site-sidenav"
+    name="left"
+    open=leftSideBarOpen
+    onToggle=(action (mut leftSideBarOpen))
+  }}
+    {{#paper-toolbar as |toolbar|}}
+      {{#paper-toolbar-tools}}Menu{{/paper-toolbar-tools}}
+    {{/paper-toolbar}}
+    {{#paper-content}}
+      {{#paper-list}}
+
+        {{#menu-item active=(eq currentRouteName 'settings') onClick=(action 'transitionTo' "settings")}}
+          Settings
+        {{/menu-item}}
+
+        {{#menu-item active=(eq currentRouteName 'shields') onClick=(action 'transitionTo' "shields")}}
+          Shields
+        {{/menu-item}}
+
+        {{#menu-item active=(eq currentRouteName 'hazards') onClick=(action 'transitionTo' "hazards")}}
+          Hazards
+        {{/menu-item}}
+
+      {{/paper-list}}
+    {{/paper-content}}
+  {{/paper-sidenav}}
+  <div class="flex layout-column" style="margin-left: 270px;">
+    {{#paper-toolbar theme='default' as |toolbar|}}
+      {{#paper-toolbar-tools}}
+
+        {{currentRouteName}}
+
+        {{#paper-sidenav-toggle name="left" as |toggleAction|}}
+          {{#paper-button raised=true classNames="hide-gt-sm" onClick=(action toggleAction)}}
+            Toggle
+          {{/paper-button}}
+        {{/paper-sidenav-toggle}}
+
+        <span class="flex"></span>
+
+        {{#paper-button iconButton=true}}
+          {{#paper-menu as |menu|}}
+            {{#menu.trigger}}
+              {{#paper-button iconButton=true}}
+                {{paper-icon "account circle"}}
+              {{/paper-button}}
+            {{/menu.trigger}}
+            {{#menu.content width=4 as |content|}}
+              {{#content.menu-item onClick=(action 'logout')}}
+                Logout
+              {{/content.menu-item}}
+            {{/menu.content}}
+          {{/paper-menu}}
+        {{/paper-button}}
+
+      {{/paper-toolbar-tools}}
+    {{/paper-toolbar}}
+  {{#paper-content padding=true}}
+    {{outlet}}
+  {{/paper-content}}
+  </div>
+{{/paper-sidenav-container}}

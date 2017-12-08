@@ -1,0 +1,52 @@
+<div class="layout-row layout-wrap flex">
+  <div class="layout-column flex-xs flex-gt-xs-50">
+  {{#paper-card as |card|}}
+    {{#paper-toolbar as |toolbar|}}
+      {{#paper-toolbar-tools}}Hazards{{/paper-toolbar-tools}}
+    {{/paper-toolbar}}
+    {{#card.content as |content|}}
+      {{#paper-tabs
+        center=false
+        stretch=false
+        shouldpaginate=true
+        borderBottom=true
+        selected=selectedBasicTab
+        onChange=(action (mut selectedBasicTab)) as |tabs|}}
+        {{#tabs.tab}}
+         1
+        {{/tabs.tab}}
+        {{#tabs.tab}}
+          2
+        {{/tabs.tab}}
+        {{#tabs.tab}}
+         3
+        {{/tabs.tab}}
+        {{#tabs.tab}}
+          4
+        {{/tabs.tab}}
+        {{#tabs.tab}}
+          5
+        {{/tabs.tab}}
+      {{/paper-tabs}}
+      {{#paper-list}}
+        {{#each model as |hazard index|}}
+          {{#paper-item class="md-3-line" as |controls|}}
+            <div class="md-list-item-text">
+              #{{index}}
+              <h3>User: {{hazard.userId}}</h3>
+              <h4>Shield name {{default-to hazard.shield.name "<does not exist>"}}</h4>
+              <p>At {{moment hazard.createdAt}}</p>
+            </div>
+            <div class="md-secondary-container">
+              {{paper-icon "check" class="md-avatar-icon"}}
+              {{#controls.button primary=true}}
+                Okay
+              {{/controls.button}}
+            </div>
+          {{/paper-item}}
+        {{/each}}
+      {{/paper-list}}
+    {{/card.content}}
+  {{/paper-card}}
+  </div>
+</div>

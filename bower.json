@@ -1,0 +1,6 @@
+{
+  "name": "iot-app",
+  "dependencies": {
+    "ember": "components/ember#canary"
+  }
+}
