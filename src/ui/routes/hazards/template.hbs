@@ -5,29 +5,6 @@
       {{#paper-toolbar-tools}}Hazards{{/paper-toolbar-tools}}
     {{/paper-toolbar}}
     {{#card.content as |content|}}
-      {{#paper-tabs
-        center=false
-        stretch=false
-        shouldpaginate=true
-        borderBottom=true
-        selected=selectedBasicTab
-        onChange=(action (mut selectedBasicTab)) as |tabs|}}
-        {{#tabs.tab}}
-         1
-        {{/tabs.tab}}
-        {{#tabs.tab}}
-          2
-        {{/tabs.tab}}
-        {{#tabs.tab}}
-         3
-        {{/tabs.tab}}
-        {{#tabs.tab}}
-          4
-        {{/tabs.tab}}
-        {{#tabs.tab}}
-          5
-        {{/tabs.tab}}
-      {{/paper-tabs}}
       {{#paper-list}}
         {{#each model as |hazard index|}}
           {{#paper-item class="md-3-line" as |controls|}}

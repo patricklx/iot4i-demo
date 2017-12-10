@@ -1,16 +1,15 @@
 import Ember from 'ember';
+import config from 'iot-app/config/environment';
 
 export default Ember.Service.extend({
   store: Ember.inject.service(),
+  router: Ember.inject.service(),
+  emberOauth2: Ember.inject.service(),
   user: null,
   userPromise: null,
   credentials: null,
 
-  tryLogin() {
-    if (this.get('userPromise')) {
-      return this.get('userPromise');
-    }
-    localStorage.setItem('credentials', 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpPU0UiLCJraWQiOiJvS3dTY21CRFdITjBMVEhnVDRpQjhpMjdZUjNYOF9IRWQ3Smo2RlEtcHhVIn0.eyJpc3MiOiJhcHBpZC1vYXV0aC5uZy5ibHVlbWl4Lm5ldCIsImV4cCI6MTQ5ODU3Nzk5NCwiYXVkIjoiMjBjMDliNmUtMzBiYi00ZmUxLTgxNDAtYzY3MTA2ZmE3MmJkIiwic3ViIjoiN2RjNTJkY2MtOWQzYy00MDA0LWE3Y2UtYWIxMGEzYzUwMzlhIiwiYW1yIjpbImdvb2dsZSJdLCJpYXQiOjE0OTg1NzQzOTQsInRlbmFudCI6IjE0MDAxNWRlLWM1NGYtNDlhMC1iYzRhLTQyOTBiMmJhYTQ1ZiIsInNjb3BlIjoiYXBwaWRfZGVmYXVsdCBhcHBpZF9yZWFkcHJvZmlsZSBhcHBpZF9yZWFkdXNlcmF0dHIgYXBwaWRfd3JpdGV1c2VyYXR0ciJ9.CKfc1oFUMaQOLBS0BX_9IjerpNI3I7FYeHmMf_CehSX_5eCmZZAEZaa2l-3osGqMySUCXe3_xg0dgHspBwwwyBbyHDOT-3O2EuhRpYaB5DCrlWU1leSMTBMH_ijy5agYCqibUXZ5gtK0G39cIXQFn1lJ77bmCfUcVVxfplkS743FJTiZpsL4GIK6sLZTEvRXjSumaeyP-IQ2ALJ9LznnVrKtxo_yLSjmge9epnHzr5nSGbVgCvT6Ho5q2VcE-IREk_vDyi6mCu94cjFHcU7zYb8Gygsw9S4HYCdwGAH4DIhSdFW80Em0dkDx-Vfaa2hTsbC7u3o_t-Zk4rfK5fRypQ');
+  processLogin() {
     if (localStorage['credentials']) {
       this.set('credentials', localStorage['credentials']);
       let output = localStorage['credentials'].split('.')[1].replace(/-/g, "+").replace(/_/g, "/");
@@ -34,7 +33,30 @@ export default Ember.Service.extend({
       });
       return this.get('userPromise');
     }
-    return Ember.RSVP.Promise.reject();
+  },
+
+  tryLogin(params) {
+
+    if (!params || !params.code) {
+      return Ember.RSVP.Promise.reject();
+    }
+
+    let adapter = this.get('store').adapterFor('application');
+    let url = adapter.buildURL() + '/token';
+    return Ember.$.ajax({
+      url: url,
+      type: 'post',
+      contentType: 'application/x-www-form-urlencoded',
+      data: {
+        client_id:'your-client-id',
+        client_secret:'your-client-secret-if-required',
+      code: params.code,
+        redirect_uri: config.EmberENV['ember-oauth2'].iot4i.redirectUri,
+      grant_type: 'authorization_code'
+    }}).then((token) => {
+      localStorage.setItem('credentials', JSON.stringify(token));
+      window.close();
+    });
   },
 
   logout() {
@@ -43,16 +65,21 @@ export default Ember.Service.extend({
     localStorage.removeItem('credentials');
   },
 
-  login(name, password) {
-    let p = this.get('store').findRecord('user', this.get);
-    return p.then((data) => {
-      this.get('store').pushPayload('user', {data:  data});
-      this.set('userPromise', this.get('store').find('user', data.username));
-      this.get('userPromise').then((user) => {
-        this.set('user', user);
-        localStorage.setItem('credentials', JSON.stringify(this.get('credentials')));
-      });
-      return this.get('userPromise');
-    });
+  login() {
+    this.get('emberOauth2').setProvider('iot4i');
+    // this.get('emberOauth2').set('clientId', 'your-client-id');
+    return this.get('emberOauth2').authorize().then((response) => {
+      let checkWindow = () => {
+        if(response.closed) {
+          this.set('credentials', JSON.parse(localStorage.getItem('credentials')));
+          this.get('router').transitionTo('index');
+          return;
+        }
+        Ember.run.later(checkWindow);
+      };
+      checkWindow();
+    }, function(error) {
+      this.get('emberOauth2').get('auth').trigger('error', error);
+    })
   }
 });

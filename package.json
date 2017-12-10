@@ -35,6 +35,7 @@
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
     "ember-moment": "^7.5.0",
+    "ember-oauth2": "^2.0.3-beta",
     "ember-resolver": "^4.3.0",
     "ember-truth-helpers": "^2.0.0",
     "loader.js": "^4.2.3"

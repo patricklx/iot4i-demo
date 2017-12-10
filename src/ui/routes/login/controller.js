@@ -7,20 +7,16 @@ export default Ember.Controller.extend({
   password: null,
 
   actions: {
-    submitAction() {
+    login() {
       this.set('loading', true);
       let p = this.get('session').login(
         this.get('name'),
         this.get('password')
       );
-
-      p.then(() => {
-        this.transitionToRoute('index');
-      });
-
       p.finally(() => {
         this.set('loading', false);
-      })
+      });
+      p.catch((e) => this.set('error', e));
     }
   }
 });

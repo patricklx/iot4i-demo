@@ -9,7 +9,6 @@ module.exports = function(environment) {
       }
     },
     tenantId: 'ff12827fc4e309a44da3086cbb39a355',
-    token: '',
     iotUri: 'https://ioti.us-south.containers.mybluemix.net',
     backendUri: 'http://iot4i-starter-backend.mybluemix.net',
     modulePrefix: 'iot-app',
@@ -25,6 +24,15 @@ module.exports = function(environment) {
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
         Date: false
+      },
+      'ember-oauth2': {
+        iot4i: {
+          clientId: 'your-client-id',
+          authBaseUri: 'https://ioti.us-south.containers.mybluemix.net/api/v1/ff12827fc4e309a44da3086cbb39a355/authorization',
+          redirectUri: 'https://localhost:8080/',
+          scope: 'read write',
+          responseType: 'code'
+        }
       }
     },
 

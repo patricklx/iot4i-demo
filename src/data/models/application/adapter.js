@@ -6,9 +6,10 @@ export default DS.RESTAdapter.extend({
   host: config.iotUri,
   namespace: 'api/v1/' + config.tenantId,
   headers: Ember.computed('session.credentials', function(){
-    var auth = this.get('session.credentials');
+    var auth = this.get('session.credentials.access_token');
+    if (!auth) return {};
     return {
-      'authorization': 'Bearer ' + config.token
+      'authorization': 'Bearer ' + auth
     };
   })
 });

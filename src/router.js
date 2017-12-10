@@ -19,16 +19,21 @@ const Router = Ember.Router.extend({
 
   willTransition: function(oldInfos, newInfos, transition) {
     this._super(...arguments);
-    if (this.get('session.userPromise')) {
+
+    if (this.get('session.credentials')) {
       return;
     }
-    if (!this.get('session.user')) {
-      this.transitionTo('trylogin');
-      this.get('session').tryLogin().then(() => {
-        transition.retry();
-      }, () => {
-        this.transitionTo('login');
-      });
+    if (!this.get('session.credentials')) {
+      if (transition.queryParams.code && transition.queryParams.state) {
+        this.transitionTo('trylogin');
+        this.get('session').tryLogin(transition.queryParams).then(() => {
+          this.transitionTo('index');
+        }, () => {
+          this.transitionTo('login');
+        });
+        return
+      }
+      this.transitionTo('login');
     }
   }
 });
