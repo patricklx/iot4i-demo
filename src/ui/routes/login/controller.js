@@ -9,10 +9,7 @@ export default Ember.Controller.extend({
   actions: {
     login() {
       this.set('loading', true);
-      let p = this.get('session').login(
-        this.get('name'),
-        this.get('password')
-      );
+      let p = this.get('session').login();
       p.finally(() => {
         this.set('loading', false);
       });

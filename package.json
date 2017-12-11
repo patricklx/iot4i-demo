@@ -33,6 +33,7 @@
     "ember-data": "~2.15.0-beta.1",
     "ember-debug-logger": "^1.0.0",
     "ember-export-application-global": "^2.0.0",
+    "ember-inflector": "^2.1.0",
     "ember-load-initializers": "^1.0.0",
     "ember-moment": "^7.5.0",
     "ember-oauth2": "^2.0.3-beta",
@@ -47,6 +48,7 @@
   "dependencies": {
     "ember-cli-sass": "^7.1.2",
     "ember-component-css": "^0.5.0",
-    "ember-paper": "^1.0.0-beta.3"
+    "ember-paper": "^1.0.0-beta.3",
+    "node-sass": "^4.7.2"
   }
 }

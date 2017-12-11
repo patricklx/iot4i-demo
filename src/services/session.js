@@ -1,5 +1,7 @@
 import Ember from 'ember';
 import config from 'iot-app/config/environment';
+import { singularize, pluralize } from 'ember-inflector';
+
 
 export default Ember.Service.extend({
   store: Ember.inject.service(),
@@ -9,36 +11,66 @@ export default Ember.Service.extend({
   userPromise: null,
   credentials: null,
 
-  processLogin() {
-    if (localStorage['credentials']) {
-      this.set('credentials', localStorage['credentials']);
-      let output = localStorage['credentials'].split('.')[1].replace(/-/g, "+").replace(/_/g, "/");
-      switch (output.length % 4) {
-        case 0:
-          break;
-        case 2:
-          output += "==";
-          break;
-        case 3:
-          output += "=";
-          break;
-        default:
-          throw "Illegal base64url string!";
-      }
-      output = JSON.parse(atob(output));
-      this.debug(output);
-      this.set('userPromise', this.get('store').findRecord('user', output.sub));
-      this.get('userPromise').then((user) => {
-        this.set('user', user);
-      });
-      return this.get('userPromise');
+  getUserId() {
+    let output = localStorage['credentials'].split('.')[1].replace(/-/g, "+").replace(/_/g, "/");
+    switch (output.length % 4) {
+      case 0:
+        break;
+      case 2:
+        output += "==";
+        break;
+      case 3:
+        output += "=";
+        break;
+      default:
+        throw "Illegal base64url string!";
     }
+    output = JSON.parse(atob(output));
+    return output.sub;
+  },
+
+  setAll(model) {
+    this.get('store').findAll(model).then((res) => {
+      this.set(pluralize(model), res);
+    });
+  },
+
+  setUser() {
+    this.setAll('hazard');
+    this.setAll('shield');
+    this.setAll('user');
+    this.setAll('device');
+    this.setAll('claim');
+    this.set('userPromise', this.get('store').findRecord('user', this.getUserId()));
+    this.get('userPromise').then((user) => {
+      this.set('user', user);
+    });
+  },
+
+  checkCredentials() {
+    if (localStorage['credentials']) {
+      this.set('credentials', JSON.parse(localStorage['credentials']));
+
+      let adapter = this.get('store').adapterFor('application');
+      let url = adapter.buildURL() + '/introspect';
+      return Ember.$.ajax({
+        url: url,
+        type: 'post',
+        contentType: 'application/x-www-form-urlencoded',
+        data: {
+          token: this.get('credentials.access_token')
+        }}).then(() => {
+          this.setUser()
+      });
+    }
+
+    return Ember.RSVP.Promise.reject();
   },
 
   tryLogin(params) {
 
     if (!params || !params.code) {
-      return Ember.RSVP.Promise.reject();
+      return this.checkCredentials();
     }
 
     let adapter = this.get('store').adapterFor('application');

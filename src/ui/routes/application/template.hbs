@@ -1,4 +1,9 @@
-{{#paper-sidenav-container class="inner-sidenav"}}
+<div style='    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;'>
+{{#paper-sidenav-container class='layout-fill'}}
 
   {{#paper-sidenav
     class="md-whiteframe-z2 site-sidenav"
@@ -12,54 +17,67 @@
     {{#paper-content}}
       {{#paper-list}}
 
-        {{#menu-item active=(eq currentRouteName 'settings') onClick=(action 'transitionTo' "settings")}}
-          Settings
+        {{#menu-item active=(eq currentRouteName 'home') onClick=(action 'transitionTo' "index")}}
+          Home
+          {{paper-icon 'home'}}
         {{/menu-item}}
 
         {{#menu-item active=(eq currentRouteName 'shields') onClick=(action 'transitionTo' "shields")}}
           Shields
+          {{paper-icon 'security'}}
         {{/menu-item}}
 
         {{#menu-item active=(eq currentRouteName 'hazards') onClick=(action 'transitionTo' "hazards")}}
           Hazards
+          {{paper-icon 'warning'}}
+        {{/menu-item}}
+
+        {{#menu-item active=(eq currentRouteName 'devices') onClick=(action 'transitionTo' "devices")}}
+          Devices
+          {{paper-icon 'devices_other'}}
         {{/menu-item}}
 
       {{/paper-list}}
     {{/paper-content}}
   {{/paper-sidenav}}
-  <div class="flex layout-column" style="margin-left: 270px;">
-    {{#paper-toolbar theme='default' as |toolbar|}}
-      {{#paper-toolbar-tools}}
 
-        {{currentRouteName}}
+  {{#paper-card-content class="flex"}}
+    <div class="layout-fill layout-column">
+      {{#paper-toolbar theme='default' as |toolbar|}}
+        {{#paper-toolbar-tools}}
 
-        {{#paper-sidenav-toggle name="left" as |toggleAction|}}
-          {{#paper-button raised=true classNames="hide-gt-sm" onClick=(action toggleAction)}}
-            Toggle
+          {{currentRouteName}}
+
+          {{#paper-sidenav-toggle name="left" as |toggleAction|}}
+            {{#paper-button raised=true classNames="hide-gt-sm" onClick=(action toggleAction)}}
+              Toggle
+            {{/paper-button}}
+          {{/paper-sidenav-toggle}}
+
+          <span class="flex"></span>
+
+          {{#paper-button iconButton=true}}
+            {{#paper-menu as |menu|}}
+              {{#menu.trigger}}
+                {{#paper-button iconButton=true}}
+                  {{paper-icon "account circle"}}
+                {{/paper-button}}
+              {{/menu.trigger}}
+              {{#menu.content width=4 as |content|}}
+                {{#content.menu-item onClick=(action 'logout')}}
+                  Logout
+                {{/content.menu-item}}
+              {{/menu.content}}
+            {{/paper-menu}}
           {{/paper-button}}
-        {{/paper-sidenav-toggle}}
 
-        <span class="flex"></span>
+        {{/paper-toolbar-tools}}
+      {{/paper-toolbar}}
 
-        {{#paper-button iconButton=true}}
-          {{#paper-menu as |menu|}}
-            {{#menu.trigger}}
-              {{#paper-button iconButton=true}}
-                {{paper-icon "account circle"}}
-              {{/paper-button}}
-            {{/menu.trigger}}
-            {{#menu.content width=4 as |content|}}
-              {{#content.menu-item onClick=(action 'logout')}}
-                Logout
-              {{/content.menu-item}}
-            {{/menu.content}}
-          {{/paper-menu}}
-        {{/paper-button}}
-
-      {{/paper-toolbar-tools}}
-    {{/paper-toolbar}}
-  {{#paper-content padding=true}}
-    {{outlet}}
-  {{/paper-content}}
-  </div>
+      <div style='padding: 16px'>
+        {{outlet}}
+      </div>
+    </div>
+  {{/paper-card-content}}
 {{/paper-sidenav-container}}
+</div>
