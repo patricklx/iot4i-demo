@@ -1,0 +1,9 @@
+<div class="layout-row layout-wrap">
+{{#each model as |device|}}
+  <div class="flex-40">
+    <div>{{device.type}}</div>
+    <div>{{device.userId}}</div>
+    <div>{{device.vendorId}}</div>
+  </div>
+{{/each}}
+</div>

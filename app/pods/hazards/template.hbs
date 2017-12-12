@@ -7,12 +7,18 @@
     {{#card.content as |content|}}
       {{#paper-list}}
         {{#each model as |hazard index|}}
-          {{#paper-item class="md-3-line"}}
+          {{#paper-item class="md-3-line" as |controls|}}
             <div class="md-list-item-text">
               #{{index}}
               <h3>User: {{hazard.userId}}</h3>
-              <h4>Shield name {{hazard.shield.name}}</h4>
+              <h4>Shield name {{default-to hazard.shield.name "<does not exist>"}}</h4>
               <p>At {{moment hazard.createdAt}}</p>
+            </div>
+            <div class="md-secondary-container">
+              {{paper-icon "check" class="md-avatar-icon"}}
+              {{#controls.button primary=true}}
+                Okay
+              {{/controls.button}}
             </div>
           {{/paper-item}}
         {{/each}}

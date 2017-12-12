@@ -1,34 +1,15 @@
 <div style="width: 250px; margin: auto">
-{{#paper-card as |card|}}
+  {{#paper-card as |card|}}
 
-  {{#card.title as |title|}}
-    {{#title.text as |text|}}
-      {{#text.headline}}Login{{/text.headline}}
-    {{/title.text}}
-  {{/card.title}}
-
-  {{#paper-form onSubmit=(action "submitAction") as |form|}}
-
-    {{#card.content}}
-      <div>
-        {{form.input label="Name" value=name onChange=(action (mut name)) required=true}}
-      </div>
-      <div>
-        {{form.input type='password' label="Password" value=password onChange=(action (mut password))}}
-      </div>
-    {{/card.content}}
+    {{#card.title as |title|}}
+      {{#title.text as |text|}}
+        {{#text.headline}}Login to IoT4i{{/text.headline}}
+      {{/title.text}}
+      {{to-json session.authError}}
+    {{/card.title}}
 
     {{#card.actions}}
-
-        {{#form.submit-button disabled=loading raised=true primary=true}}
-          {{#if loading}}
-            {{paper-progress-circular accent=true diameter=30}}
-          {{else}}
-            Login
-          {{/if}}
-        {{/form.submit-button}}
-
+      {{#paper-button primary=true onClick=(action 'login')}}Login{{/paper-button}}
     {{/card.actions}}
-  {{/paper-form}}
-{{/paper-card}}
+  {{/paper-card}}
 </div>

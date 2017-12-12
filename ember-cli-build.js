@@ -1,9 +1,10 @@
-/*jshint node:true*/
-/* global require, module */
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+/* eslint-env node */
+'use strict';
+
+const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
-  var app = new EmberApp(defaults, {
+  let app = new EmberApp(defaults, {
     // Add options here
   });
 
@@ -17,7 +18,8 @@ module.exports = function(defaults) {
   //
   // If the library that you are including contains AMD or ES6
   // modules that you would like to import into your application
-  // please specify an object with the list of modules as keys
+  // please specify an object with the list of modules aember ss keys
   // along with the exports of each module as its value.
+
   return app.toTree();
 };

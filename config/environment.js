@@ -5,9 +5,10 @@ module.exports = function(environment) {
     modulePrefix: 'demoapp',
     podModulePrefix: 'demoapp/pods',
     environment: environment,
-    tenantId: '1c4860afd0d5529f693fbe4729de95ec',
-    iotUri: 'http://localhost:10010',
-    backendUri: 'http://iot4i-starter-backend.mybluemix.net',
+    tenantId: 'ff12827fc4e309a44da3086cbb39a355',
+    iotUri: 'https://ioti.us-south.containers.mybluemix.net',
+    backendUri: 'https://prod-starter-backend-ff12827fc4e309a44da3086cbb39a355.mybluemix.net',
+    backendWebSocketPath: '/notifications',
     rootURL: '/',
     locationType: 'auto',
     EmberENV: {
@@ -18,6 +19,15 @@ module.exports = function(environment) {
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
         Date: false
+      },
+      'ember-oauth2': {
+        iot4i: {
+          clientId: 'your-client-id',
+          authBaseUri: 'https://ioti.us-south.containers.mybluemix.net/api/v1/ff12827fc4e309a44da3086cbb39a355/authorization',
+          redirectUri: 'https://localhost:8080/',
+          scope: 'read write',
+          responseType: 'code'
+        }
       }
     },
 

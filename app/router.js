@@ -19,27 +19,28 @@ const Router = Ember.Router.extend({
 
   willTransition: function(oldInfos, newInfos, transition) {
     this._super(...arguments);
-    if (this.get('session.userPromise')) {
+
+    if (this.get('session.credentials')) {
       return;
     }
-    if (!this.get('session.user')) {
-      this.transitionTo('trylogin');
-      this.get('session').tryLogin().then(() => {
-        transition.retry();
-      }, () => {
-        this.transitionTo('login');
-      });
-    }
+
+    this.transitionTo('trylogin');
+    this.get('session').tryLogin(transition.queryParams).then(() => {
+      this.transitionTo('index');
+    }, () => {
+      this.transitionTo('login');
+    });
   }
 });
 
 Router.map(function() {
   this.route('login', { path: 'login' });
-  this.route('shields', { path: 'shields' });
-  this.route('hazards', { path: 'hazards' });
-  this.route('settings', { path: 'settings' });
   this.route('trylogin', { path: 'trylogin' });
   this.route('shields', { path: 'shields' });
+  this.route('hazards', { path: 'hazards' });
+  this.route('actions', { path: 'actions' });
+  this.route('devices', { path: 'devices' });
+  this.route('customers', { path: 'customers' });
 });
 
 export default Router;
