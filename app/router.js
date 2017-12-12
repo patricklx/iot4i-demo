@@ -6,27 +6,15 @@ const Router = Ember.Router.extend({
   rootURL: config.rootURL,
   session: Ember.inject.service(),
 
-  // beforeModel(transition) {
-  //   if (!this.get('session.user')) {
-  //     this.transitionTo('trylogin');
-  //     this.get('session').tryLogin().then(() => {
-  //       transition.retry();
-  //     }, function () {
-  //       this.transitionTo('login');
-  //     })
-  //   }
-  // },
-
   willTransition: function(oldInfos, newInfos, transition) {
     this._super(...arguments);
 
     if (this.get('session.credentials')) {
       return;
     }
-
     this.transitionTo('trylogin');
     this.get('session').tryLogin(transition.queryParams).then(() => {
-      this.transitionTo('index');
+      transition.retry();
     }, () => {
       this.transitionTo('login');
     });

@@ -65,7 +65,7 @@ export default Ember.Service.extend({
             localStorage.removeItem('credentials');
             throw new Error('Token Invalid');
           }
-          this.setUser()
+          this.setUser();
       });
     }
 
@@ -113,6 +113,7 @@ export default Ember.Service.extend({
         if(response.closed) {
           this.set('credentials', JSON.parse(localStorage.getItem('credentials')));
           this.set('authError', JSON.parse(localStorage.getItem('authError')));
+          this.setUser();
           this.get('router').transitionTo('index');
           return;
         }

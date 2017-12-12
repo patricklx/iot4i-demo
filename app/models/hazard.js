@@ -6,5 +6,11 @@ export default DS.Model.extend({
   createdAt: DS.attr('number'),
   type: DS.attr('string'),
   shield: DS.belongsTo('shield'),
-  callbackAction: DS.attr()
+  user: DS.belongsTo('user'),
+  ishandled: DS.attr('boolean'),
+  actionParams: DS.attr(),
+
+  userId: Ember.computed(function() {
+    return this.belongsTo('user').id()
+  })
 });

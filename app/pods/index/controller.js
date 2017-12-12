@@ -12,7 +12,7 @@ export default Ember.Controller.extend({
     function() {
       return [{
         name: 'Hazards',
-        display: `${(this.get('session.hazards') || []).filterBy('acknowledged').length} acks / ${this.get('session.hazards.length')}`,
+        display: `${(this.get('session.hazards') || []).filterBy('ishandled').length} acks / ${this.get('session.hazards.length')}`,
         icon: 'warning'
       },
         {

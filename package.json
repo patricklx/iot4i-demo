@@ -35,7 +35,6 @@
     "ember-data": "^2.17.0",
     "ember-debug-logger": "1.0.0",
     "ember-export-application-global": "^2.0.0",
-    "ember-leaflet": "^3.0.13",
     "ember-load-initializers": "^1.0.0",
     "ember-moment": "^7.5.0",
     "ember-oauth2": "^2.0.3-beta",
