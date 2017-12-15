@@ -1,0 +1,6 @@
+{
+  "name": "demoapp",
+  "dependencies": {
+    "amcharts": "^3.15.2"
+  }
+}
