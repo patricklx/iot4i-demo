@@ -3,24 +3,18 @@
   {{#card.title as |title|}}
     {{#title.text as |text|}}
       {{#text.headline}}
-        {{shield.name}}
+        {{shield.name}} <span class="badge">{{shield.type}}</span>
       {{/text.headline}}
-      {{#text.subhead}}uuid: {{shield.uuid}}{{/text.subhead}}
+      {{#text.subhead}}{{shield.description}}{{/text.subhead}}
     {{/title.text}}
   {{/card.title}}
 
   {{#card.content}}
-    <dl>
-      <dt><strong>Type</strong></dt>
-      <dd>{{shield.type}}</dd>
-      <dt><strong>jsCodeMethod</strong></dt>
-      <dd>{{shield.jsCodeMethod}}</dd>
-    </dl>
   {{/card.content}}
-    
+
   {{#card.actions}}
-    {{#paper-button raised=true primary=true}}Details{{/paper-button}}
-    {{#paper-button raised=true warn=true}}Delete{{/paper-button}}
-    {{#paper-button raised=true}}Deactivate{{/paper-button}}
+    {{#paper-button onClick=(action 'showDetails') raised=true primary=true}}Details{{/paper-button}}
+    {{#paper-button onClick=(action 'delete') raised=true warn=true}}Delete{{/paper-button}}
+    {{#paper-button onClick=(action 'deactivate') raised=true}}Deactivate{{/paper-button}}
   {{/card.actions}}
 {{/paper-card}}

@@ -1,13 +1,12 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-   uuid: DS.attr('string'),
-   name: DS.attr('string'),
-   actions: DS.attr(),
-   canBeDisabled: DS.attr('boolean'),
-   hazardDetectionOnCloud: DS.attr('boolean'),
-   jsCodeMethod: DS.attr('string'),
-   type: DS.attr('string'),
-   image: DS.attr('string')
+  name: DS.attr('string'),
+  actions: DS.attr(),
+  enabled: DS.attr('boolean'),
+  type: DS.attr('string'),
+  description: DS.attr('string'),
+  image: DS.attr('string'),
+  codes: DS.hasMany('shield-code')
 });
 

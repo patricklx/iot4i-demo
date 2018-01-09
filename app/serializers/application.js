@@ -1,12 +1,13 @@
 import DS from 'ember-data';
+import { pluralize } from 'ember-inflector';
 
 export default DS.RESTSerializer.extend({
   primaryKey: '_id',
   normalizeResponse(store, primaryModelClass, payload, id, requestType) {
-    var newPayload = {};
+    let newPayload = {};
     if (payload && payload.items) {
-      newPayload[primaryModelClass.modelName] = payload.items;
-      newPayload[primaryModelClass.modelName].__meta = {
+      newPayload[pluralize(primaryModelClass.modelName)] = payload.items;
+      newPayload[pluralize(primaryModelClass.modelName)].__meta = {
         limit: payload.limit,
         offset: payload.offset,
         totalItems: payload.totalItems

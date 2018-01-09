@@ -1,9 +1,20 @@
-<div class="layout-row layout-wrap">
-{{#each model as |device|}}
-  <div class="flex-40">
-    <div>{{device.type}}</div>
-    <div>{{device.userId}}</div>
-    <div>{{device.vendorId}}</div>
-  </div>
-{{/each}}
+<div class="layout-row">
+  {{#paper-list}}
+    {{#each model as |device|}}
+      {{#paper-item class="md-3-line" as |controls|}}
+        <div class="md-list-item-text">
+          <h3>{{device.vendorId}}</h3>
+          <p>{{device.userId}}</p>
+          <p>{{device.description}}</p>
+          <p>{{device.type}}</p>
+        </div>
+        <div class="md-secondary-container">
+          {{#controls.button raised=true warn=true secondary=true}}
+            Delete
+          {{/controls.button}}
+        </div>
+    {{/paper-item}}
+    {{paper-divider}}
+    {{/each}}
+  {{/paper-list}}
 </div>

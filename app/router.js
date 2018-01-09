@@ -24,7 +24,14 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('login', { path: 'login' });
   this.route('trylogin', { path: 'trylogin' });
-  this.route('shields', { path: 'shields' });
+  this.route('shields', { path: 'shields' }, function () {
+    this.route('index');
+    this.route('shield', { path: ':shield_id' }, function () {
+      this.route('codes', function () {
+        this.route('index');
+      });
+    });
+  });
   this.route('hazards', { path: 'hazards' });
   this.route('actions', { path: 'actions' });
   this.route('devices', { path: 'devices' });
