@@ -111,9 +111,11 @@ export default Ember.Service.extend({
     return this.get('emberOauth2').authorize().then((response) => {
       let checkWindow = () => {
         if(response.closed) {
-          this.set('credentials', JSON.parse(localStorage.getItem('credentials')));
+          if (localStorage.getItem('credentials')){
+            this.set('credentials', JSON.parse(localStorage.getItem('credentials')));
+            this.setUser();
+          }
           this.set('authError', JSON.parse(localStorage.getItem('authError')));
-          this.setUser();
           this.get('router').transitionTo('index');
           return;
         }

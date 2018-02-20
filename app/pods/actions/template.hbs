@@ -1,0 +1,20 @@
+<div class="layout-row">
+  {{#paper-list}}
+    {{#each model as |action|}}
+      {{#paper-item class="md-3-line" as |controls|}}
+        <div class="md-list-item-text">
+          <p>{{action.userId}}</p>
+          <p>{{action.description}}</p>
+          <p>{{action.type}}</p>
+          <p>{{to-json action.callbackAction}}</p>
+        </div>
+        <div class="md-secondary-container">
+          {{#controls.button onClick=(action 'delete' action) raised=true warn=true secondary=true}}
+            Delete
+          {{/controls.button}}
+        </div>
+      {{/paper-item}}
+      {{paper-divider}}
+    {{/each}}
+  {{/paper-list}}
+</div>

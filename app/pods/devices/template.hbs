@@ -9,7 +9,7 @@
           <p>{{device.type}}</p>
         </div>
         <div class="md-secondary-container">
-          {{#controls.button raised=true warn=true secondary=true}}
+          {{#controls.button onClick=(action 'delete' device) raised=true warn=true secondary=true}}
             Delete
           {{/controls.button}}
         </div>

@@ -1,15 +1,13 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import { action, computed } from 'ember-decorators/object';
+import { service } from 'ember-decorators/service';
 
-export default Ember.Controller.extend({
-  session: Ember.inject.service(),
-  store: Ember.inject.service(),
+export default class extends Controller {
+  @service session;
+  @service store;
 
-  overviewCards: Ember.computed(
-    'session.hazards.length',
-    'session.shields.length',
-    'session.devices.length',
-    'session.users.length',
-    function() {
+  @computed('session.hazards.length','session.shields.length','session.devices.length','session.users.length')
+  overviewCards() {
       return [{
         name: 'Hazards',
         display: `${(this.get('session.hazards') || []).filterBy('ishandled').length} acks / ${this.get('session.hazards.length')}`,
@@ -36,9 +34,5 @@ export default Ember.Controller.extend({
           icon: 'mail'
         }
       ];
-    }),
-
-  actions: {
-
   }
-});
+};

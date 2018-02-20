@@ -13,6 +13,9 @@ export default DS.RESTSerializer.extend({
         totalItems: payload.totalItems
       };
     } else {
+      if (payload.id) {
+        payload._id = payload.id;
+      }
       newPayload[primaryModelClass.modelName] = payload;
     }
     return this._super(store, primaryModelClass, newPayload, id, requestType);

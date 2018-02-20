@@ -1,22 +1,24 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { action } from 'ember-decorators/object';
+import { alias } from 'ember-decorators/object/computed';
+import { service } from 'ember-decorators/service';
 
+export default class extends Component {
 
-export default Ember.Component.extend({
+  @service router;
+  @alias('attrs.shield') firstName;
 
-  router: Ember.inject.service(),
-  shield: null,
-
-  actions: {
-    showDetails() {
-      this.get('router').transitionTo('shields.shield', this.get('shield'));
-    },
-
-    delete() {
-
-    },
-
-    deactivate() {
-
-    }
+  @action
+  showDetails() {
+    this.get('router').transitionTo('shields.shield', this.get('shield'));
   }
-});
+
+  @action
+  delete() {
+    return this.shield.destroyRecord();
+  }
+
+  @action
+  deactivate() {
+  }
+};

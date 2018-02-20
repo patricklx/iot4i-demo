@@ -1,17 +1,20 @@
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default class extends Component {
 
-  graphs: [{
-    "id":"g1",
-    "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
-    "bullet": "round",
-    "bulletSize": 8,
-    "lineColor": "#d1655d",
-    "lineThickness": 2,
-    "negativeLineColor": "#637bb6",
-    "type": "smoothedLine",
-    "valueField": "value"
-  }],
+  init() {
+    this.graphs = [{
+      "id":"g1",
+      "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
+      "bullet": "round",
+      "bulletSize": 8,
+      "lineColor": "#d1655d",
+      "lineThickness": 2,
+      "negativeLineColor": "#637bb6",
+      "type": "smoothedLine",
+      "valueField": "value"
+    }];
+  }
 
   drawChart() {
     let chartdiv = this.$().find('.chartdiv')[0];
@@ -59,9 +62,9 @@ export default Ember.Component.extend({
         "enabled": true
       }
     });
-  },
+  }
 
   didRender() {
     this.drawChart();
   }
-})
+}

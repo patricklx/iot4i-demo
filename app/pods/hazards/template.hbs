@@ -23,6 +23,9 @@
                   Ack
                 {{/controls.button}}
               {{/if}}
+              {{#controls.button type="danger" onClick=(action "delete")}}
+                Delete
+              {{/controls.button}}
             </div>
           {{/paper-item}}
         {{/each}}

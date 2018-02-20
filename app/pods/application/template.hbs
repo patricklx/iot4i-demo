@@ -29,13 +29,13 @@
         {{#paper-toolbar theme='default' as |toolbar|}}
           {{#paper-toolbar-tools}}
 
-            {{currentRouteName}}
-
             {{#paper-sidenav-toggle name="left" as |toggleAction|}}
-              {{#paper-button raised=true classNames="hide-gt-sm" onClick=(action toggleAction)}}
-                Toggle
+              {{#paper-button classNames="hide-gt-sm" onClick=(action toggleAction)}}
+                {{paper-icon "menu"}}
               {{/paper-button}}
             {{/paper-sidenav-toggle}}
+
+            {{currentRouteName}}
 
             <span class="flex"></span>
 

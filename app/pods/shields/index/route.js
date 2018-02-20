@@ -1,9 +1,10 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
+import { service } from 'ember-decorators/service';
 
-export default Ember.Route.extend({
-  store: Ember.inject.service(),
+export default class extends Route{
+  @service store;
 
   model() {
-    return this.get('store').findAll('shield');
+    return this.get('store').findAll('shield')
   }
-});
+};
