@@ -3,6 +3,7 @@ import Component from '@ember/component';
 export default class extends Component {
 
   init() {
+    super.init(...arguments);
     this.graphs = [{
       "id":"g1",
       "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
