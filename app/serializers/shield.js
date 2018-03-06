@@ -12,7 +12,7 @@ export default AppSerializer.extend({
       });
     } else {
       payload.links = {
-        codes: `/${namespace}/shield-codes?shieldId=${payload._id}`
+        codes: `/${namespace}/shield-codes?shieldId=${payload._id}`,
       };
     }
     return this._super(store, primaryModelClass, payload, id, requestType);
@@ -20,6 +20,18 @@ export default AppSerializer.extend({
 
   normalize(model, hash, prop) {
     hash.user = hash.userId;
+    hash.actions = hash.actionIds;
     return this._super(model, hash, prop);
+  },
+
+  serialize(snapshot, options) {
+    const json = this._super(snapshot, options);
+
+    json.userId = json.user;
+    json.actionIds = json.actions;
+    delete json.user;
+    delete json.actions;
+
+    return json;
   }
 });

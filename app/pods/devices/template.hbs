@@ -1,7 +1,7 @@
 <div class="layout-row">
-  {{#paper-list}}
+  <Paper-List>
     {{#each model as |device|}}
-      {{#paper-item class="md-3-line" as |controls|}}
+      <Paper-Item @class="md-3-line" as |controls|>
         <div class="md-list-item-text">
           <h3>{{device.vendorId}}</h3>
           <p>{{device.userId}}</p>
@@ -13,8 +13,8 @@
             Delete
           {{/controls.button}}
         </div>
-    {{/paper-item}}
-    {{paper-divider}}
+    </Paper-Item>
+    <Paper-Divider/>
     {{/each}}
-  {{/paper-list}}
+  </Paper-List>
 </div>

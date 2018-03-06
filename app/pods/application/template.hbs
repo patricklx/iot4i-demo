@@ -1,66 +1,62 @@
 <div class="{{styleNamespace}} main">
-  {{#paper-sidenav-container class='layout-fill'}}
+  <Paper-Sidenav-Container @class='layout-fill'>
 
-    {{#paper-sidenav
-      class="md-whiteframe-z2 site-sidenav"
-      name="left"
-      open=leftSideBarOpen
-      onToggle=(action (mut leftSideBarOpen))
-    }}
-      {{#paper-toolbar as |toolbar|}}
-        {{#paper-toolbar-tools}}Menu{{/paper-toolbar-tools}}
-      {{/paper-toolbar}}
-      {{#paper-content}}
-        {{#paper-list}}
-
+    <Paper-Sidenav
+      @class="md-whiteframe-z2 site-sidenav"
+      @name="left"
+      @open={{leftSideBarOpen}}
+      @onToggle={{action (mut leftSideBarOpen)}}
+    >
+      <Paper-Toolbar as |toolbar|>
+        <Paper-Toolbar-Tools>Menu</Paper-Toolbar-Tools>
+      </Paper-Toolbar>
+      <Paper-Content>
+        <Paper-List>
           {{#each menuItems as |menu|}}
-            {{#menu-item active=(eq currentRouteName menu.routeName) onClick=(action 'transitionTo' menu.routeName)}}
+            <Menu-Item @active={{str-contains currentRoute menu.routeName}} @onClick={{action 'transitionTo' menu.routeName}}>
               {{menu.title}}
-              {{paper-icon menu.icon}}
-            {{/menu-item}}
+              <Paper-Icon @icon="{{menu.icon}}" />
+            </Menu-Item>
           {{/each}}
+        </Paper-List>
+      </Paper-Content>
+    </Paper-Sidenav>
 
-        {{/paper-list}}
-      {{/paper-content}}
-    {{/paper-sidenav}}
-
-    {{#paper-card-content class="flex"}}
+    <Paper-Card-Content @class="flex">
       <div class="layout-fill layout-column">
-        {{#paper-toolbar theme='default' as |toolbar|}}
-          {{#paper-toolbar-tools}}
+        <Paper-Toolbar @theme='default' as |toolbar|>
+          <Paper-Toolbar-Tools>
 
-            {{#paper-sidenav-toggle name="left" as |toggleAction|}}
-              {{#paper-button classNames="hide-gt-sm" onClick=(action toggleAction)}}
-                {{paper-icon "menu"}}
-              {{/paper-button}}
-            {{/paper-sidenav-toggle}}
+            <Paper-Sidenav-Toggle @name="left" as |toggleAction|>
+              <Paper-Button @iconButton=true @classNames="hide-gt-sm" @onClick={{action toggleAction}}>
+                <Paper-Icon @icon="menu"/>
+              </Paper-Button>
+            </Paper-Sidenav-Toggle>
 
             {{currentRouteName}}
 
             <span class="flex"></span>
 
-            {{#paper-button iconButton=true}}
-              {{#paper-menu as |menu|}}
-                {{#menu.trigger}}
-                  {{#paper-button iconButton=true}}
-                    {{paper-icon "account circle"}}
-                  {{/paper-button}}
-                {{/menu.trigger}}
+            <Paper-Button @iconButton=true>
+              <Paper-Menu as |menu|>
+                <R-C @comp={{menu.trigger}}>
+                  <Paper-Icon @icon="account circle"/>
+                </R-C>
                 {{#menu.content width=4 as |content|}}
                   {{#content.menu-item onClick=(action 'logout')}}
                     Logout
                   {{/content.menu-item}}
                 {{/menu.content}}
-              {{/paper-menu}}
-            {{/paper-button}}
+              </Paper-Menu>
+            </Paper-Button>
 
-          {{/paper-toolbar-tools}}
-        {{/paper-toolbar}}
+          </Paper-Toolbar-Tools>
+        </Paper-Toolbar>
 
         <div class="main-content">
           {{outlet}}
         </div>
       </div>
-    {{/paper-card-content}}
-  {{/paper-sidenav-container}}
+    </Paper-Card-Content>
+  </Paper-Sidenav-Container>
 </div>

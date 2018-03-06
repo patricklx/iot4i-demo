@@ -22,3 +22,7 @@ span.badge {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+.md-chips md-chip {
+  height: initial !important;
+}

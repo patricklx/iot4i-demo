@@ -1,6 +1,6 @@
 import DS from 'ember-data';
-import { computed } from 'ember-decorators/object';
-import { service } from 'ember-decorators/service';
+import { computed } from '@ember-decorators/object';
+import { service } from '@ember-decorators/service';
 import config from 'demoapp/config/environment';
 
 
@@ -11,7 +11,7 @@ export default class extends DS.RESTAdapter {
   namespace = 'api/v1/' + config.tenantId;
 
   @computed('session.credentials')
-  headers(){
+  get headers(){
     let auth = this.get('session.credentials.access_token');
     if (!auth) return {};
     return {
@@ -21,8 +21,8 @@ export default class extends DS.RESTAdapter {
 
   handleResponse(status) {
     if (status === 401) {
-      this.get('session').logout();
-      this.get('router').transitionTo('index');
+      this.session.logout();
+      this.router.transitionTo('index');
     }
     return super.handleResponse(...arguments);
   }

@@ -4,65 +4,91 @@ export default class extends Component {
 
   init() {
     super.init(...arguments);
-    this.graphs = [{
-      "id":"g1",
-      "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
-      "bullet": "round",
-      "bulletSize": 8,
-      "lineColor": "#d1655d",
-      "lineThickness": 2,
-      "negativeLineColor": "#637bb6",
-      "type": "smoothedLine",
-      "valueField": "value"
-    }];
   }
 
   drawChart() {
-    let chartdiv = this.$().find('.chartdiv')[0];
-    let chart = AmCharts.makeChart(chartdiv, {
-      "type": "serial",
-      "theme": "light",
-      "marginTop":0,
-      "marginRight": 0,
-      "dataProvider": this.get('values'),
-      "graphs": this.get('graphs'),
-      "chartScrollbar": {
-        "graph":"g1",
-        "gridAlpha":0,
-        "color":"#888888",
-        "scrollbarHeight":55,
-        "backgroundAlpha":0,
-        "selectedBackgroundAlpha":0.1,
-        "selectedBackgroundColor":"#888888",
-        "graphFillAlpha":0,
-        "autoGridCount":true,
-        "selectedGraphFillAlpha":0,
-        "graphLineAlpha":0.2,
-        "graphLineColor":"#c2c2c2",
-        "selectedGraphLineColor":"#888888",
-        "selectedGraphLineAlpha":1
+    const users =  this.users || [];
+    const chartData = [];
+    for (let i=12; i>=0; i--) {
+      const date = new Date();
+      const result = users.filter(function (user) {
+        return user.createdAt <= new Date(date.getFullYear(), date.getMonth() + 1 - i);
+      });
+      chartData.push({
+        date: new Date(new Date().getFullYear(), date.getMonth() - i),
+        value: result.length
+      });
+    }
 
+    this.chart = AmCharts.makeChart('amchart', {
+      type: 'serial',
+      theme: 'blur',
+      marginTop: 15,
+      marginRight: 15,
+      dataProvider: chartData,
+      categoryField: 'date',
+      categoryAxis: {
+        parseDates: true,
+        gridAlpha: 0,
+        // color: layoutColors.defaultText,
+        // axisColor: layoutColors.defaultText
       },
-      "chartCursor": {
-        "categoryBalloonDateFormat": "YYYY",
-        "cursorAlpha": 0,
-        "valueLineEnabled":true,
-        "valueLineBalloonEnabled":true,
-        "valueLineAlpha":0.5,
-        "fullWidth":true
+      valueAxes: [
+        {
+          minVerticalGap: 50,
+          gridAlpha: 0,
+          // color: layoutColors.defaultText,
+          // axisColor: layoutColors.defaultText,
+          title: 'Users'
+        }
+      ],
+      graphs: [
+        {
+          id: 'g1',
+          bullet: 'none',
+          useLineColorForBulletBorder: true,
+          // lineColor: baUtil.hexToRGB(graphColor, 0.5),
+          lineThickness: 1,
+          // negativeLineColor: layoutColors.danger,
+          type: 'smoothedLine',
+          valueField: 'value',
+          fillAlphas: 1,
+          fillColorsField: 'lineColor'
+        }
+      ],
+      chartCursor: {
+        categoryBalloonDateFormat: 'MM YYYY',
+        categoryBalloonColor: '#4285F4',
+        categoryBalloonAlpha: 0.7,
+        cursorAlpha: 0,
+        valueLineEnabled: true,
+        valueLineBalloonEnabled: true,
+        valueLineAlpha: 0.5
       },
-      "dataDateFormat": "YYYY",
-      "categoryField": "date",
-      "categoryAxis": {
-        "minPeriod": "YYYY",
-        "parseDates": true,
-        "minorGridAlpha": 0.1,
-        "minorGridEnabled": true
+      dataDateFormat: 'MM YYYY',
+      export: {
+        enabled: true
       },
-      "export": {
-        "enabled": true
-      }
+      creditsPosition: 'bottom-right',
+      zoomOutButton: {
+        backgroundColor: '#fff',
+        backgroundAlpha: 0
+      },
+      zoomOutText: '',
+      //pathToImages: layoutPaths.images.amChart
     });
+
+    this.chart.addListener('rendered', this.zoomChart.bind(this));
+    this.zoomChart();
+    if (this.chart.zoomChart) {
+      this.chart.zoomChart();
+    }
+  }
+
+  zoomChart() {
+    const startDate = new Date();
+    startDate.setMonth(startDate.getMonth() - 12);
+    this.chart.zoomToDates(startDate, new Date());
   }
 
   didRender() {

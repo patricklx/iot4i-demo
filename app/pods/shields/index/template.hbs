@@ -1,7 +1,19 @@
-<div class="layout-row layout-wrap">
-{{#each model as |shield|}}
-  <div class="flex-40">
-  {{iot-shield shield=shield}}
-  </div>
-{{/each}}
-</div>
+<Paper-List @class="flex-gt-sm-50">
+  <Paper-Toolbar as |toolbar|>
+    <Paper-Toolbar-Tools>Shields</Paper-Toolbar-Tools>
+  </Paper-Toolbar>
+  {{#each model as |shield|}}
+    <Paper-Item as |controls|>
+      <!--<img src={{shield.img}} alt={{shield.name}} class="md-avatar">-->
+      <p>{{shield.name}}</p>
+      <div class="md-secondary-container">
+        {{#controls.button primary=true iconButton=true onClick=(action "goToShield" shield)}}
+          <Paper-Icon @icon="mode edit"/>
+        {{/controls.button}}
+        {{#controls.button secondary=true iconButton=true onClick=(action "deleteShield" shield)}}
+          <Paper-Icon @icon="delete"/>
+        {{/controls.button}}
+      </div>
+    </Paper-Item>
+  {{/each}}
+</Paper-List>

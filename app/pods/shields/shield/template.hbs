@@ -1,13 +1,50 @@
-<h2>
-  {{model.name}} - codes
-</h2>
+<div class="flex-sm-50 flex-sm-70">
+  <Paper-Card as |card|>
+    <R-C @comp={{card.title}} as |title|>
+      <R-C @comp={{title.text}} as |text|>
+        <R-C @comp={{text.headline}}>{{shield.name}}</R-C>
+        <R-C @comp={{text.subhead}}>{{shield.name}}</R-C>
+      </R-C>
+    </R-C>
+    <R-C @comp={{card.content}}>
+      <Paper-Input @value={{shield.name}} @label="Name" @onChange={{action (mut shield.name) value}} />
+      <Paper-Input @value={{shield.description}} @label="Description" @onChange={{action (mut shield.description) value}} />
+      <Paper-Chips
+        @placeholder="Choose actions"
+        @content={{actionsArray}}
+        @removeItem={{action "removeAction"}}
+        @addItem={{action "addAction"}}
+        @searchField="name"
+        @onfocus={{action "selectFocused"}}
+        @options={{actionOptionsArray}} as |act|>
+          {{act.name}} <br> <small>{{act.description}}</small>
+      </Paper-Chips>
+      <R-C @comp={{card.actions}}>
+      </R-C>
+    </R-C>
+  </Paper-Card>
 
-<div class="layout-row layout-wrap">
-{{#each model.codes as |code|}}
-  <div class="flex-40">
-  {{code.name}}
-  </div>
-{{else}}
-  No Shield codes available
-{{/each}}
+  <Paper-List>
+    <Paper-Toolbar as |toolbar|>
+      <Paper-Toolbar-Tools>{{shield.name}}: Shield Codes</Paper-Toolbar-Tools>
+    </Paper-Toolbar>
+    {{#each shield.codes as |shieldCode|}}
+      <Paper-Item @class="md-3-line" as |controls|>
+        <!--<img src={{shieldCode.img}} alt={{shieldCode.name}} class="md-avatar">-->
+        <div class="md-list-item-text">
+          <h3>{{shieldCode.name}}</h3>
+          <p>{{shieldCode.description}}</p>
+        </div>
+        <div class="md-secondary-container">
+          {{controls.checkbox secondary=true value=shieldCode.enabled onChange=(action (mut shieldCode.enabled)) skipProxy=true}}
+          {{#controls.button secondary=true iconButton=true onClick=(action "goToShieldCode" shieldCode)}}
+            <Paper-Icon @icon="mode edit"/>
+          {{/controls.button}}
+          {{#controls.button secondary=true iconButton=true onClick=(action "deleteShieldCode" shieldCode)}}
+            <Paper-Icon @icon="delete"/>
+          {{/controls.button}}
+        </div>
+      </Paper-Item>
+    {{/each}}
+  </Paper-List>
 </div>

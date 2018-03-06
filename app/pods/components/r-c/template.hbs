@@ -1,0 +1,7 @@
+{{#if hasBlock}}
+  {{#component comp ...compParams as |x y z|}}
+    {{yield x y z}}
+  {{/component}}
+{{else}}
+  {{component comp ...compParams}}
+{{/if}}

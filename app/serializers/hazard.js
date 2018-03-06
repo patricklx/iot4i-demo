@@ -8,5 +8,16 @@ export default AppSerializer.extend({
     delete hash.userId;
 
     return this._super(model, hash, prop);
+  },
+
+  serialize(snapshot, options) {
+    const json = this._super(snapshot, options);
+
+    json.userId = json.user;
+    json.shieldId = json.shield;
+    delete json.user;
+    delete json.shield;
+
+    return json;
   }
 });

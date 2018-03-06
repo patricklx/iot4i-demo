@@ -40,6 +40,7 @@ export default Ember.Service.extend({
     this.setAll('shield');
     this.setAll('user');
     this.setAll('device');
+    this.setAll('action');
     this.setAll('claim');
     this.set('userPromise', this.get('store').findRecord('user', this.getUserId()));
     this.get('userPromise').then((user) => {

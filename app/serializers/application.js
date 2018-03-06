@@ -15,6 +15,7 @@ export default DS.RESTSerializer.extend({
     } else {
       if (payload.id) {
         payload._id = payload.id;
+        delete payload.id;
       }
       newPayload[primaryModelClass.modelName] = payload;
     }

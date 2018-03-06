@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
-import { action } from 'ember-decorators/object';
-import { service } from 'ember-decorators/service';
+import { action } from '@ember-decorators/object';
+import { service } from '@ember-decorators/service';
 
 export default class extends Controller {
   @service session;
@@ -8,7 +8,7 @@ export default class extends Controller {
   init() {
     this.menuItems = [{
       title: 'Home',
-      routeName: 'index',
+      routeName: 'application',
       icon: 'home'
     }, {
       title: 'Shields',

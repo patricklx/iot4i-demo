@@ -1,4 +1,4 @@
-{{#paper-card as |card|}}
+<Paper-Card as |card|>
 
   {{#card.title as |title|}}
     {{#title.text as |text|}}
@@ -13,8 +13,8 @@
   {{/card.content}}
 
   {{#card.actions}}
-    {{#paper-button onClick=(action 'showDetails') raised=true primary=true}}Details{{/paper-button}}
-    {{#paper-button onClick=(action 'delete') raised=true warn=true}}Delete{{/paper-button}}
-    {{#paper-button onClick=(action 'deactivate') raised=true}}Deactivate{{/paper-button}}
+    <Paper-Button @onClick={{action 'showDetails'}} @raised=true primary=true>Details</Paper-Button>
+    <Paper-Button @onClick={{action 'delete'}} @raised=true warn=true>Delete</Paper-Button>
+    <Paper-Button @onClick={{action 'deactivate'}} raised=true>Deactivate</Paper-Button>
   {{/card.actions}}
-{{/paper-card}}
+</Paper-Card>

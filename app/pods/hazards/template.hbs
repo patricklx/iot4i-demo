@@ -1,23 +1,23 @@
 <div class="layout-row layout-wrap flex">
   <div class="layout-column flex-xs flex-gt-xs-50">
-  {{#paper-card as |card|}}
-    {{#paper-toolbar as |toolbar|}}
-      {{#paper-toolbar-tools}}Hazards{{/paper-toolbar-tools}}
-    {{/paper-toolbar}}
+  <Paper-Card as |card|>
+    <Paper-Toolbar as |toolbar|>
+      <Paper-Toolbar-Tools>Hazards</Paper-Toolbar-Tools>
+    </Paper-Toolbar>
     {{#card.content as |content|}}
-      {{#paper-list}}
+      <Paper-List>
         {{#each model as |hazard index|}}
-          {{#paper-item class="md-3-line" as |controls|}}
+          <Paper-Item @class="md-3-line" as |controls|>
             <div class="md-list-item-text">
               <h3>{{default-to hazard.user.name hazard.userId}}</h3>
               <h4>{{default-to hazard.shield.name "<does not exist>"}}</h4>
               <p>At {{moment hazard.createdAt}}</p>
               <p>{{hazard.actionParams.hazardTitle}}</p>
             </div>
-            {{paper-divider}}
+            <Paper-Divider/>
             <div class="md-secondary-container">
               {{#if hazard.ishandled}}
-                {{paper-icon "check" class="md-avatar-icon"}}
+                <Paper-Icon @icon=check" @class="md-avatar-icon"/>
               {{else}}
                 {{#controls.button primary=true}}
                   Ack
@@ -27,10 +27,10 @@
                 Delete
               {{/controls.button}}
             </div>
-          {{/paper-item}}
+          </Paper-Item>
         {{/each}}
-      {{/paper-list}}
+      </Paper-List>
     {{/card.content}}
-  {{/paper-card}}
+  </Paper-Card>
   </div>
 </div>
