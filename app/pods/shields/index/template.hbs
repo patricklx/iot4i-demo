@@ -1,19 +1,30 @@
-<Paper-List @class="flex-gt-sm-50">
-  <Paper-Toolbar as |toolbar|>
-    <Paper-Toolbar-Tools>Shields</Paper-Toolbar-Tools>
-  </Paper-Toolbar>
-  {{#each model as |shield|}}
-    <Paper-Item as |controls|>
-      <!--<img src={{shield.img}} alt={{shield.name}} class="md-avatar">-->
-      <p>{{shield.name}}</p>
-      <div class="md-secondary-container">
-        {{#controls.button primary=true iconButton=true onClick=(action "goToShield" shield)}}
-          <Paper-Icon @icon="mode edit"/>
-        {{/controls.button}}
-        {{#controls.button secondary=true iconButton=true onClick=(action "deleteShield" shield)}}
-          <Paper-Icon @icon="delete"/>
-        {{/controls.button}}
-      </div>
-    </Paper-Item>
-  {{/each}}
-</Paper-List>
+<div class="layout-row layout-wrap flex">
+  <div class="layout-column flex-xs flex-gt-50">
+    <Paper-Card as |card|>
+      <Paper-Toolbar as |toolbar|>
+        <Paper-Toolbar-Tools>Shields</Paper-Toolbar-Tools>
+      </Paper-Toolbar>
+      {{#card.content as |content|}}
+        <Paper-List>
+          {{#each model as |shield index|}}
+            <Paper-Item @class="md-3-line" as |controls|>
+              <div class="md-list-item-text">
+                <!--<img src={{shield.img}} alt={{shield.name}} class="md-avatar">-->
+                <p>#{{shield.id}} {{shield.name}}</p>
+              </div>
+              <Paper-Divider/>
+              <div class="md-secondary-container">
+                {{#controls.button primary=true iconButton=true onClick=(action "goToShield" shield)}}
+                  <Paper-Icon @icon="mode edit"/>
+                {{/controls.button}}
+                {{#controls.button warn=true secondary=true iconButton=true onClick=(action "deleteShield" shield)}}
+                  <Paper-Icon @icon="delete"/>
+                {{/controls.button}}
+              </div>
+            </Paper-Item>
+          {{/each}}
+        </Paper-List>
+      {{/card.content}}
+    </Paper-Card>
+  </div>
+</div>

@@ -1,7 +1,23 @@
-<div class="layout-row layout-wrap">
-{{#each model as |user|}}
-  <div class="flex-40">
-    <div>{{user.name}}</div>
+<div class="layout-row layout-wrap flex">
+  <div class="layout-column flex-xs flex-gt-50">
+    <Paper-Card as |card|>
+      <Paper-Toolbar>
+        <Paper-Toolbar-Tools>Customers</Paper-Toolbar-Tools>
+      </Paper-Toolbar>
+      {{#card.content as |content|}}
+        <Paper-List>
+          {{#each model as |user index|}}
+            <Paper-Item @class="md-3-line" as |controls|>
+              <div class="md-list-item-text">
+                <h3>{{user.name}}</h3>
+                <h4>{{user.email}}</h4>
+                <p>City: {{user.address.city}}</p>
+              </div>
+              <Paper-Divider/>
+            </Paper-Item>
+          {{/each}}
+        </Paper-List>
+      {{/card.content}}
+    </Paper-Card>
   </div>
-{{/each}}
 </div>

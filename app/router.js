@@ -36,7 +36,7 @@ Router.map(function() {
   this.route('actions', { path: 'actions' });
   this.route('devices', { path: 'devices' });
   this.route('actions', { path: 'actions' });
-  this.route('users', { path: 'customers' });
+  this.route('customers', { path: 'customers' });
   this.route('claims', { path: 'claims' });
 });
 

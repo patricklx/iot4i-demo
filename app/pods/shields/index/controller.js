@@ -11,11 +11,13 @@ export default class extends Controller {
   }
 
   @action
-  deleteShield() {
-    //return this.shield.destroyRecord();
+  deleteShield(shield) {
+    return shield.destroyRecord();
   }
 
   @action
-  deactivate() {
+  deactivate(shield) {
+    shield.enabled = false;
+    return shield.save();
   }
 }

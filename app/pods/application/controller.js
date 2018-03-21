@@ -1,9 +1,10 @@
 import Controller from '@ember/controller';
-import { action } from '@ember-decorators/object';
+import { action, computed } from '@ember-decorators/object';
 import { service } from '@ember-decorators/service';
 
 export default class extends Controller {
   @service session;
+  @service router;
 
   init() {
     this.menuItems = [{
@@ -17,7 +18,17 @@ export default class extends Controller {
     }, {
       title: 'Hazards',
       routeName: 'hazards',
-      icon: 'warning'
+      icon: 'warning',
+      submenus: [{
+        title: 'Hazards',
+        routeName: 'hazards',
+        icon: 'warning'
+      }, {
+        title: 'Hazards by Country',
+        routeName: 'hazards',
+        icon: 'warning'
+      }
+      ]
     }, {
       title: 'Devices',
       routeName: 'devices',
@@ -33,9 +44,18 @@ export default class extends Controller {
     }];
   }
 
+  @computed('router.currentRouteName')
+  get currentMenu() {
+    return this.menuItems.find((i) => {
+      if (i.submenus) {
+        return i.submenus.find(sm => sm.routeName.startsWith(this.router.currentRouteName));
+      }
+      return i.routeName.startsWith(this.router.currentRouteName);
+    });
+  }
+
   @action
   transitionTo(to) {
-    this.set('currentRoute', to);
     this.transitionToRoute(to);
   }
 
@@ -43,5 +63,20 @@ export default class extends Controller {
   logout() {
     this.get('session').logout();
     this.transitionToRoute('login');
+  }
+
+  @action
+  toggleExpandedItem(item, ev) {
+    ev.stopPropagation();
+    const expandProperty = item + '-expanded';
+    if (this.currentExpanded === expandProperty) {
+      this.toggleProperty(expandProperty);
+      return;
+    }
+    if (this.currentExpanded) {
+      this.set(this.currentExpanded, false);
+    }
+    this.currentExpanded = expandProperty;
+    this.set(this.currentExpanded, true);
   }
 }

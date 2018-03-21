@@ -40,7 +40,7 @@
           {{#controls.button secondary=true iconButton=true onClick=(action "goToShieldCode" shieldCode)}}
             <Paper-Icon @icon="mode edit"/>
           {{/controls.button}}
-          {{#controls.button secondary=true iconButton=true onClick=(action "deleteShieldCode" shieldCode)}}
+          {{#controls.button warn=true secondary=true iconButton=true onClick=(action "deleteShieldCode" shieldCode)}}
             <Paper-Icon @icon="delete"/>
           {{/controls.button}}
         </div>

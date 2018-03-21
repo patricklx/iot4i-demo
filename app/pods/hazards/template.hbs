@@ -1,5 +1,5 @@
 <div class="layout-row layout-wrap flex">
-  <div class="layout-column flex-xs flex-gt-xs-50">
+  <div class="layout-column flex-xs flex-gt-50">
   <Paper-Card as |card|>
     <Paper-Toolbar as |toolbar|>
       <Paper-Toolbar-Tools>Hazards</Paper-Toolbar-Tools>
@@ -19,13 +19,13 @@
               {{#if hazard.ishandled}}
                 <Paper-Icon @icon=check" @class="md-avatar-icon"/>
               {{else}}
-                {{#controls.button primary=true}}
+                <R-C @comp={{controls.button primary=true}} >
                   Ack
-                {{/controls.button}}
+                </R-C>
               {{/if}}
-              {{#controls.button type="danger" onClick=(action "delete")}}
+              <R-C @onClick={{action 'delete'}} @comp={{controls.button warn=true}} >
                 Delete
-              {{/controls.button}}
+              </R-C>
             </div>
           </Paper-Item>
         {{/each}}

@@ -1,20 +1,29 @@
-<div class="layout-row">
-  <Paper-List>
-    {{#each model as |action|}}
-      <Paper-Item class="md-3-line" as |controls|>
-        <div class="md-list-item-text">
-          <p>{{action.userId}}</p>
-          <p>{{action.description}}</p>
-          <p>{{action.type}}</p>
-          <p>{{to-json action.callbackAction}}</p>
-        </div>
-        <div class="md-secondary-container">
-          {{#controls.button onClick=(action 'delete' action) raised=true warn=true secondary=true}}
-            Delete
-          {{/controls.button}}
-        </div>
-      </Paper-Item>
-      <Paper-Divider/>
-    {{/each}}
-  </Paper-List>
+<div class="layout-row layout-wrap flex">
+  <div class="layout-column flex-xs flex-gt-50">
+    <Paper-Card as |card|>
+      <Paper-Toolbar>
+        <Paper-Toolbar-Tools>Devices</Paper-Toolbar-Tools>
+      </Paper-Toolbar>
+      {{#card.content as |content|}}
+        <Paper-List>
+          {{#each model as |action index|}}
+            <Paper-Item @class="md-3-line" as |controls|>
+              <div class="md-list-item-text">
+                <p>{{action.userId}}</p>
+                <p>{{action.description}}</p>
+                <p>{{action.type}}</p>
+                <p>{{to-json action.callbackAction}}</p>
+              </div>
+              <Paper-Divider/>
+              <div class="md-secondary-container">
+                {{#controls.button onClick=(action 'delete' action) raised=true warn=true secondary=true}}
+                  Delete
+                {{/controls.button}}
+              </div>
+            </Paper-Item>
+          {{/each}}
+        </Paper-List>
+      {{/card.content}}
+    </Paper-Card>
+  </div>
 </div>

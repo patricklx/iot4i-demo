@@ -7,6 +7,7 @@ import config from 'demoapp/config/environment';
 export default class extends DS.RESTAdapter {
   @service session;
   @service router;
+  @service paperToaster;
   host = config.iotUri;
   namespace = 'api/v1/' + config.tenantId;
 
@@ -17,6 +18,23 @@ export default class extends DS.RESTAdapter {
     return {
       'authorization': 'Bearer ' + auth
     };
+  }
+
+  deleteRecord(store, type) {
+    let p = super.deleteRecord(...arguments);
+    return p.then((result) => {
+      this.paperToaster.show(`deleted record ${type.modelName}`, {
+        position: 'bottom right',
+        duration: 4000
+      });
+      return result;
+    }, (err) => {
+      this.paperToaster.show(`failed to delete record ${type.modelName}: ${err}`, {
+        position: 'bottom right',
+        duration: 4000
+      });
+      throw err;
+    });
   }
 
   handleResponse(status) {

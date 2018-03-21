@@ -33,8 +33,8 @@ export default class extends Controller {
           icon: 'devices_other'
         },
         {
-          link: 'users',
-          name: 'Users',
+          link: 'customers',
+          name: 'Customers',
           display: this.get('session.users.length'),
           icon: 'perm_identity'
         },

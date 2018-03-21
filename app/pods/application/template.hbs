@@ -13,10 +13,28 @@
       <Paper-Content>
         <Paper-List>
           {{#each menuItems as |menu|}}
-            <Menu-Item @active={{str-contains currentRoute menu.routeName}} @onClick={{action 'transitionTo' menu.routeName}}>
-              {{menu.title}}
-              <Paper-Icon @icon="{{menu.icon}}" />
-            </Menu-Item>
+            {{#if menu.submenus}}
+              <Menu-Item @canExpand=true @expanded={{get this (concat menu.title '-expanded')}} @active={{eq currentMenu menu}}  @onClick={{action 'toggleExpandedItem' menu.title bubbles=false}}>
+                <Paper-Icon @icon="{{menu.icon}}" />
+                {{menu.title}}
+              </Menu-Item>
+              <div class="submenu">
+              {{#liquid-if (get this (concat menu.title '-expanded'))}}
+                {{#each menu.submenus as |submenu|}}
+                  <Submenu-Item @active={{eq currentMenu submenu}} @onClick={{action 'transitionTo' submenu.routeName}}>
+                    <Paper-Icon @icon="{{submenu.icon}}" />
+                    {{submenu.title}}
+                  </Submenu-Item>
+                {{/each}}
+              {{/liquid-if}}
+              </div>
+            {{else}}
+              <Menu-Item @active={{eq currentMenu menu}} @onClick={{action 'transitionTo' menu.routeName}}>
+                <Paper-Icon @icon="{{menu.icon}}" />
+                {{menu.title}}
+              </Menu-Item>
+            {{/if}}
+
           {{/each}}
         </Paper-List>
       </Paper-Content>
@@ -33,7 +51,7 @@
               </Paper-Button>
             </Paper-Sidenav-Toggle>
 
-            {{currentRouteName}}
+            {{currentMenu.title}}
 
             <span class="flex"></span>
 
@@ -56,6 +74,7 @@
         <div class="main-content">
           {{outlet}}
         </div>
+        <Paper-Toaster/>
       </div>
     </Paper-Card-Content>
   </Paper-Sidenav-Container>

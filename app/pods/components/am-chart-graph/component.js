@@ -20,7 +20,8 @@ export default class extends Component {
       });
     }
 
-    this.chart = AmCharts.makeChart('amchart', {
+    const chartdiv = this.$().find('.chartdiv')[0];
+    this.chart = AmCharts.makeChart(chartdiv, {
       type: 'serial',
       theme: 'blur',
       marginTop: 15,

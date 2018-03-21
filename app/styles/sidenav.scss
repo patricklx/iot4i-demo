@@ -96,3 +96,8 @@ md-sidenav {
     }
   }
 }
+
+md-list-item .md-list-item-inner > md-icon:first-child:not(.md-avatar-icon) {
+  margin-left: 0;
+  margin-right: 10px;
+}

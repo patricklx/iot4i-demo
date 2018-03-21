@@ -1,10 +1,10 @@
-import Router from '@ember/route/routing';
+import Route from '@ember/routing/route';
 import { service } from '@ember-decorators/service';
 
-export default class extends Router {
+export default class extends Route {
   @service store;
 
   model() {
-    return this.get('store').findAll('user');
+    return this.store.findAll('user');
   }
 };
