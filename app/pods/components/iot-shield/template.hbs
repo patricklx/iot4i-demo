@@ -1,20 +1,19 @@
-<Paper-Card as |card|>
+<Paper-Card as |Card|>
 
-  {{#card.title as |title|}}
-    {{#title.text as |text|}}
-      {{#text.headline}}
+  <Card.title as |Title|>
+    <Title.text as |Text|>
+      <Text.headline>
         {{shield.name}} <span class="badge">{{shield.type}}</span>
-      {{/text.headline}}
-      {{#text.subhead}}{{shield.description}}{{/text.subhead}}
-    {{/title.text}}
-  {{/card.title}}
+      </Text.headline>
+      <Text.subhead>{{shield.description}}</Text.subhead>
+    </Title.text>
+  </Card.title>
 
-  {{#card.content}}
-  {{/card.content}}
+  <Card.content></Card.content>
 
-  {{#card.actions}}
+  <Card.actions>
     <Paper-Button @onClick={{action 'showDetails'}} @raised=true primary=true>Details</Paper-Button>
     <Paper-Button @onClick={{action 'delete'}} @raised=true warn=true>Delete</Paper-Button>
     <Paper-Button @onClick={{action 'deactivate'}} raised=true>Deactivate</Paper-Button>
-  {{/card.actions}}
+  </Card.actions>
 </Paper-Card>

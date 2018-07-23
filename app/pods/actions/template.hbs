@@ -16,9 +16,9 @@
               </div>
               <Paper-Divider/>
               <div class="md-secondary-container">
-                {{#controls.button onClick=(action 'delete' action) raised=true warn=true secondary=true}}
+                <controls.button @onClick={{action 'delete' action}} @raised=true @warn=true @secondary=true>
                   Delete
-                {{/controls.button}}
+                </controls.button>
               </div>
             </Paper-Item>
           {{/each}}

@@ -1,15 +1,20 @@
 <div style="width: 250px; margin: auto">
-  {{#paper-card as |card|}}
+  <Paper-Card as |Card|>
 
-    {{#card.title as |title|}}
-      {{#title.text as |text|}}
-        {{#text.headline}}Login to IoT4i{{/text.headline}}
-      {{/title.text}}
+    <Card.title as |Title|>
+      <Title.text as |Text|>
+        <Text.headline>
+          Login to IoT4i
+        </Text.headline>
+        <Text.subhead>{{shield.description}}</Text.subhead>
+      </Title.text>
       {{to-json session.authError}}
-    {{/card.title}}
+    </Card.title>
 
-    {{#card.actions}}
-      {{#paper-button primary=true onClick=(action 'login')}}Login{{/paper-button}}
-    {{/card.actions}}
-  {{/paper-card}}
+    <Card.content></Card.content>
+
+    <Card.actions>
+      <Paper-Button @onClick={{action 'login'}} primary=true>Login</Paper-Button>
+    </Card.actions>
+  </Paper-Card>
 </div>

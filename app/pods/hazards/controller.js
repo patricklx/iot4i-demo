@@ -7,4 +7,4 @@ export default class extends Controller {
   delete(action) {
     return action.destroyRecord();
   }
-};
+}

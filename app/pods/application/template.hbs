@@ -21,7 +21,7 @@
               <div class="submenu">
               {{#liquid-if (get this (concat menu.title '-expanded'))}}
                 {{#each menu.submenus as |submenu|}}
-                  <Submenu-Item @active={{eq currentMenu submenu}} @onClick={{action 'transitionTo' submenu.routeName}}>
+                  <Submenu-Item @active={{eq currentMenu submenu}} @onClick={{action 'transitionTo' submenu.routeName}} >
                     <Paper-Icon @icon="{{submenu.icon}}" />
                     {{submenu.title}}
                   </Submenu-Item>
@@ -57,14 +57,14 @@
 
             <Paper-Button @iconButton=true>
               <Paper-Menu as |menu|>
-                <R-C @comp={{menu.trigger}}>
+                <menu.trigger>
                   <Paper-Icon @icon="account circle"/>
-                </R-C>
-                {{#menu.content width=4 as |content|}}
-                  {{#content.menu-item onClick=(action 'logout')}}
+                </menu.trigger>
+                <menu.content @width=4 as |content|>
+                  <content.menu-item @onClick={{action 'logout'}} >
                     Logout
-                  {{/content.menu-item}}
-                {{/menu.content}}
+                  </content.menu-item>
+                </menu.content>
               </Paper-Menu>
             </Paper-Button>
 

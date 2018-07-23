@@ -5,19 +5,19 @@
     {{#each overviewCards as |overview|}}
       <div class="flex-xs flex-sm-30" style="cursor: pointer" onclick={{action 'transitionTo' overview.link}}>
         <Paper-Card as |card|>
-          <R-C @comp={{card.title}} as |title|>
-            <R-C @comp={{title.text}} as |text|>
-              {{#text.headline}}
+          <card.title as |title|>
+            <title.text as |text|>
+              <text.headline>
                 {{overview.name}}
-              {{/text.headline}}
-              {{#text.subhead}}
+              </text.headline>
+              <text.subhead>
                 {{overview.display}}
-              {{/text.subhead}}
-            </R-C>
-            {{#title.media size='gt'}}
-              {{paper-icon overview.icon size=64}}
-            {{/title.media}}
-          </R-C>
+              </text.subhead>
+            </title.text>
+            <title.media @size='gt'>
+              <Paper-Icon @icon={{overview.icon}} @size=64></Paper-Icon>
+            </title.media>
+          </card.title>
         </Paper-Card>
       </div>
     {{/each}}

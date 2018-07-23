@@ -4,7 +4,7 @@
       <Paper-Toolbar>
         <Paper-Toolbar-Tools>Devices</Paper-Toolbar-Tools>
       </Paper-Toolbar>
-      {{#card.content as |content|}}
+      <card.content as |content|>
         <Paper-List>
           {{#each model as |device index|}}
             <Paper-Item @class="md-3-line" as |controls|>
@@ -16,14 +16,14 @@
               </div>
               <Paper-Divider/>
               <div class="md-secondary-container">
-                {{#controls.button onClick=(action 'delete' device) raised=true warn=true secondary=true}}
+                <controls.button @onClick={{action 'delete' device}} @raised=true @warn=true @secondary=true>
                   Delete
-                {{/controls.button}}
+                </controls.button>
               </div>
             </Paper-Item>
           {{/each}}
         </Paper-List>
-      {{/card.content}}
+      </card.content>
     </Paper-Card>
   </div>
 </div>
