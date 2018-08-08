@@ -1,36 +1,31 @@
-<div class="layout-row layout-wrap flex">
-  <div class="layout-column flex-xs flex-gt-50">
-  <Paper-Card as |card|>
-    <Paper-Toolbar as |toolbar|>
-      <Paper-Toolbar-Tools>Hazards</Paper-Toolbar-Tools>
-    </Paper-Toolbar>
-    <card.content as |content|>
-      <Paper-List>
-        {{#each model as |hazard index|}}
-          <Paper-Item @class="md-3-line" as |controls|>
-            <div class="md-list-item-text">
-              <h3>{{default-to hazard.user.name hazard.userId}}</h3>
-              <h4>{{default-to hazard.shield.name "<does not exist>"}}</h4>
-              <p>At {{moment hazard.createdAt}}</p>
-              <p>{{hazard.actionParams.hazardTitle}}</p>
-            </div>
-            <Paper-Divider/>
-            <div class="md-secondary-container">
-              {{#if hazard.ishandled}}
-                <Paper-Icon @icon=check" @class="md-avatar-icon"/>
-              {{else}}
-                <controls.button primary=true>
-                  Ack
-                </controls.button>
-              {{/if}}
-              <controls.button @onClick={{action 'delete' hazard}} @warn={{true}}>
-                Delete
-              </controls.button>
-            </div>
-          </Paper-Item>
-        {{/each}}
-      </Paper-List>
-    </card.content>
-  </Paper-Card>
-  </div>
+<div class="bx--tile">
+  <section class="bx--structured-list">
+    <div class="bx--structured-list-thead">
+      <div class="bx--structured-list-row bx--structured-list-row--header-row">
+        <div class="bx--structured-list-th">Hazards</div>
+        <div class="bx--structured-list-th"></div>
+      </div>
+    </div>
+    <div class="bx--structured-list-tbody">
+      {{#each model as |hazard index|}}
+        <div class="bx--structured-list-row">
+          <div class="bx--structured-list-td bx--structured-list-content--nowrap">
+            <h3>{{default-to hazard.user.name hazard.userId}}</h3>
+            <h4>{{default-to hazard.shield.name "<does not exist>"}}</h4>
+            <p>At {{moment hazard.createdAt}}</p>
+            <p>{{hazard.actionParams.hazardTitle}}</p>
+          </div>
+          <div class="bx--structured-list-td">
+            {{#if hazard.ishandled}}
+              <BxIcon @icon=check" @class="check"/>
+            {{else}}
+              <BxButton @onClick={{action 'ack' hazard}}>Ack</BxButton>
+              <span style="width: 10px; display: inline-block;"></span>
+            {{/if}}
+            <BxButton @danger="true" @onClick={{action 'delete' hazard}}>Delete</BxButton>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </section>
 </div>

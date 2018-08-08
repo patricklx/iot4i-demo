@@ -1,30 +1,24 @@
-<div class="layout-row layout-wrap flex">
-  <div class="layout-column flex-xs flex-gt-50">
-    <Paper-Card as |card|>
-      <Paper-Toolbar as |toolbar|>
-        <Paper-Toolbar-Tools>Shields</Paper-Toolbar-Tools>
-      </Paper-Toolbar>
-      <card.content as |content|>
-        <Paper-List>
-          {{#each model as |shield index|}}
-            <Paper-Item @class="md-3-line" as |controls|>
-              <div class="md-list-item-text">
-                <!--<img src={{shield.img}} alt={{shield.name}} class="md-avatar">-->
-                <p>#{{shield.id}} {{shield.name}}</p>
-              </div>
-              <Paper-Divider/>
-              <div class="md-secondary-container">
-                <controls.button @primary=true @iconButton=true @onClick={{action "goToShield" shield}}>
-                  <Paper-Icon @icon="mode edit"/>
-                </controls.button>
-                <controls.button @warn=true @secondary=true @iconButton=true @onClick={{action "deleteShield" shield}}>
-                  <Paper-Icon @icon="delete"/>
-                </controls.button>
-              </div>
-            </Paper-Item>
-          {{/each}}
-        </Paper-List>
-      </card.content>
-    </Paper-Card>
-  </div>
+<div class="bx--tile">
+  <section class="bx--structured-list">
+    <div class="bx--structured-list-thead">
+      <div class="bx--structured-list-row bx--structured-list-row--header-row">
+        <div class="bx--structured-list-th">Shields</div>
+        <div class="bx--structured-list-th"></div>
+      </div>
+    </div>
+    <div class="bx--structured-list-tbody">
+      {{#each model as |shield index|}}
+        <div class="bx--structured-list-row">
+          <div class="bx--structured-list-td bx--structured-list-content--nowrap">
+            <p>#{{shield.id}} {{shield.name}}</p>
+          </div>
+          <div class="bx--structured-list-td">
+            <BxIcon @icon="edit" @info="true" @onClick={{action 'goToShield' shield}}/>
+            <span style="width: 10px; display: inline-block;"></span>
+            <BxIcon @icon="delete" @danger="true" @onClick={{action 'deleteShield' shield}}/>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </section>
 </div>

@@ -1,7 +1,55 @@
-@import "pod-styles";
 @import 'node_modules/carbon-components/src/globals/scss/styles';
+@import "pod-styles";
 @import 'ember-paper';
 @import 'sidenav';
+@import "bx-power-select";
+@import "ember-power-select";
+@import "bx-sidenav";
+
+.ember-power-select-status-icon {
+  width: initial;
+  height: initial;
+  right: 1em;
+  border: none;
+}
+.ember-power-select-trigger, .ember-power-select-trigger-multiple-input {
+  height: 40px;
+  line-height: initial;
+}
+
+.ember-power-select-multiple-trigger {
+  input[type='checkbox'] {
+    display: none;
+  }
+}
+
+.ember-power-select-multiple-options > .ember-power-select-multiple-option {
+  border: none;
+  margin-top: 12px;
+  margin-left: 10px;
+  @extend .bx--list-box__selection;
+  @extend .bx--list-box__selection--multi;
+}
+
+.ember-power-select-multiple-remove-btn {
+  opacity: 1;
+  margin-right: 3px;
+  font-weight: bold;
+  font-size: 150%;
+}
+
+.ember-power-select-placeholder {
+  height: 2.7rem;
+  padding: 0.8125rem 2.5rem 0.8125rem 1rem;
+}
+
+.ember-power-select-option {
+  padding: 1rem 1.5rem 1rem 1rem;
+  font-size: 0.875rem;
+}
+.ember-power-select-option[aria-current="true"] {
+  text-decoration: underline;
+}
 
 span.badge {
   font-weight: 300;
@@ -34,4 +82,3 @@ body {
   color: #666;
   background-color: #f0f3f4;
 }
-

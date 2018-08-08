@@ -8,6 +8,7 @@ export default Ember.Component.extend(BxClassNames, {
     'primary:primary',
     'secondary:secondary',
     'danger:danger',
+    'ghost:ghost',
     'small:sm'
   ]
 })

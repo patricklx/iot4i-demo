@@ -1,10 +1,14 @@
 import Controller from '@ember/controller';
-import { action } from '@ember-decorators/object';
 
-export default class extends Controller {
+export default Controller.extend({
 
-  @action
-  delete(action) {
-    return action.destroyRecord();
+  actions: {
+    delete(action) {
+      return action.destroyRecord();
+    },
+
+    ack(action) {
+
+    }
   }
-}
+})
