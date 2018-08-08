@@ -1,6 +1,5 @@
 import PaperButton from 'ember-paper/components/paper-button';
 import PaperTemplate from 'demoapp/pods/components/paper-button/template';
-
 /**
  * Extend paper button to show loading indicator for promises
  */

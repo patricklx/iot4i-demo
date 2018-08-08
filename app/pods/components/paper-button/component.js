@@ -10,7 +10,7 @@ export default PaperButton.extend({
         if (ret instanceof Promise) {
           this.set('loading', true);
           this.set('disabled', true);
-          res.finally(() => {
+          ret.finally(() => {
             this.set('loading', false);
             this.set('disabled', false);
           });

@@ -5,7 +5,21 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
-    // Add options here
+    autoImport: {
+      alias: {
+        // when the app tries to import from "plotly.js", use
+        // the real package "plotly.js-basic-dist" instead.
+        // 'plotly.js': 'plotly.js-basic-dist',
+
+        // you can also use alises to pick a different entrypoint
+        // within the same package. This can come up when the default
+        // entrypoint only works in Node, but there is also a browser
+        // build available (and the author didn't provide a "browser"
+        // field in package.json that would let us detect it
+        // automatically).
+        // 'handlebars': 'handlebars/dist/handlebars'
+      }
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated
@@ -23,6 +37,7 @@ module.exports = function(defaults) {
 
   app.import('bower_components/amcharts/dist/amcharts/amcharts.js');
   app.import('bower_components/amcharts/dist/amcharts/serial.js');
+  app.import('node_modules/carbon-components/css/carbon-components.css');
 
   return app.toTree();
 };

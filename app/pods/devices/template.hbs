@@ -1,29 +1,25 @@
-<div class="layout-row layout-wrap flex">
-  <div class="layout-column flex-xs flex-gt-50">
-    <Paper-Card as |card|>
-      <Paper-Toolbar>
-        <Paper-Toolbar-Tools>Devices</Paper-Toolbar-Tools>
-      </Paper-Toolbar>
-      <card.content as |content|>
-        <Paper-List>
-          {{#each model as |device index|}}
-            <Paper-Item @class="md-3-line" as |controls|>
-              <div class="md-list-item-text">
-                <h3>{{device.vendorId}}</h3>
-                <p>{{device.userId}}</p>
-                <p>{{device.description}}</p>
-                <p>{{device.type}}</p>
-              </div>
-              <Paper-Divider/>
-              <div class="md-secondary-container">
-                <controls.button @onClick={{action 'delete' device}} @raised=true @warn=true @secondary=true>
-                  Delete
-                </controls.button>
-              </div>
-            </Paper-Item>
-          {{/each}}
-        </Paper-List>
-      </card.content>
-    </Paper-Card>
-  </div>
+<div class="bx--tile">
+  <section class="bx--structured-list">
+    <div class="bx--structured-list-thead">
+      <div class="bx--structured-list-row bx--structured-list-row--header-row">
+        <div class="bx--structured-list-th">Devices</div>
+        <div class="bx--structured-list-th"></div>
+      </div>
+    </div>
+    <div class="bx--structured-list-tbody">
+    {{#each model as |device index|}}
+      <div class="bx--structured-list-row">
+        <div class="bx--structured-list-td bx--structured-list-content--nowrap">
+        <h3>{{device.vendorId}}</h3>
+          <p>{{device.userId}}</p>
+          <p>{{device.description}}</p>
+          <p>{{device.type}}</p>
+        </div>
+        <div class="bx--structured-list-td">
+          <BxButton @secondary=true @danger=true @onClick={{action 'delete' device}}>Delete</BxButton>
+        </div>
+      </div>
+    {{/each}}
+    </div>
+  </section>
 </div>
