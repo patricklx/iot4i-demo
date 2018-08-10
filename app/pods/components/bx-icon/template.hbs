@@ -1,9 +1,10 @@
 {{#if loading}}
   <BxLoading @small="true"/>
 {{else}}
-  <svg style="{{if @onClick 'cursor: pointer'}}"
+  <span style="{{if @onClick 'cursor: pointer'}}"
        onclick={{action 'onClick'}}
-         class="bx--btn__icon {{bxClassNames}} {{styleNamespace}}"
+       class="bx--btn__icon" >
+  <svg class="{{bxClassNames}} {{styleNamespace}}"
   width="{{default-to size svg.width}}"
   height="{{default-to size  svg.height}}"
   viewBox="{{svg.viewBox}}"
@@ -21,4 +22,5 @@
       <path d="{{p.d}}" fill-rule="{{get p 'fill-rule'}}"></path>
     {{/each}}
   </svg>
+  </span>
 {{/if}}
