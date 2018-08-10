@@ -9,9 +9,10 @@
 
 'use strict';
 
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
+import { defineProperty, computed } from '@ember/object';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   init() {
     this._super(...arguments);
     const mapping = {};
@@ -20,8 +21,8 @@ export default Ember.Mixin.create({
       mapping[a] = this.classPrefix + c;
     });
     const props = attrs.map(a => `attrs.${a[0]}`);
-    Ember.defineProperty(this, 'bxClassNames', Ember.computed(props.join(','), () => {
-      return attrs.map(a => a[0]).map(a => String(this.attrs[a]) === 'true' ? mapping[a] : null).compact().join(' ');
+    defineProperty(this, 'bxClassNames', computed(props.join(','), () => {
+      return attrs.map(a => a[0]).map(a => String(this[a]) === 'true' ? mapping[a] : null).compact().join(' ');
     }));
   }
 });

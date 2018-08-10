@@ -30,19 +30,19 @@ export default class extends Controller {
           link: 'devices',
           name: 'Devices',
           display: this.get('session.devices.length'),
-          icon: 'devices_other'
+          icon: 'iot'
         },
         {
           link: 'customers',
           name: 'Customers',
           display: this.get('session.users.length'),
-          icon: 'perm_identity'
+          icon: 'header--user'
         },
         {
           link: 'claims',
           name: 'Claims',
           display: this.get('session.claims.length'),
-          icon: 'mail'
+          icon: 'email'
         }
       ];
   }

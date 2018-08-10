@@ -1,21 +1,23 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { guidFor } from '@ember/object/internals';
 import Loading from 'carbon-components/es/components/loading/loading';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: '',
-  uuid: Ember.computed(function () {
-    return Ember.uuid();
+  uuid: computed(function () {
+    return guidFor(this);
   }),
 
   didReceiveAttrs() {
     this._super(...arguments);
-    if (this.attrs.active !== undefined) {
-      this.loading && this.loading.set(this.attrs.active);
+    if (this.active !== undefined) {
+      this.loading && this.loading.set(this.active);
     }
   },
 
   didInsertElement() {
-    this.loading = new Loading($(`#${this.uuid}`)[0], this.attrs);
+    this.loading = new Loading($(`#${this.uuid}`)[0], this);
   },
 
   willDestroy() {

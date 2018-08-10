@@ -16,9 +16,7 @@
           <p>{{device.type}}</p>
         </div>
         <div class="bx--structured-list-td">
-          <BxButton @secondary=true @danger=true @onClick={{action 'delete' device}}>
-            <BxLoading @small='true' @active={{false}}/>
-          </BxButton>
+          <BxIcon @danger="true" @icon="delete" @onClick={{action 'delete' device}}/>
         </div>
       </div>
     {{/each}}

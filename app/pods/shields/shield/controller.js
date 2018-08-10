@@ -14,10 +14,7 @@ export default class extends Controller {
 
   @computed('session.actions.[]','actionsArray.[]')
   get actionOptionsArray() {
-    if (!this.session.actions || !this.actionsArray) {
-      return this.session.actions;
-    }
-    return this.session.actions.filter((a) => !this.actionsArray.findBy('id', a.id));
+    return this.session.actions;
   }
 
   @action

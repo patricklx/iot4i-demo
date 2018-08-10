@@ -1,16 +1,18 @@
 import Controller from '@ember/controller';
-import { action, computed } from '@ember-decorators/object';
-import { service } from '@ember-decorators/service';
+import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 
-export default class extends Controller {
-  @service session;
-  @service router;
+export default Controller.extend({
+  session: service(),
+  router: service(),
+  leftSideBarOpen: true,
 
   init() {
+    this._super(...arguments);
     this.menuItems = [{
       title: 'Home',
-      routeName: 'application',
-      icon: 'home'
+      routeName: 'index',
+      icon: 'applications'
     }, {
       title: 'Shields',
       routeName: 'shields',
@@ -18,65 +20,84 @@ export default class extends Controller {
     }, {
       title: 'Hazards',
       routeName: 'hazards',
-      icon: 'warning',
+      icon: 'warning--outline',
       submenus: [{
         title: 'Hazards',
         routeName: 'hazards',
-        icon: 'warning'
+        icon: 'warning--outline'
       }, {
         title: 'Hazards by Country',
         routeName: 'hazards',
-        icon: 'warning'
+        icon: 'warning--outline'
       }
       ]
     }, {
       title: 'Devices',
       routeName: 'devices',
-      icon: 'devices_other'
+      icon: 'iot'
     }, {
       title: 'Actions',
       routeName: 'actions',
-      icon: 'notifications'
+      icon: 'notification-on'
     }, {
       title: 'Customers',
       routeName: 'customers',
-      icon: 'perm_identity'
+      icon: 'header--user'
     }];
-  }
 
-  @computed('router.currentRouteName')
-  get currentMenu() {
+    const handler = function (event) {
+      // if the target is a descendent of container do nothing
+      if ($(window).width <= 1024) {
+        this.set('leftSideBarOpen', false);
+      }
+      if ($(event.target).is(".side-nav, .side-nav *")) return;
+      // remove event handler from document
+      // $(document).off("click", handler);
+      // dostuff
+    };
+
+    $(document).on("click", handler);
+  },
+
+  currentMenu: computed('router.currentRouteName', function () {
+    return this.menuItems.find((i) => {
+      if (i.submenus) {
+        return i.submenus.find(sm => this.router.currentRouteName.startsWith(sm.routeName));
+      }
+      return this.router.currentRouteName.startsWith(i.routeName);
+    });
+  }),
+
+  currentSubMenu: computed('router.currentRouteName', function () {
     return this.menuItems.find((i) => {
       if (i.submenus) {
         return i.submenus.find(sm => sm.routeName.startsWith(this.router.currentRouteName));
       }
-      return i.routeName.startsWith(this.router.currentRouteName);
     });
-  }
+  }),
 
-  @action
-  transitionTo(to) {
-    this.transitionToRoute(to);
-  }
+  actions: {
+    transitionTo(to) {
+      this.transitionToRoute(to);
+    },
 
-  @action
-  logout() {
-    this.get('session').logout();
-    this.transitionToRoute('login');
-  }
+    logout() {
+      this.get('session').logout();
+      this.transitionToRoute('login');
+    },
 
-  @action
-  toggleExpandedItem(item, ev) {
-    ev.stopPropagation();
-    const expandProperty = item + '-expanded';
-    if (this.currentExpanded === expandProperty) {
-      this.toggleProperty(expandProperty);
-      return;
+    toggleExpandedItem(item, ev) {
+      ev.stopPropagation();
+      const expandProperty = item + '-expanded';
+      if (this.currentExpanded === expandProperty) {
+        this.toggleProperty(expandProperty);
+        return;
+      }
+      if (this.currentExpanded) {
+        this.set(this.currentExpanded, false);
+      }
+      this.currentExpanded = expandProperty;
+      this.set(this.currentExpanded, true);
     }
-    if (this.currentExpanded) {
-      this.set(this.currentExpanded, false);
-    }
-    this.currentExpanded = expandProperty;
-    this.set(this.currentExpanded, true);
   }
-}
+})

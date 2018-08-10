@@ -9,16 +9,17 @@
     <card.content>
       <Paper-Input @value={{shield.name}} @label="Name" @onChange={{action (mut shield.name) value}} />
       <Paper-Input @value={{shield.description}} @label="Description" @onChange={{action (mut shield.description) value}} />
-      <Paper-Chips
+      <BxSelect
         @placeholder="Choose actions"
+        @multiple={{true}}
         @content={{actionsArray}}
         @removeItem={{action "removeAction"}}
         @addItem={{action "addAction"}}
         @searchField="name"
         @onfocus={{action "selectFocused"}}
         @options={{actionOptionsArray}} as |act|>
-          {{act.name}} <br> <small>{{act.description}}</small>
-      </Paper-Chips>
+          {{act.name}} <br> <small>{{default-to act.description 'no description'}}</small>
+      </BxSelect>
       <card.actions></card.actions>
     </card.content>
   </Paper-Card>

@@ -1,28 +1,26 @@
-<div class="page-header">
-  <h1>Welcome {{session.user.username}}</h1>
-
-  <div class="flex layout-row layout-wrap layout-xs-column">
-    {{#each overviewCards as |overview|}}
-      <div class="flex-xs flex-sm-30" style="cursor: pointer" onclick={{action 'transitionTo' overview.link}}>
-        <Paper-Card as |card|>
-          <card.title as |title|>
-            <title.text as |text|>
-              <text.headline>
-                {{overview.name}}
-              </text.headline>
-              <text.subhead>
+<div class="bx--grid">
+  <div class="bx--row">
+  {{#each overviewCards as |overview|}}
+    <div class="bx--col-sm-3 bx--col-lg-2 bx--col-xs-12" style="cursor: pointer" onclick={{action 'transitionTo' overview.link}}>
+      <BxTile>
+        <div class="bx--grid">
+          <div class="bx--row">
+            <div class="bx--col-xs-7 bx--col-sm-5">
+              <h4>{{overview.name}}</h4>
+              <p>
                 {{overview.display}}
-              </text.subhead>
-            </title.text>
-            <title.media @size='gt'>
-              <Paper-Icon @icon={{overview.icon}} @size=64></Paper-Icon>
-            </title.media>
-          </card.title>
-        </Paper-Card>
-      </div>
-    {{/each}}
+              </p>
+            </div>
+            <div class="bx--col-xs-1">
+              <BxIcon @icon={{overview.icon}} @size=64></BxIcon>
+            </div>
+          </div>
+        </div>
+      </BxTile>
+    </div>
+  {{/each}}
   </div>
-  <div class="flex layout-row" style="height: 350px">
-    <Am-Chart-Graph @class="flex layout-row" @users={{session.users}} />
-  </div>
+</div>
+<div class="" style="height: 350px">
+  <Am-Chart-Graph @class="flex layout-row" @users={{session.users}} />
 </div>
