@@ -1,7 +1,7 @@
 {{#if loading}}
   <BxLoading @small="true"/>
 {{else}}
-  <span style="{{if @onClick 'cursor: pointer'}}"
+  <span style="{{if attrs.onClick 'cursor: pointer'}}"
        onclick={{action 'onClick'}}
        class="bx--btn__icon" >
   <svg class="{{bxClassNames}} {{styleNamespace}}"

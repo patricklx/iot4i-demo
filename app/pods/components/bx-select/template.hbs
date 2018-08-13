@@ -10,11 +10,27 @@
   as |option select|
   >
     {{#if hasBlock}}
-      <input type='checkbox' onclick='return false;' readonly='readonly' checked={{ember-power-select-is-selected option select.selected}}>
-      {{yield option}}
+      <div class='bx--grid'>
+        <div class='bx--row'>
+          <div class='bx--col-xs-1'>
+            <BxCheckbox @onclick='return false;' @readonly='true' @checked={{ember-power-select-is-selected option select.selected}} />
+          </div>
+          <div class='bx--col-xs'>
+            {{yield option}}
+          </div>
+        </div>
+      </div>
     {{else}}
-      <input type='checkbox' onclick='return false;' readonly='readonly' checked={{ember-power-select-is-selected option select.selected}}>
-      {{option}}
+      <div class='bx--grid'>
+        <div class='bx--row'>
+          <div class='bx--col-xs-1'>
+            <BxCheckbox @onclick='return false;' @readonly='true' @checked={{ember-power-select-is-selected option select.selected}} />
+          </div>
+          <div class='bx--col-xs'>
+            {{option}}
+          </div>
+        </div>
+      </div>
     {{/if}}
   </PowerSelectMultiple>
 {{else}}

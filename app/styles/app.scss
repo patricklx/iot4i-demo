@@ -17,9 +17,22 @@
   line-height: initial;
 }
 
+.bx--checkbox-label {
+  display: inline-block;
+}
+
 .ember-power-select-multiple-trigger {
   input[type='checkbox'] {
     display: none;
+  }
+  .bx--checkbox-label {
+    display: none;
+  }
+  [class*="bx--col"] {
+    display: contents;
+  }
+  br {
+    display: block;
   }
 }
 

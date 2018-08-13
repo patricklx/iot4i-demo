@@ -1,1 +1,6 @@
-<input id="{{uuid}}" class="bx--checkbox" type="checkbox" value="{{value}}" name="{{name}}" checked={{checked}}>
+<span id="{{uuid}}">
+  <label for="checkbox-{{uuid}}" class="bx--checkbox-label">
+    <input id='checkbox-{{uuid}}' readonly='{{readonly}}' class="bx--checkbox" type="checkbox" value="{{value}}" name="{{name}}" checked={{if checked true false}}>
+    {{label}}
+  </label>
+</span>

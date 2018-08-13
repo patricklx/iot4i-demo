@@ -4,13 +4,13 @@ import { pluralize } from 'ember-inflector';
 export default DS.RESTSerializer.extend({
   primaryKey: '_id',
   normalizeResponse(store, primaryModelClass, payload, id, requestType) {
-    let newPayload = {};
+    const newPayload = {};
     if (payload && payload.items) {
       newPayload[pluralize(primaryModelClass.modelName)] = payload.items;
       newPayload[pluralize(primaryModelClass.modelName)].__meta = {
         limit: payload.limit,
         offset: payload.offset,
-        totalItems: payload.totalItems
+        totalItems: payload.totalItems,
       };
     } else {
       if (payload.id) {
@@ -22,10 +22,10 @@ export default DS.RESTSerializer.extend({
     return this._super(store, primaryModelClass, newPayload, id, requestType);
   },
 
-  extractMeta: function(store, type, payload) {
+  extractMeta(store, type, payload) {
     if (payload && payload.__meta) {
       store.metaForType(type, payload.__meta);
       delete payload.__meta;
     }
-  }
+  },
 });
