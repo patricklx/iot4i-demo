@@ -8,5 +8,10 @@ module.exports = {
     'airbnb-base'
   ],
   rules: {
+    "comma-dangle": ["error", "never"],
+    "no-underscore-dangle": "off",
+    "no-continue": "off",
+    "no-plusplus": "off",
+    "no-param-reassign": "off"
   }
 };

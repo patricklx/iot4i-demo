@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import BxClassNames from 'demoapp/mixins/bx-class-names'
+import BxClassNames from 'demoapp/mixins/bx-class-names';
 
 export default Ember.Component.extend({
   content: [],
@@ -11,37 +11,39 @@ export default Ember.Component.extend({
     onChange(choice) {
       if (this.multiple) {
         choice.forEach((item) => {
-          if (!this.content.includes(item)) {
-            this.attrs.addItem && this.attrs.addItem(item);
+          if (!this.content || !this.content.includes(item)) {
+            this.addItem && this.addItem(item);
           }
         });
-        this.content.forEach((item) => {
+        this.content && this.content.forEach((item) => {
           if (!choice.includes(item)) {
-            this.attrs.removeItem && this.attrs.removeItem(item);
+            this.removeItem && this.removeItem(item);
           }
         });
         return;
       }
-      this.attrs.onSelect && this.attrs.onSelect(choice);
+      this.onSelect && this.onSelect(choice);
     },
 
     selectFocused(...args) {
-      return this.attrs.selectFocused && this.attrs.selectFocused(...args);
+      return this.selectFocused && this.selectFocused(...args);
     },
 
-    handleKeydown (select, event) {
-      let selected = this.get('content') || [],
-        backspaceHandled = false;
+    handleKeydown(select, event) {
+      const selected = this.get('content') || [];
+
+
+      let backspaceHandled = false;
 
       // Delete the entire last tag if backspacing into the tags area.
-      if (8 === event.keyCode && Ember.isBlank(event.target.value)) {  // BACKSPACE === 8
-        this.attrs.removeItem && this.attrs.removeItem(selected.slice(-1)[0]);
+      if (event.keyCode === 8 && Ember.isBlank(event.target.value)) { // BACKSPACE === 8
+        this.removeItem && this.removeItem(selected.slice(-1)[0]);
         event.preventDefault();
         backspaceHandled = true;
         return false;
       }
 
-      if (13 === event.keyCode) {// enter === 8
+      if (event.keyCode === 13) { // enter === 8
         Ember.set(select, 'searchText', '');
         backspaceHandled = true;
       }
@@ -53,9 +55,9 @@ export default Ember.Component.extend({
   },
 
   didInsertElement() {
-    this.$('.ember-power-select-status-icon').replaceWith('' +
-      '<svg class="bx--dropdown__arrow ember-power-select-status-icon" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">\n' +
-      '    <path d="M10 0L5 5 0 0z"></path>\n' +
-      '  </svg>');
+    this.$('.ember-power-select-status-icon').replaceWith(''
+      + '<svg class="bx--dropdown__arrow ember-power-select-status-icon" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">\n'
+      + '    <path d="M10 0L5 5 0 0z"></path>\n'
+      + '  </svg>');
   }
-})
+});

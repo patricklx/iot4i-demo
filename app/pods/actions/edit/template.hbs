@@ -1,0 +1,18 @@
+<div class="bx--grid">
+  <div class='bx--row'>
+    <div class='bx--col-sm-6'>
+      <BxTile>
+        <h4>{{action.name}}</h4>
+        <small>{{action.id}}</small>
+        <br>
+        <br>
+        <div style='max-width: 400px'>
+          <Form-Editor
+            @model={{action}}
+            @sections={{formSections}}
+          />
+        </div>
+      </BxTile>
+    </div>
+  </div>
+</div>

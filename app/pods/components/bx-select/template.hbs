@@ -7,31 +7,16 @@
     @placeholder={{placeholder}}
       @onchange={{action 'onChange'}}
     @onkeydown={{action 'handleKeydown'}}
+    @closeOnSelect={{false}}
   as |option select|
   >
-    {{#if hasBlock}}
-      <div class='bx--grid'>
-        <div class='bx--row'>
-          <div class='bx--col-xs-1'>
-            <BxCheckbox @onclick='return false;' @readonly='true' @checked={{ember-power-select-is-selected option select.selected}} />
-          </div>
-          <div class='bx--col-xs'>
-            {{yield option}}
-          </div>
-        </div>
-      </div>
-    {{else}}
-      <div class='bx--grid'>
-        <div class='bx--row'>
-          <div class='bx--col-xs-1'>
-            <BxCheckbox @onclick='return false;' @readonly='true' @checked={{ember-power-select-is-selected option select.selected}} />
-          </div>
-          <div class='bx--col-xs'>
-            {{option}}
-          </div>
-        </div>
-      </div>
-    {{/if}}
+    <BxCheckbox @onclick='return false;' @readonly='true' @checked={{ember-power-select-is-selected option select.selected}} >
+      {{#if hasBlock}}
+        {{yield option}}
+      {{else}}
+        {{option}}
+      {{/if}}
+    </BxCheckbox>
   </PowerSelectMultiple>
 {{else}}
   <PowerSelect

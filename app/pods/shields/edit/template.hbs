@@ -6,20 +6,11 @@
         <small>{{shield.id}}</small>
         <br>
         <br>
-        <div style='max-width: 300px'>
-          <BxInput @value={{shield.name}} @label="Name" @onChange={{action (mut shield.name) value}} />
-          <BxInput @value={{shield.description}} @label="Description" @onChange={{action (mut shield.description) value}} />
-          <BxSelect
-            @placeholder="Choose actions"
-            @multiple={{true}}
-              @content={{actionsArray}}
-            @removeItem={{action "removeAction"}}
-              @addItem={{action "addAction"}}
-            @searchField="name"
-            @onfocus={{action "selectFocused"}}
-              @options={{actionOptionsArray}} as |act|>
-            {{act.name}} <br> <small>{{default-to act.description 'no description'}}</small>
-          </BxSelect>
+        <div style='max-width: 400px'>
+          <Form-Editor
+            @model={{shield}}
+            @sections={{formSections}}
+          />
         </div>
       </BxTile>
     </div>
@@ -40,12 +31,21 @@
               </div>
               <div class="bx--structured-list-td">
                 <BxCheckbox @checked={{shieldCode.enabled}} @onChange={{action (mut shieldCode.enabled)}} />
-                <BxIcon @icon="edit" @info="true" @onClick={{action 'goToShieldCode' shieldCode}}/>
+                <BxIcon @icon="edit" @info="true" @onClick={{action 'editShieldCode' shieldCode}}/>
                 <span style="width: 10px; display: inline-block;"></span>
                 <BxIcon @icon="delete" @danger="true" @onClick={{action 'deleteShieldCode' shieldCode}}/>
               </div>
             </div>
           {{/each}}
+          <div class="bx--structured-list-row">
+            <div class="bx--structured-list-td bx--structured-list-content--nowrap">
+              <BxButton @primary="true" @onClick={{action 'addNew'}}>
+                New <BxIcon @icon="add" />
+              </BxButton>
+            </div>
+            <div class="bx--structured-list-td">
+            </div>
+          </div>
         </div>
       </section>
     </div>

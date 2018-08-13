@@ -1,0 +1,12 @@
+<BxSelect
+  @placeholder="{{field.placeholder}}"
+  @multiple={{fields.multiple}}
+  @content={{currentValue}}
+  @removeItem={{action "remove"}}
+  @onSelect={{action "onSelect"}}
+  @addItem={{action "add"}}
+  @searchField={{field.searchField}}
+  @onfocus={{action "selectFocused"}}
+  @options={{field.options}} as |opt|>
+  {{opt}}
+</BxSelect>

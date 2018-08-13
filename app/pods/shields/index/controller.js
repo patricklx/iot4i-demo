@@ -4,15 +4,21 @@ import { service } from '@ember-decorators/service';
 
 export default class extends Controller {
   @service router;
+  @service store;
 
   @action
-  goToShield(shield) {
-    this.router.transitionTo('shields.shield', shield);
+  editShield(shield) {
+    this.router.transitionTo('shields.edit', shield);
   }
 
   @action
   deleteShield(shield) {
     return shield.destroyRecord();
+  }
+
+  @action
+  createNewShield() {
+    this.router.transitionTo('shields.edit', '__new__');
   }
 
   @action

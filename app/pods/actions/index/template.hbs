@@ -16,10 +16,21 @@
             <p>{{to-json action.callbackAction}}</p>
           </div>
           <div class="bx--structured-list-td">
-            <BxButton @danger="true" @onClick={{action 'delete' action}}>Delete</BxButton>
+            <BxIcon @icon="edit" @info="true" @onClick={{action 'edit' action}} />
+            <BxIcon @icon="delete" @danger="true" @onClick={{action 'delete' action}} />
           </div>
         </div>
       {{/each}}
+      <div class="bx--structured-list-row">
+        <div class="bx--structured-list-td bx--structured-list-content--nowrap">
+          <BxButton @primary="true" @onClick={{action 'addNew'}}>
+            New <BxIcon @icon="add" />
+          </BxButton>
+        </div>
+        <div class="bx--structured-list-td">
+
+        </div>
+      </div>
     </div>
   </section>
 </div>

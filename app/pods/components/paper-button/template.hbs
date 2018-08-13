@@ -1,9 +1,0 @@
-{{#if loading}}
-  <Paper-Progress-Circular @class="md-hue-2" @diameter=25 />
-{{else}}
-  {{#if hasBlock}}
-    {{yield}}
-  {{else}}
-    {{label}}
-  {{/if}}
-{{/if}}

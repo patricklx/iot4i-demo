@@ -1,20 +1,12 @@
 <div style="width: 250px; margin: auto">
-  <Paper-Card as |Card|>
+  <BxTile>
 
-    <Card.title as |Title|>
-      <Title.text as |Text|>
-        <Text.headline>
-          Login to IoT4i
-        </Text.headline>
-        <Text.subhead>{{shield.description}}</Text.subhead>
-      </Title.text>
+    <h4>Login to IoT4i</h4>
+    <p>
       {{to-json session.authError}}
-    </Card.title>
+    </p>
 
-    <Card.content></Card.content>
+    <BxButton @onClick={{action 'login'}} @primary=true>Login</BxButton>
 
-    <Card.actions>
-      <Paper-Button @onClick={{action 'login'}} primary=true>Login</Paper-Button>
-    </Card.actions>
-  </Paper-Card>
+  </BxTile>
 </div>

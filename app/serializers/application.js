@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import { setProperties } from '@ember/object';
 import { pluralize } from 'ember-inflector';
 
 export default DS.RESTSerializer.extend({
@@ -10,7 +11,7 @@ export default DS.RESTSerializer.extend({
       newPayload[pluralize(primaryModelClass.modelName)].__meta = {
         limit: payload.limit,
         offset: payload.offset,
-        totalItems: payload.totalItems,
+        totalItems: payload.totalItems
       };
     } else {
       if (payload.id) {
@@ -28,4 +29,11 @@ export default DS.RESTSerializer.extend({
       delete payload.__meta;
     }
   },
+
+  serializeIntoHash(hash, typeClass, snapshot, options) {
+    this._super(hash, typeClass, snapshot, options);
+    const normalizedRootKey = this.payloadKeyFromModelName(typeClass.modelName);
+    setProperties(hash, hash[normalizedRootKey]);
+    hash[normalizedRootKey] = undefined;
+  }
 });

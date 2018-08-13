@@ -1,0 +1,102 @@
+{{!bs-breadcrumbs selected=(readonly currentSection) content=sectionNames onItemSelected=(action 'showSection')}}
+
+<div style="max-width: 350px"  class="{{sectionContent.content.id}}">
+
+  {{#if (and iniData fieldsets)}}
+    <Json-Form
+      @fieldsets={{fieldsets}}
+      @iniData={{iniData}}
+      @onSubmit={{action 'onSubmit'}}
+      @onChange={{action 'onChange'}}
+      @globalOptions={{globalOptions}}
+    as |Form|
+    >
+      <form class="form">
+        <Form.fieldsets as |Fieldset|>
+
+          <fieldset class="{{fieldset.self.id}}" style="position:relative;">
+
+            {{#if Fieldset.self.legend}}
+              <legend>
+                {{Fieldset.self.legend}}
+                <br>
+                <small>{{Fieldset.self.sub-legend}}</small>
+              </legend>
+              <br>
+            {{/if}}
+
+            <Fieldset.fields as |field|>
+              <field.input as |input|>
+
+                <div class="bx--form-item {{field.self.type}} {{field.self.style_class}}" style='margin-bottom: 1.5rem;'>
+                  <input.component @classNames="bx--text-input" @errors={{input.validation.messages}} data-invalid={{if input.showMessage 'true' false}} />
+                  {{#if (and field.self.label (not-eq field.self.type 'checkbox'))}}
+                    <label for="{{field.self.name}}" class="bx--label {{if field.self.validations.presence 'required' ''}}">
+                      {{field.self.label}}
+                    </label>
+                  {{/if}}
+                  {{#if (eq field.self.type 'file')}}
+                    uploaded: <a href="{{ajax.host}}{{get Form.self.iniData input.self.formPath}}">link</a>
+                  {{/if}}
+                  {{#if field.self.help}}
+                    <div class="bx--form__helper-text">
+                      {{field.self.help}}
+                    </div>
+                  {{/if}}
+                  {{#if (or checkValidations input.showMessage (eq field.self.type 'dummy'))}}
+                    {{#each input.validation.messages as |message|}}
+                      <div class="bx--form-requirement">
+                        {{message}}
+                      </div>
+                    {{/each}}
+                  {{/if}}
+                  {{#if input.validation.isValidating}}
+                    <p class="text-info">validating...</p>
+                  {{/if}}
+                </div>
+
+                <div class="{{field.self.type}} {{field.self.style_class}} form-group">
+
+                  {{!in case of async validation}}
+                  {{#if input.validation.isValidating}}
+                    <p class="text-info">validating...</p>
+                  {{/if}}
+
+                </div>
+              </field.input>
+            </Fieldset.fields>
+          </fieldset>
+
+        </Form.fieldsets>
+
+        {{#if checkValidations}}
+          {{#each Form.self.validations.errors as |error|}}
+            <div class="alert alert-danger">
+              <strong>{{form-attr-translate error.attribute Form.self.fieldsets}}:</strong> {{error.message}}</div>
+          {{/each}}
+        {{/if}}
+
+        {{#if Form.self.validations.isInvalid}}
+
+          Please fill in all fields with <span style="color: red">*</span>
+          <BxButton @isActive={{checkValidations}} @onClick={{action toggleProperty 'checkValidations'}} @disabled={{loading}} class='pull-right'>
+            Show me
+          </BxButton>
+
+        {{else}}
+
+          {{#if (and noNewData formSaved hasNext)}}
+            <BxButton @onClick={{action 'showNextSection'}} class='pull-right'>
+              Next Section
+            </BxButton>
+          {{else}}
+            <BxButton @onClick={{Form.onSubmit}} @loading={{loading}} @primary='true' @disabled={{or loading noNewData}} class='pull-right'>
+              Save
+            </BxButton>
+          {{/if}}
+
+        {{/if}}
+      </form>
+    </Json-Form>
+  {{/if}}
+</div>

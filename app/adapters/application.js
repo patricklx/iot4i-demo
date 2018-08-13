@@ -1,6 +1,9 @@
 import DS from 'ember-data';
 import { computed } from '@ember-decorators/object';
 import { service } from '@ember-decorators/service';
+import { dasherize } from '@ember/string';
+import { pluralize } from 'ember-inflector';
+
 import config from 'demoapp/config/environment';
 
 
@@ -18,6 +21,11 @@ export default class extends DS.RESTAdapter {
     return {
       'authorization': 'Bearer ' + auth
     };
+  }
+
+  pathForType(modelName) {
+    const dasherized = dasherize(modelName);
+    return pluralize(dasherized);
   }
 
   deleteRecord(store, type) {
