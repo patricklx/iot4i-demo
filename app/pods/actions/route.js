@@ -1,10 +1,10 @@
 import Route from '@ember/routing/route';
-import { service } from '@ember-decorators/service';
+import { inject as service } from '@ember/service';
 
-export default class extends Route {
-  @service store;
-
+export default Route.extend({
+  store: service(),
   model() {
-    return this.store.findAll('action');
+    this.store.findAll('action');
+    return this.store.peekAll('action');
   }
-};
+});

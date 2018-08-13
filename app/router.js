@@ -6,7 +6,7 @@ const Router = Ember.Router.extend({
   rootURL: config.rootURL,
   session: Ember.inject.service(),
 
-  willTransition: function(oldInfos, newInfos, transition) {
+  willTransition(oldInfos, newInfos, transition) {
     this._super(...arguments);
 
     if (this.get('session.credentials')) {

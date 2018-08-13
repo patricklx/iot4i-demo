@@ -19,7 +19,7 @@ export default Component.extend(BxClassNames, {
   actions: {
     onClick() {
       const promise = this.onClick && this.onClick();
-      if (promise && promise instanceof Promise) {
+      if (promise && promise.finally) {
         this.set('loading', true);
         this.set('disabled', true);
         promise.finally(() => {

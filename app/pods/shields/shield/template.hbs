@@ -1,50 +1,53 @@
-<div class="flex-sm-50 flex-sm-70">
-  <Paper-Card as |card|>
-    <card.title as |title|>
-      <title.text as |text|>
-        <text.headline>{{shield.name}}</text.headline>
-        <text.subhead>{{shield.name}}</text.subhead>
-      </title.text>
-    </card.title>
-    <card.content>
-      <Paper-Input @value={{shield.name}} @label="Name" @onChange={{action (mut shield.name) value}} />
-      <Paper-Input @value={{shield.description}} @label="Description" @onChange={{action (mut shield.description) value}} />
-      <BxSelect
-        @placeholder="Choose actions"
-        @multiple={{true}}
-        @content={{actionsArray}}
-        @removeItem={{action "removeAction"}}
-        @addItem={{action "addAction"}}
-        @searchField="name"
-        @onfocus={{action "selectFocused"}}
-        @options={{actionOptionsArray}} as |act|>
-          {{act.name}} <br> <small>{{default-to act.description 'no description'}}</small>
-      </BxSelect>
-      <card.actions></card.actions>
-    </card.content>
-  </Paper-Card>
-
-  <Paper-List>
-    <Paper-Toolbar as |toolbar|>
-      <Paper-Toolbar-Tools>{{shield.name}}: Shield Codes</Paper-Toolbar-Tools>
-    </Paper-Toolbar>
-    {{#each shield.codes as |shieldCode|}}
-      <Paper-Item @class="md-3-line" as |controls|>
-        <!--<img src={{shieldCode.img}} alt={{shieldCode.name}} class="md-avatar">-->
-        <div class="md-list-item-text">
-          <h3>{{shieldCode.name}}</h3>
-          <p>{{shieldCode.description}}</p>
+<div class="bx--grid">
+  <div class='bx--row'>
+    <div class='bx--col-sm-6'>
+      <BxTile>
+        <h4>{{shield.name}}</h4>
+        <small>{{shield.id}}</small>
+        <br>
+        <br>
+        <div style='max-width: 300px'>
+          <BxInput @value={{shield.name}} @label="Name" @onChange={{action (mut shield.name) value}} />
+          <BxInput @value={{shield.description}} @label="Description" @onChange={{action (mut shield.description) value}} />
+          <BxSelect
+            @placeholder="Choose actions"
+            @multiple={{true}}
+              @content={{actionsArray}}
+            @removeItem={{action "removeAction"}}
+              @addItem={{action "addAction"}}
+            @searchField="name"
+            @onfocus={{action "selectFocused"}}
+              @options={{actionOptionsArray}} as |act|>
+            {{act.name}} <br> <small>{{default-to act.description 'no description'}}</small>
+          </BxSelect>
         </div>
-        <div class="md-secondary-container">
-          <controls.checkbox @secondary=true @value={{shieldCode.enabled}} @onChange={{action (mut shieldCode.enabled)}} @skipProxy=true />
-          <controls.button @secondary=true @iconButton=true @onClick={{action "goToShieldCode" shieldCode}}>
-            <Paper-Icon @icon="mode edit"/>
-            </controls.button>
-          <controls.button @warn=true @secondary=true @iconButton=true @onClick={{action "deleteShieldCode" shieldCode}} >
-            <Paper-Icon @icon="delete"/>
-          </controls.button>
+      </BxTile>
+    </div>
+    <div class='bx--col-sm-6'>
+      <section class="bx--structured-list">
+        <div class="bx--structured-list-thead">
+          <div class="bx--structured-list-row bx--structured-list-row--header-row">
+            <div class="bx--structured-list-th">{{shield.name}}: Shield Codes</div>
+            <div class="bx--structured-list-th"></div>
+          </div>
         </div>
-      </Paper-Item>
-    {{/each}}
-  </Paper-List>
+        <div class="bx--structured-list-tbody">
+          {{#each shield.codes as |shieldCode|}}
+            <div class="bx--structured-list-row">
+              <div class="bx--structured-list-td bx--structured-list-content--nowrap">
+                <h3>{{shieldCode.name}}</h3>
+                <p>{{shieldCode.description}}</p>
+              </div>
+              <div class="bx--structured-list-td">
+                <BxCheckbox @checked={{shieldCode.enabled}} @onChange={{action (mut shieldCode.enabled)}} />
+                <BxIcon @icon="edit" @info="true" @onClick={{action 'goToShieldCode' shieldCode}}/>
+                <span style="width: 10px; display: inline-block;"></span>
+                <BxIcon @icon="delete" @danger="true" @onClick={{action 'deleteShieldCode' shieldCode}}/>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </section>
+    </div>
+  </div>
 </div>

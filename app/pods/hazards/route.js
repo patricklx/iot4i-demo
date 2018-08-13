@@ -5,6 +5,6 @@ export default class extends Route{
   @service store;
 
   model() {
-    return this.get('store').query('hazard', {descending: true})
+    return this.get('store').query('hazard', {descending: true});
   }
 };

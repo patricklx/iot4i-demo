@@ -40,7 +40,7 @@
                   <ul role="menu" aria-label="{{menu.title}} sub menu" aria-hidden="true" class="main-nav__sub-nav">
                     {{#each menu.submenus as |submenu|}}
                       <li role="menuitem" class="sub-nav__item {{if (eq currentMenu submenu) 'selected'}}" tabindex="-1">
-                        <a class="sub-nav__item-link" aria-label="{{submenu.title}}" tabindex="-1" href="#" onclick={{action 'transitionTo' submenu.routeName}}>
+                        <a class="sub-nav__item-link" aria-label="{{submenu.title}}" tabindex="-1" onclick={{action 'transitionTo' submenu.routeName}}>
                           <BxIcon @icon="{{submenu.icon}}" />
                           {{submenu.title}}
                         </a>
@@ -51,7 +51,7 @@
             </li>
           {{else}}
             <li role="menuitem" tabindex="{{menuIndex}}" class="main-nav-item {{if (eq currentMenu menu) 'main-nav-item__active'}}">
-              <a aria-label="{{menu.title}}" tabindex="-1" class="main-nav-item__heading" href="#" onclick={{action 'transitionTo' menu.routeName}}>
+              <a aria-label="{{menu.title}}" tabindex="-1" class="main-nav-item__heading" onclick={{action 'transitionTo' menu.routeName}}>
                 <BxIcon @icon="{{menu.icon}}" />
                 {{menu.title}}
               </a>

@@ -45,18 +45,22 @@ export default Controller.extend({
       icon: 'header--user'
     }];
 
-    const handler = function (event) {
+    const handler = (event) => {
+      return;
+      if (!this.leftSideBarOpen) {
+        return;
+      }
       // if the target is a descendent of container do nothing
-      if ($(window).width <= 1024) {
+      if ($(event.target).is(".side-nav, .side-nav *")) return;
+      if ($(window).width() <= 1024) {
         this.set('leftSideBarOpen', false);
       }
-      if ($(event.target).is(".side-nav, .side-nav *")) return;
       // remove event handler from document
       // $(document).off("click", handler);
       // dostuff
     };
 
-    $(document).on("click", handler);
+    //$(document).on("click", handler);
   },
 
   currentMenu: computed('router.currentRouteName', function () {

@@ -5,6 +5,7 @@ export default class extends Route{
   @service store;
 
   model() {
-    return this.store.findAll('shield')
+    this.store.findAll('shield');
+    return this.store.peekAll('shield');
   }
 };
