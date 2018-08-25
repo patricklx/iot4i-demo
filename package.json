@@ -19,6 +19,7 @@
     "carbon-components": "^9.6.1",
     "carbon-icons": "latest",
     "ember-inflector": "^2.1.0",
+    "ember-json-form": "github:patricklx/ember-json-form",
     "eslint": "^5.3.0",
     "eslint-plugin-import": "^2.13.0",
     "lodash": "^4.17.4"
@@ -47,6 +48,7 @@
     "ember-cli-uglify": "^2.0.0",
     "ember-cli-windows-addon": "^1.3.1",
     "ember-component-css": "^0.6.4",
+    "ember-cp-validations": "^4.0.0-beta.2",
     "ember-data": "^3.3.0",
     "ember-debug-logger": "^1.1.0",
     "ember-decorators": "^2.3.1",

@@ -19,6 +19,13 @@
           </div>
         </div>
       {{/each}}
+      <div class="bx--structured-list-row">
+        <div class="bx--structured-list-td bx--structured-list-content--nowrap">
+          <BxButton @primary="true" @onClick={{action 'goToNewShield'}}>
+            New <BxIcon @icon="add" />
+          </BxButton>
+        </div>
+      </div>
     </div>
   </section>
 </div>

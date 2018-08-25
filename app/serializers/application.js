@@ -10,7 +10,7 @@ export default DS.RESTSerializer.extend({
       newPayload[pluralize(primaryModelClass.modelName)].__meta = {
         limit: payload.limit,
         offset: payload.offset,
-        totalItems: payload.totalItems,
+        totalItems: payload.totalItems
       };
     } else {
       if (payload.id) {
@@ -27,5 +27,5 @@ export default DS.RESTSerializer.extend({
       store.metaForType(type, payload.__meta);
       delete payload.__meta;
     }
-  },
+  }
 });

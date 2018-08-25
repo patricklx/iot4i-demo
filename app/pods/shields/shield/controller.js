@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import { alias } from '@ember-decorators/object/computed';
 import { action, computed } from '@ember-decorators/object';
 import { service } from '@ember-decorators/service';
+import { fields } from '../../../models/shield';
 
 export default class extends Controller {
   @alias('model') shield;
@@ -10,6 +11,20 @@ export default class extends Controller {
   @computed('shield.actions')
   get actionsArray() {
     return this.shield.actions.toArray();
+  }
+
+  @computed('')
+  get formSections() {
+    return [{
+      name: 'Shield',
+      form: {
+        id: 'shield',
+        fieldsets: [{
+          id: 'model',
+          fields: fields
+        }]
+      }
+    }];
   }
 
   @computed('session.actions.[]','actionsArray.[]')

@@ -1,0 +1,14 @@
+<BxSelect
+  @placeholder="{{field.placeholder}}"
+  @multiple={{true}}
+    @content={{value}}
+  @removeItem={{action "removeAction"}}
+    @addItem={{action "addAction"}}
+  @searchField={{field.searchField}}
+  @onfocus={{action "selectFocused"}}
+    @options={{modelArray}} as |model|>
+  {{get model field.modelLabel}}
+  {{#if field.description}}
+    <br> <small>{{default-to (get model field.description) 'no description'}}</small>
+  {{/if}}
+</BxSelect>

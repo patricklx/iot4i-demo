@@ -4,6 +4,7 @@ import { service } from '@ember-decorators/service';
 
 export default class extends Controller {
   @service router;
+  @service store;
 
   @action
   goToShield(shield) {
@@ -13,6 +14,11 @@ export default class extends Controller {
   @action
   deleteShield(shield) {
     return shield.destroyRecord();
+  }
+
+  @action
+  goToNewShield() {
+    this.router.transitionTo('shields.shield', '__new__');
   }
 
   @action

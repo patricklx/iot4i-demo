@@ -21,5 +21,5 @@ export default Ember.Component.extend({
 
   willDestroy() {
     return this.checkbox.release();
-  },
+  }
 });

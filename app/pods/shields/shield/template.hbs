@@ -7,19 +7,10 @@
         <br>
         <br>
         <div style='max-width: 300px'>
-          <BxInput @value={{shield.name}} @label="Name" @onChange={{action (mut shield.name) value}} />
-          <BxInput @value={{shield.description}} @label="Description" @onChange={{action (mut shield.description) value}} />
-          <BxSelect
-            @placeholder="Choose actions"
-            @multiple={{true}}
-              @content={{actionsArray}}
-            @removeItem={{action "removeAction"}}
-              @addItem={{action "addAction"}}
-            @searchField="name"
-            @onfocus={{action "selectFocused"}}
-              @options={{actionOptionsArray}} as |act|>
-            {{act.name}} <br> <small>{{default-to act.description 'no description'}}</small>
-          </BxSelect>
+          <Form-Editor
+            @model={{shield}}
+            @sections={{formSections}}
+          />
         </div>
       </BxTile>
     </div>

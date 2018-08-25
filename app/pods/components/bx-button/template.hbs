@@ -1,6 +1,7 @@
-<button onclick={{action attrs.onClick}}
+<button onclick={{action onClick}}
         class="bx--btn {{bxClassNames}}"
         aria-label="{{if danger 'danger'}}"
+        disabled={{disabled}}
         type="button">
   {{#if hasBlock}}
     {{yield}}

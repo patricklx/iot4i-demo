@@ -5,6 +5,7 @@ export default DS.Model.extend({
   description: DS.attr('string'),
   type: DS.attr('string'),
   enabled: DS.attr('boolean'),
-  jobOptions: DS.attr()
-});
+  jobOptions: DS.attr(),
 
+  shield: DS.belongsTo('shield')
+});

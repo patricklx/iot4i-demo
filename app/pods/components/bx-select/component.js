@@ -58,4 +58,4 @@ export default Ember.Component.extend({
       '    <path d="M10 0L5 5 0 0z"></path>\n' +
       '  </svg>');
   }
-})
+});

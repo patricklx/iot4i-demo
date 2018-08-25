@@ -7,6 +7,7 @@ import { inject as service } from '@ember/service';
 
 export default Component.extend({
   ajax: service(),
+  store: service(),
 
   noNewData: true,
   tmpIniData: null,
@@ -19,7 +20,7 @@ export default Component.extend({
     },
     allowString() {
       return this.get('_type') === 'number';
-    },
+    }
   },
   fieldsets: computed.alias('sectionContent.fieldsets'),
   sectionNames: computed('sections.[]', function () {
@@ -35,7 +36,7 @@ export default Component.extend({
     this.set('currentSection', this.sections.firstObject.name);
   },
 
-  iniData: computed('model', 'sectionContent.id', function () {
+  iniData: computed('model.isLoaded', 'sectionContent.id', function () {
     // this.get('session.user').belongsTo('advancedInfo').load();
     let info = this.get('model') || {};
     let saved;
@@ -45,6 +46,7 @@ export default Component.extend({
     if (!this.get('model.isLoaded')) {
       return null;
     }
+    info = info.serialize ? info.serialize() : info;
     const id = this.get('sectionContent.id');
     if (this.get('tmpIniData')) {
       return this.get('tmpIniData')[id] || this.get('tmpIniData');
@@ -52,7 +54,9 @@ export default Component.extend({
     info = info[id] || info;
     const data = Ember.$.extend(true, {}, info, saved);
     Ember.set(data, 'session', this.get('session'));
-    return data;
+    return {
+      model: data
+    };
   }),
 
   /**
@@ -84,7 +88,7 @@ export default Component.extend({
           reader.onload = function (e) {
             Ember.set(data, vName, {
               type: file.type,
-              data: e.target.result,
+              data: e.target.result
             });
             nFiles--;
             if (nFiles === 0) {
@@ -113,7 +117,7 @@ export default Component.extend({
   actions: {
 
     onSubmit(data) {
-      if (!this.get(`formChanged.${this.get('currentSectionObject.form')}`)) {
+      if (!this.get(`formChanged.${this.get('currentSectionObject.name')}`)) {
         return;
       }
       this.set('loading', true);
@@ -124,12 +128,15 @@ export default Component.extend({
         _data[form] = formData;
 
         this.set('tmpIniData', formData);
-        this.set('model', _data);
+        if (this.model.id === '__new__') {
+          this.set('model', this.store.createRecord(this.model.modelType), {});
+        }
+        this.setProperties('model', _data);
         localStorage.removeItem(this.get('sectionContent.id'));
         this.get('model.content').save().then(() => {
           this.set('formSaved', true);
           this.set('noNewData', true);
-          this.set(`formChanged.${this.get('currentSectionObject.form')}`, false);
+          this.set(`formChanged.${this.get('currentSectionObject.name')}`, false);
         }).finally(() => {
           this.set('tmpIniData', null);
           this.set('loading', false);
@@ -138,13 +145,16 @@ export default Component.extend({
     },
 
     onChange(data, value, attrPath) {
-      if (this.get(`model${attrPath}`) === value) {
+      if (attrPath.startsWith('.')) {
+        attrPath = attrPath.slice(1);
+      }
+      if (this.get(attrPath) === value) {
         return;
       }
       this.set('noNewData', false);
-      this.set(`formChanged.${this.get('sectionContent.id')}`, true);
+      this.set(`formChanged.${this.get('sectionContent.name')}`, true);
       this.loadFiles(data, (formData) => {
-        localStorage.setItem(this.get('sectionContent.id'), JSON.stringify(formData));
+        localStorage.setItem(this.get('sectionContent.name'), JSON.stringify(formData));
       });
     },
 
@@ -163,6 +173,6 @@ export default Component.extend({
     showSection(section) {
       this.set('currentSection', section);
       this.set('formSaved', false);
-    },
-  },
+    }
+  }
 });

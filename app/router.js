@@ -33,7 +33,10 @@ Router.map(function() {
     });
   });
   this.route('hazards', { path: 'hazards' });
-  this.route('actions', { path: 'actions' });
+  this.route('actions', { path: 'actions' }, function () {
+    this.route('index');
+    this.route('edit', { path: ':action_id' });
+  });
   this.route('devices', { path: 'devices' });
   this.route('actions', { path: 'actions' });
   this.route('customers', { path: 'customers' });
