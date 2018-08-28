@@ -12,24 +12,22 @@ export default Component.extend({
   }),
 
   actions: {
+
+    onSelect(selected) {
+      this.set('currentValue', selected);
+      this.onChange(this.currentValue);
+    },
+
     remove(model) {
-      if (this.field.multiple) {
-        this.currentValue.removeObject(model);
-      } else {
-        this.set('currentValue', undefined);
-      }
+      this.currentValue.removeObject(model);
       this.onChange(this.currentValue);
     },
 
     add(model) {
-      if (this.field.multiple) {
-        if (!Array.isArray(this.currentValue)) {
-          this.set('currentValue', []);
-        }
-        this.currentValue.pushObject(model);
-      } else {
-        this.set('currentValue', model);
+      if (!Array.isArray(this.currentValue)) {
+        this.set('currentValue', []);
       }
+      this.currentValue.pushObject(model);
       this.onChange(this.currentValue);
     },
 
