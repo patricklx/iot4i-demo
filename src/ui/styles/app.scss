@@ -1,0 +1,107 @@
+@import 'node_modules/carbon-components/src/globals/scss/styles';
+@import "ember-component-css/pod-styles";
+@import 'ember-paper/ember-paper';
+@import 'sidenav';
+@import "bx-power-select";
+@import "ember-power-select/ember-power-select";
+@import "bx-sidenav";
+
+
+
+.bx--checkbox-label {
+  display: inline-block;
+}
+
+
+span.badge {
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: #fff;
+  background-color: #26a69a;
+  border-radius: 2px;
+}
+
+span.badge {
+  min-width: 3rem;
+  padding: 0 6px;
+  margin-left: 14px;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 22px;
+  height: 22px;
+  float: right;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.md-chips md-chip {
+  height: initial !important;
+}
+
+body {
+  font: 14px/16px;
+  font-family: 'ibm-plex-sans', 'Helvetica Neue', Arial, sans-serif;
+  color: #666;
+  background-color: #f0f3f4;
+}
+
+
+.ember-power-select-multiple-trigger {
+  input[type='checkbox'] {
+    display: none;
+  }
+  .bx--checkbox-label {
+    padding: 0;
+  }
+  .bx--checkbox-label::before, .bx--checkbox-label::after {
+    display: none;
+  }
+  br {
+    display: block;
+  }
+}
+
+.ember-power-select-status-icon {
+  width: initial;
+  height: initial;
+  right: 1em;
+  border: none;
+}
+.ember-power-select-trigger, .ember-power-select-trigger-multiple-input {
+  line-height: initial;
+  padding: 10px 20px 10px 16px;
+}
+
+.ember-power-select-multiple-options > .ember-power-select-multiple-option {
+  border: none;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 2px;
+  line-height: inherit;
+  height: auto;
+  @extend .bx--list-box__selection;
+  @extend .bx--list-box__selection--multi;
+}
+
+.ember-power-select-multiple-remove-btn {
+  opacity: 1;
+  margin-right: 3px;
+  font-weight: bold;
+  font-size: 150%;
+}
+
+.ember-power-select-placeholder {
+  height: 2.7rem;
+  padding: 0.8125rem 2.5rem 0.8125rem 1rem;
+}
+
+.ember-power-select-option {
+  padding: 1rem 1.5rem 1rem 1rem;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  min-height: 2.5rem;
+}
+.ember-power-select-option[aria-current="true"] {
+  text-decoration: underline;
+}
