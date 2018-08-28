@@ -2,6 +2,11 @@
 
 module.exports = function(environment) {
   var ENV = {
+    'ember-resolver': {
+      features: {
+        EMBER_RESOLVER_MODULE_UNIFICATION: true
+      }
+    },
     modulePrefix: 'demoapp',
     podModulePrefix: 'demoapp/pods',
     environment: environment,
@@ -9,6 +14,7 @@ module.exports = function(environment) {
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
+        'ember-module-unification': true
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
       },
