@@ -1,0 +1,13 @@
+.bx--label {
+  position: relative;
+  &.required::after {
+    content: '*';
+    color: red;
+    position: relative;
+    right:0;
+    top: -5px;
+    font-family: 'Glyphicons Halflings';
+    font-weight: normal;
+    font-size: 15px;
+  }
+}

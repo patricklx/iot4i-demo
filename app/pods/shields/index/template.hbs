@@ -13,7 +13,7 @@
             <p>#{{shield.id}} {{shield.name}}</p>
           </div>
           <div class="bx--structured-list-td">
-            <BxIcon @icon="edit" @info="true" @onClick={{action 'goToShield' shield}}/>
+            <BxIcon @icon="edit" @info="true" @onClick={{action 'editShield' shield}}/>
             <span style="width: 10px; display: inline-block;"></span>
             <BxIcon @icon="delete" @danger="true" @onClick={{action 'deleteShield' shield}}/>
           </div>
@@ -21,7 +21,7 @@
       {{/each}}
       <div class="bx--structured-list-row">
         <div class="bx--structured-list-td bx--structured-list-content--nowrap">
-          <BxButton @primary="true" @onClick={{action 'goToNewShield'}}>
+          <BxButton @primary="true" @onClick={{action 'createNewShield'}}>
             New <BxIcon @icon="add" />
           </BxButton>
         </div>

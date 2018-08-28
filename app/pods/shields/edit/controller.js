@@ -7,11 +7,7 @@ import { fields } from '../../../models/shield';
 export default class extends Controller {
   @alias('model') shield;
   @service session;
-
-  @computed('shield.actions')
-  get actionsArray() {
-    return this.shield.actions.toArray();
-  }
+  @service router;
 
   @computed('')
   get formSections() {
@@ -27,33 +23,18 @@ export default class extends Controller {
     }];
   }
 
-  @computed('session.actions.[]','actionsArray.[]')
-  get actionOptionsArray() {
-    return this.session.actions;
+  @action
+  addNew() {
+    this.router.transitionTo('shields.edit-shield-code', '__new__');
   }
 
   @action
-  selectFocused(select, evt) {
-    select.actions.open();
+  editShieldCode(code) {
+    this.router.transitionTo('shields.edit-shield-code', code);
   }
 
   @action
-  goToShieldCode() {
-
-  }
-
-  @action
-  deleteShieldCode() {
-
-  }
-
-  @action
-  addAction(action) {
-    this.actionsArray.pushObject(action);
-  }
-
-  @action
-  removeAction(action) {
-    this.actionsArray.removeObject(action);
+  deleteShieldCode(code) {
+    return code.destroyRecord();
   }
 }

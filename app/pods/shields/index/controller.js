@@ -7,8 +7,8 @@ export default class extends Controller {
   @service store;
 
   @action
-  goToShield(shield) {
-    this.router.transitionTo('shields.shield', shield);
+  editShield(shield) {
+    this.router.transitionTo('shields.edit', shield);
   }
 
   @action
@@ -17,8 +17,8 @@ export default class extends Controller {
   }
 
   @action
-  goToNewShield() {
-    this.router.transitionTo('shields.shield', '__new__');
+  createNewShield() {
+    this.router.transitionTo('shields.edit', '__new__');
   }
 
   @action

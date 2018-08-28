@@ -37,7 +37,7 @@ export const fields = [{
   label: 'Description',
   type: 'text',
   validations: {
-    presence: false,
+    presence: true,
     length: {
       min: 3,
       max: 30
@@ -49,6 +49,8 @@ export const fields = [{
   label: 'Select actions to execute on a hazard',
   type: 'model-select',
   modelType: 'action',
+  modelLabel: 'name',
+  description: 'description',
   validations: {
     presence: true
   }

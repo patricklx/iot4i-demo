@@ -6,6 +6,14 @@ export default Component.extend({
   store: service(),
   tagName: '',
 
+  _value: computed('value', function () {
+    try {
+      return JSON.stringify(this.value);
+    } catch (e) {
+      return this.value;
+    }
+  }),
+
   actions: {
     onChange(value) {
       try {

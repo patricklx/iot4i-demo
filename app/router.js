@@ -26,11 +26,8 @@ Router.map(function() {
   this.route('trylogin', { path: 'trylogin' });
   this.route('shields', { path: 'shields' }, function () {
     this.route('index');
-    this.route('shield', { path: ':shield_id' }, function () {
-      this.route('codes', function () {
-        this.route('index');
-      });
-    });
+    this.route('edit', { path: ':shield_id' });
+    this.route('edit-shield-code', { path: 'code/:shield_code_id' });
   });
   this.route('hazards', { path: 'hazards' });
   this.route('actions', { path: 'actions' }, function () {

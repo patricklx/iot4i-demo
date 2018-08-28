@@ -4,22 +4,15 @@ import Checkbox from 'carbon-components/es/components/checkbox/checkbox';
 export default Ember.Component.extend({
   tagName: '',
   uuid: Ember.computed(() => Ember.uuid()),
+  disabled: false,
+  state: null,
+  checked: null,
 
-  didReceiveAttrs(...args) {
-    this._super(...args);
-    if (this.disabled !== undefined) {
-      this.checkbox && this.checkbox.setDisabled(this.disabled);
-    }
-    if (this.state !== undefined) {
-      this.checkbox && this.checkbox.setState(this.state);
-    }
+  onFocus() {
+    this.set('isFocus', true);
   },
 
-  didInsertElement() {
-    this.checkbox = new Checkbox($(`#checkbox-${this.uuid}`)[0], this);
-  },
-
-  willDestroy() {
-    return this.checkbox.release();
+  onBlur() {
+    this.set('isFocus', false);
   }
 });

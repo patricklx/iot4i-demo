@@ -5,11 +5,11 @@ export default Route.extend({
   store: service(),
 
   model(params) {
-    if (params.action_id === '__new__') {
+    if (params.shield_id === '__new__') {
       return {
-        id: '__new__', name: 'New Action', modelType: 'action', isLoaded: true
+        id: '__new__', name: 'New Shield', modelType: 'shield', isLoaded: true
       };
     }
-    return this.store.find('action', params.action_id);
+    return this.store.find('shield', params.shield_id);
   }
 });

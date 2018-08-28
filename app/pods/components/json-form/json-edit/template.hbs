@@ -1,2 +1,2 @@
-<textarea rows={{field.rows}} class="bx--text-area bx--text-area--v2" placeholder="{{field.placeholder}}" value={{default-to (readonly value) field.defaultValue}} onchange={{action "onChange" value="target.value"}} />
+<textarea rows={{field.rows}} class="bx--text-area bx--text-area--v2" placeholder="{{field.placeholder}}" value={{default-to (readonly _value) field.defaultValue}} onchange={{action "onChange" value="target.value"}} />
 <p style="color: red">{{err}}</p>

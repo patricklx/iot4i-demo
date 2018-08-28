@@ -1,9 +1,9 @@
 <BxSelect
   @placeholder="{{field.placeholder}}"
   @multiple={{true}}
-    @content={{value}}
-  @removeItem={{action "removeAction"}}
-    @addItem={{action "addAction"}}
+    @content={{currentValue}}
+  @removeItem={{action "removeModel"}}
+    @addItem={{action "addModel"}}
   @searchField={{field.searchField}}
   @onfocus={{action "selectFocused"}}
     @options={{modelArray}} as |model|>

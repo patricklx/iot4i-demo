@@ -29,7 +29,7 @@
               <field.input as |input|>
 
                 <div class="bx--form-item {{field.self.type}} {{field.self.style_class}}" style='margin-bottom: 1.5rem;'>
-                  <input.component @classNames="bx--text-input" @errors={{input.validation.messages}} />
+                  <input.component @classNames="bx--text-input" @errors={{input.validation.messages}} data-invalid={{if input.showMessage 'true' false}} />
                   {{#if (and field.self.label (not-eq field.self.type 'checkbox'))}}
                     <label for="{{field.self.name}}" class="bx--label {{if field.self.validations.presence 'required' ''}}">
                       {{field.self.label}}
@@ -79,7 +79,7 @@
         {{#if Form.self.validations.isInvalid}}
 
           Please fill in all fields with <span style="color: red">*</span>
-          <BxButton @isActive={{checkValidations}} @onClick={{action toggleProperty 'checkValidations'}} @disabled=loading class='pull-right'>
+          <BxButton @isActive={{checkValidations}} @onClick={{action toggleProperty 'checkValidations'}} @disabled={{loading}} class='pull-right'>
             Show me
           </BxButton>
 
@@ -90,7 +90,7 @@
               Next Section
             </BxButton>
           {{else}}
-            <BxButton @onClick={{Form.onSubmit}} @primary='true' @disabled={{or loading noNewData}} class='pull-right'>
+            <BxButton @onClick={{Form.onSubmit}} @loading={{loading}} @primary='true' @disabled={{or loading noNewData}} class='pull-right'>
               Save
             </BxButton>
           {{/if}}

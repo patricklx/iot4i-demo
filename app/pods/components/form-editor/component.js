@@ -37,22 +37,17 @@ export default Component.extend({
   },
 
   iniData: computed('model.isLoaded', 'sectionContent.id', function () {
-    // this.get('session.user').belongsTo('advancedInfo').load();
     let info = this.get('model') || {};
-    let saved;
-    if (localStorage.getItem(this.get('sectionContent.id'))) {
-      saved = JSON.parse(localStorage.getItem(this.get('sectionContent.id')));
-    }
     if (!this.get('model.isLoaded')) {
       return null;
     }
     info = info.serialize ? info.serialize() : info;
     const id = this.get('sectionContent.id');
     if (this.get('tmpIniData')) {
-      return this.get('tmpIniData')[id] || this.get('tmpIniData');
+      return { model: this.get('tmpIniData')[id] || this.get('tmpIniData') };
     }
     info = info[id] || info;
-    const data = Ember.$.extend(true, {}, info, saved);
+    const data = Ember.$.extend(true, {}, info);
     Ember.set(data, 'session', this.get('session'));
     return {
       model: data
@@ -123,23 +118,20 @@ export default Component.extend({
       this.set('loading', true);
 
       this.loadFiles(data, (formData) => {
-        const form = this.get('currentSectionObject.form');
-        const _data = {};
-        _data[form] = formData;
-
-        this.set('tmpIniData', formData);
+        this.set('tmpIniData', formData.model);
+        let model = this.model;
         if (this.model.id === '__new__') {
-          this.set('model', this.store.createRecord(this.model.modelType), {});
+          model = this.store.createRecord(this.model.modelType);
         }
-        this.setProperties('model', _data);
-        localStorage.removeItem(this.get('sectionContent.id'));
-        this.get('model.content').save().then(() => {
+        model.setProperties(formData.model);
+        model.save().then(() => {
           this.set('formSaved', true);
           this.set('noNewData', true);
           this.set(`formChanged.${this.get('currentSectionObject.name')}`, false);
         }).finally(() => {
           this.set('tmpIniData', null);
           this.set('loading', false);
+          this.set('model', model);
         });
       });
     },
@@ -152,10 +144,7 @@ export default Component.extend({
         return;
       }
       this.set('noNewData', false);
-      this.set(`formChanged.${this.get('sectionContent.name')}`, true);
-      this.loadFiles(data, (formData) => {
-        localStorage.setItem(this.get('sectionContent.name'), JSON.stringify(formData));
-      });
+      this.set(`formChanged.${this.get('currentSectionObject.name')}`, true);
     },
 
     showNextSection() {

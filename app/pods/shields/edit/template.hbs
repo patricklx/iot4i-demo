@@ -31,12 +31,21 @@
               </div>
               <div class="bx--structured-list-td">
                 <BxCheckbox @checked={{shieldCode.enabled}} @onChange={{action (mut shieldCode.enabled)}} />
-                <BxIcon @icon="edit" @info="true" @onClick={{action 'goToShieldCode' shieldCode}}/>
+                <BxIcon @icon="edit" @info="true" @onClick={{action 'editShieldCode' shieldCode}}/>
                 <span style="width: 10px; display: inline-block;"></span>
                 <BxIcon @icon="delete" @danger="true" @onClick={{action 'deleteShieldCode' shieldCode}}/>
               </div>
             </div>
           {{/each}}
+          <div class="bx--structured-list-row">
+            <div class="bx--structured-list-td bx--structured-list-content--nowrap">
+              <BxButton @primary="true" @onClick={{action 'addNew'}}>
+                New <BxIcon @icon="add" />
+              </BxButton>
+            </div>
+            <div class="bx--structured-list-td">
+            </div>
+          </div>
         </div>
       </section>
     </div>

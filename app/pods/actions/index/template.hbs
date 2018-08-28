@@ -16,7 +16,8 @@
             <p>{{to-json action.callbackAction}}</p>
           </div>
           <div class="bx--structured-list-td">
-            <BxButton @danger="true" @onClick={{action 'delete' action}}>Delete</BxButton>
+            <BxIcon @icon="edit" @info="true" @onClick={{action 'edit' action}} />
+            <BxIcon @icon="delete" @danger="true" @onClick={{action 'delete' action}} />
           </div>
         </div>
       {{/each}}

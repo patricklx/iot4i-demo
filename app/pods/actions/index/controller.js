@@ -11,6 +11,10 @@ export default Controller.extend({
 
     addNew() {
       this.router.transitionTo('actions.edit', '__new__');
+    },
+
+    edit(action) {
+      this.router.transitionTo('actions.edit', action);
     }
   }
 });
