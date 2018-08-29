@@ -18,41 +18,41 @@ export const fields = [{
   help: 'Name of shield',
   validations: null
 },
-{
-  id: 'type',
-  label: 'Type',
-  type: 'text',
-  help: 'Custom type of shield',
-  validations: null
-},
-{
-  id: 'image',
-  label: 'Image',
-  type: 'text',
-  help: 'Link to an image to represent the shield',
-  validations: null
-},
-{
-  id: 'description',
-  label: 'Description',
-  type: 'text',
-  validations: {
-    presence: true,
-    length: {
-      min: 3,
-      max: 30
+  {
+    id: 'type',
+    label: 'Type',
+    type: 'text',
+    help: 'Custom type of shield',
+    validations: null
+  },
+  {
+    id: 'image',
+    label: 'Image',
+    type: 'text',
+    help: 'Link to an image to represent the shield',
+    validations: null
+  },
+  {
+    id: 'description',
+    label: 'Description',
+    type: 'text',
+    validations: {
+      presence: true,
+      length: {
+        min: 3,
+        max: 30
+      }
+    }
+  },
+  {
+    id: 'actions',
+    label: 'Select actions to execute on a hazard',
+    type: 'model-select',
+    modelType: 'action',
+    modelLabel: 'name',
+    description: 'description',
+    validations: {
+      presence: true
     }
   }
-},
-{
-  id: 'actions',
-  label: 'Select actions to execute on a hazard',
-  type: 'model-select',
-  modelType: 'action',
-  modelLabel: 'name',
-  description: 'description',
-  validations: {
-    presence: true
-  }
-}
 ];

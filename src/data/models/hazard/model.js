@@ -11,7 +11,7 @@ export default DS.Model.extend({
   ishandled: DS.attr('boolean'),
   actionParams: DS.attr(),
 
-  userId: Ember.computed(function () {
-    return this.belongsTo('user').id();
+  userId: Ember.computed(function() {
+    return this.belongsTo('user').id()
   })
 });

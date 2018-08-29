@@ -1,5 +1,5 @@
+import AppSerializer from '../application/serializer';
 import { pluralize } from 'ember-inflector';
-import AppSerializer from './application';
 
 export default AppSerializer.extend({
   normalizeResponse(store, primaryModelClass, payload, id, requestType) {

@@ -1,7 +1,9 @@
-import Ember from 'ember';
-import config from '../config/environment';
+import EmberRouter from "@ember/routing/router";
+import config from "../config/environment";
+import Ember from "../bower_components/ember/ember-runtime";
 
-const Router = Ember.Router.extend({
+
+const Router = EmberRouter.extend({
   location: config.locationType,
   rootURL: config.rootURL,
   session: Ember.inject.service(),
@@ -21,7 +23,7 @@ const Router = Ember.Router.extend({
   }
 });
 
-Router.map(function () {
+Router.map(function() {
   this.route('login', { path: 'login' });
   this.route('trylogin', { path: 'trylogin' });
   this.route('shields', { path: 'shields' }, function () {
