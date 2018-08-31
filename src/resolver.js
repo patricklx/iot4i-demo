@@ -1,4 +1,4 @@
-import Resolver from 'ember-resolver/resolvers/glimmer-wrapper';
+import Resolver from 'ember-resolver/resolvers/fallback';
 import buildResolverConfig from 'ember-resolver/ember-config';
 import config from '../config/environment';
 
@@ -9,5 +9,18 @@ let moduleConfig = buildResolverConfig(config.modulePrefix);
  */
 
 export default Resolver.extend({
-  config: moduleConfig
+  config: moduleConfig,
+  makeToString(factory, fullName) {
+    const name = this._super(factory, fullName);
+    if (name.startsWith('@ember') || name === '(unknown)') {
+      return fullName;
+    }
+    return name;
+  },
+  resolve: function resolve(name, referrer) {
+    try {
+      var result = this._super(name, referrer);
+    } catch (e) {}
+    return result || this._fallback.resolve(this._fallback.normalize(name));
+  }
 });

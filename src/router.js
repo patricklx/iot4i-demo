@@ -1,12 +1,12 @@
 import EmberRouter from "@ember/routing/router";
 import config from "../config/environment";
-import Ember from "../bower_components/ember/ember-runtime";
+import { inject as service } from '@ember/service';
 
 
 const Router = EmberRouter.extend({
   location: config.locationType,
   rootURL: config.rootURL,
-  session: Ember.inject.service(),
+  session: service(),
 
   willTransition(oldInfos, newInfos, transition) {
     this._super(...arguments);

@@ -17,6 +17,7 @@ const App = Ember.Application.extend({
   Resolver
 });
 
+loadInitializers(App, `${config.modulePrefix}`);
 loadInitializers(App, `${config.modulePrefix}/src/init`);
 
 export default App;

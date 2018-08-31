@@ -1,10 +1,11 @@
 @import 'node_modules/carbon-components/src/globals/scss/styles';
-@import "pod-styles";
-@import 'ember-paper';
+@import "ember-component-css/pod-styles";
+@import 'ember-paper/ember-paper';
 @import 'sidenav';
 @import "bx-power-select";
-@import "ember-power-select";
+@import "ember-power-select/ember-power-select";
 @import "bx-sidenav";
+
 
 
 .bx--checkbox-label {

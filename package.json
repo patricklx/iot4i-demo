@@ -11,9 +11,9 @@
   },
   "repository": "",
   "scripts": {
-    "build": "ember build",
-    "start": "ember server",
-    "test": "ember test"
+    "build": "MODULE_UNIFICATION=true EMBER_CLI_MODULE_UNIFICATION=true ember build",
+    "start": "MODULE_UNIFICATION=true EMBER_CLI_MODULE_UNIFICATION=true ember server",
+    "test": "MODULE_UNIFICATION=true EMBER_CLI_MODULE_UNIFICATION=true ember test"
   },
   "dependencies": {
     "carbon-components": "^9.8.5",
@@ -30,7 +30,7 @@
     "broccoli-asset-rev": "^2.7.0",
     "ember-ajax": "^3.0.0",
     "ember-auto-import": "^1.2.8",
-    "ember-cli": "^3.3.0",
+    "ember-cli": "patricklx/ember-cli#fix-styles",
     "ember-cli-app-version": "^3.0.0",
     "ember-cli-babel": "^6.17.0",
     "ember-cli-dependency-checker": "^2.1.0",
@@ -46,7 +46,7 @@
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^2.0.0",
     "ember-cli-windows-addon": "^1.3.1",
-    "ember-component-css": "^0.6.4",
+    "ember-component-css": "patricklx/ember-cli#support-mu",
     "ember-cp-validations": "^4.0.0-beta.2",
     "ember-data": "^3.4.0",
     "ember-debug-logger": "^1.1.0",

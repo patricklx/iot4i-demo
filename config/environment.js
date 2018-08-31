@@ -7,6 +7,7 @@ module.exports = function(environment) {
         EMBER_RESOLVER_MODULE_UNIFICATION: true
       }
     },
+    namespaceStyles: {all: true},
     modulePrefix: 'demoapp',
     podModulePrefix: 'demoapp/pods',
     environment: environment,
