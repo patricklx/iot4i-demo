@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { alias } from '@ember-decorators/object/computed';
 import { action, computed } from '@ember-decorators/object';
 import { service } from '@ember-decorators/service';
-import { fields } from '../../../models/shield';
+import { fields } from '../../../../data/models/shield/model';
 
 export default class extends Controller {
   @alias('model') shield;

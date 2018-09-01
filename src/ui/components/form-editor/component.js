@@ -31,8 +31,7 @@ export default Component.extend({
   }),
   sectionContent: alias('currentSectionObject.form'),
 
-  init(...args) {
-    this._super(...args);
+  didReceiveAttrs() {
     this.set('currentSection', this.sections.firstObject.name);
   },
 

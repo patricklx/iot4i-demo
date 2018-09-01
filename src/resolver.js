@@ -20,7 +20,9 @@ export default Resolver.extend({
   resolve: function resolve(name, referrer) {
     try {
       var result = this._super(name, referrer);
-    } catch (e) {}
+    } catch (e) {
+      console.warn(e);
+    }
     return result || this._fallback.resolve(this._fallback.normalize(name));
   }
 });

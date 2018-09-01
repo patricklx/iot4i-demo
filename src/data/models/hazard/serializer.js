@@ -1,4 +1,4 @@
-import AppSerializer from './application';
+import AppSerializer from '../application/serializer';
 
 export default AppSerializer.extend({
   normalize(model, hash, prop) {

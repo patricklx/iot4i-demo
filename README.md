@@ -3,6 +3,15 @@
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
 
+## Addons
+* [ember-cli-flash](https://github.com/poteto/ember-cli-flash)
+* [ember-basic-dropdown](http://ember-basic-dropdown.com/docs)
+* [ember-tooltips](http://sir-dunxalot.github.io/ember-tooltips/)
+* [ember-moment](http://sir-dunxalot.github.io/ember-tooltips/)
+* [ember-truth-helpers](http://sir-dunxalot.github.io/ember-tooltips/)
+* [ember-power-select](http://sir-dunxalot.github.io/ember-tooltips/)
+* [ember-oauth2](http://sir-dunxalot.github.io/ember-tooltips/)
+
 ## Prerequisites
 
 You will need the following things properly installed on your computer.
