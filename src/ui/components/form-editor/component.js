@@ -40,7 +40,6 @@ export default Component.extend({
     if (!this.get('model.isLoaded')) {
       return null;
     }
-    info = info.serialize ? info.serialize() : info;
     const id = this.get('sectionContent.id');
     if (this.get('tmpIniData')) {
       return { model: this.get('tmpIniData')[id] || this.get('tmpIniData') };

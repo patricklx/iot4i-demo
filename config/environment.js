@@ -4,12 +4,13 @@ module.exports = function(environment) {
   var ENV = {
     'ember-resolver': {
       features: {
-        EMBER_RESOLVER_MODULE_UNIFICATION: true
+        EMBER_RESOLVER_MODULE_UNIFICATION: true,
+        EMBER_MODULE_UNIFICATION: true
       }
     },
-    namespaceStyles: {all: true},
+    namespaceStyles: { all: true },
     modulePrefix: 'demoapp',
-    podModulePrefix: 'demoapp/pods',
+    podModulePrefix: 'demoapp/src/data/models',
     environment: environment,
     rootURL: '/',
     locationType: 'auto',
@@ -49,6 +50,7 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.autoboot = false;
   }
 
   if (environment === 'production') {
