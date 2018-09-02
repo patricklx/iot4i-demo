@@ -19,7 +19,7 @@
     "carbon-components": "^9.8.5",
     "carbon-icons": "^7.0.7",
     "ember-inflector": "^3.0.0",
-    "ember-json-form": "github:patricklx/ember-json-form",
+    "ember-json-form": "github:patricklx/ember-json-form#update",
     "eslint": "^5.4.0",
     "eslint-plugin-import": "^2.14.0",
     "lodash": "^4.17.10"
