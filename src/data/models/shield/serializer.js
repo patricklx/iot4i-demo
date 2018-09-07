@@ -2,6 +2,9 @@ import AppSerializer from '../application/serializer';
 import { pluralize } from 'ember-inflector';
 
 export default AppSerializer.extend({
+  attrs: {
+    actions: { serialize: true }
+  },
   normalizeResponse(store, primaryModelClass, payload, id, requestType) {
     const namespace = store.adapterFor('application').namespace;
     if (payload && payload.items) {

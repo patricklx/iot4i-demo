@@ -8,10 +8,6 @@ export default Controller.extend({
   action: alias('model'),
   session: service(),
 
-  actionsArray: computed('shield.actions', function () {
-    return this.shield.actions.toArray();
-  }),
-
   formSections: computed('', () => [{
     name: 'Action',
     form: {

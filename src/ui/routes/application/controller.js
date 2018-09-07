@@ -46,12 +46,11 @@ export default Controller.extend({
     }];
 
     const handler = (event) => {
-      return;
       if (!this.leftSideBarOpen) {
-
+        return;
       }
       // if the target is a descendent of container do nothing
-      if ($(event.target).is('.side-nav, .side-nav *')) return;
+      if ($(event.target).is('.side-nav, .side-nav *, .side-nav__toggle-btn, .side-nav__toggle-btn *')) return;
       if ($(window).width() <= 1024) {
         this.set('leftSideBarOpen', false);
       }
@@ -61,6 +60,10 @@ export default Controller.extend({
     };
 
     $(document).on('click', handler);
+
+    if ($(window).width() <= 1024) {
+      this.set('leftSideBarOpen', false);
+    }
   },
 
   currentMenu: computed('router.currentRouteName', function () {
@@ -83,6 +86,9 @@ export default Controller.extend({
   actions: {
     transitionTo(to) {
       this.transitionToRoute(to);
+      if ($(window).width() <= 1024) {
+        this.set('leftSideBarOpen', false);
+      }
     },
 
     logout() {
