@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import BxClassNames from 'demoapp/src\\utils\\mixins\\bx-class-names';
 
 export default Ember.Component.extend({
   content: [],

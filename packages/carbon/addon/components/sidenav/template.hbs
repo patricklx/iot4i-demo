@@ -50,7 +50,7 @@
         {{#if menu.submenus}}
           <li onclick={{action toggleProperty (concat menu.title '-expanded')}} role="menuitem" tabindex="{{menuIndex}}" class="main-nav-item {{if (eq currentMenu menu) 'main-nav-item__active'}} {{if (get this (concat menu.title '-expanded')) 'main-nav-item__open'}}">
             <p class="main-nav-item__heading main-nav-item__list">
-              <BxIcon @icon="{{menu.icon}}" />
+              <Icon @icon="{{menu.icon}}" />
               {{menu.title}}
               <svg class="main-nav-item__arrow" fill-rule="evenodd" height="5" name="caret--down" role="img" viewBox="0 0 10 5" width="10" aria-hidden="true" alt="Menu arrow icon" aria-label="Menu arrow icon">
                 <title>Menu arrow icon</title><path d="M0 0l5 4.998L10 0z"></path>
@@ -61,7 +61,7 @@
                 {{#each menu.submenus as |submenu|}}
                   <li role="menuitem" class="sub-nav__item {{if (eq currentMenu submenu) 'selected'}}" tabindex="-1">
                     <a class="sub-nav__item-link" aria-label="{{submenu.title}}" tabindex="-1" onclick={{action 'transitionTo' submenu.routeName}}>
-                      <BxIcon @icon="{{submenu.icon}}" />
+                      <Icon @icon="{{submenu.icon}}" />
                       {{submenu.title}}
                     </a>
                   </li>
@@ -72,7 +72,7 @@
         {{else}}
           <li role="menuitem" tabindex="{{menuIndex}}" class="main-nav-item {{if (eq currentMenu menu) 'main-nav-item__active'}}">
             <a aria-label="{{menu.title}}" tabindex="-1" class="main-nav-item__heading" onclick={{action 'transitionTo' menu.routeName}}>
-              <BxIcon @icon="{{menu.icon}}" />
+              <Icon @icon="{{menu.icon}}" />
               {{menu.title}}
             </a>
           </li>

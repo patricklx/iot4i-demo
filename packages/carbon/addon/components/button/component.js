@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import BxClassNames from 'demoapp/src\\utils\\mixins\\bx-class-names';
+import BxClassNames from '../../mixins/bx-class-names';
 
 export default Ember.Component.extend(BxClassNames, {
   tagName: '',

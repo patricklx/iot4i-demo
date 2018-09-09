@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import Loading from 'carbon-components/es/components/loading/loading';
 
 export default Ember.Component.extend({
   selectable: false,

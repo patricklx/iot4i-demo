@@ -13,17 +13,17 @@
             <p>#{{shield.id}} {{shield.name}}</p>
           </div>
           <div class="bx--structured-list-td">
-            <BxIcon @icon="edit" @info="true" @onClick={{action 'editShield' shield}}/>
+            <Carbon::Icon @icon="edit" @info="true" @onClick={{action 'editShield' shield}}/>
             <span style="width: 10px; display: inline-block;"></span>
-            <BxIcon @icon="delete" @danger="true" @onClick={{action 'deleteShield' shield}}/>
+            <Carbon::Icon @icon="delete" @danger="true" @onClick={{action 'deleteShield' shield}}/>
           </div>
         </div>
       {{/each}}
       <div class="bx--structured-list-row">
         <div class="bx--structured-list-td bx--structured-list-content--nowrap">
-          <BxButton @primary="true" @onClick={{action 'createNewShield'}}>
-            New <BxIcon @icon="add" />
-          </BxButton>
+          <Carbon::Button @primary="true" @onClick={{action 'createNewShield'}}>
+            New <Carbon::Icon @icon="add" />
+          </Carbon::Button>
         </div>
         <div class="bx--structured-list-td"></div>
       </div>

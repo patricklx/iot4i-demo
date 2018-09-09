@@ -3,7 +3,7 @@
     <input tabindex="-1" data-tile-input id="tile-{{uuid}}" class="bx--tile-input" value="tile" type="checkbox" name="tiles" title="tile"
     />
     <div class="bx--tile__checkmark">
-      <BxIcon @icon="checkmark--solid"/>
+      <Icon @icon="checkmark--solid"/>
     </div>
     <div class="bx--tile-content">
       {{yield}}
@@ -13,7 +13,7 @@
 {{#if expandable}}
   <div data-tile="expandable" class="bx--tile bx--tile--expandable" tabindex="0">
     <button class="bx--tile__chevron">
-      <BxIcon @icon="chevron--down" />
+      <Icon @icon="chevron--down" />
     </button>
     <div class="bx--tile-content">
     <span data-tile-atf class="bx--tile-content__above-the-fold">

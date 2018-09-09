@@ -79,20 +79,20 @@
         {{#if Form.self.validations.isInvalid}}
 
           Please fill in all fields with <span style="color: red">*</span>
-          <BxButton @isActive={{checkValidations}} @onClick={{action toggleProperty 'checkValidations'}} @disabled={{loading}} class='pull-right'>
+          <Carbon::Button @isActive={{checkValidations}} @onClick={{action toggleProperty 'checkValidations'}} @disabled={{loading}} class='pull-right'>
             Show me
-          </BxButton>
+          </Carbon::Button>
 
         {{else}}
 
           {{#if (and noNewData formSaved hasNext)}}
-            <BxButton @onClick={{action 'showNextSection'}} class='pull-right'>
+            <Carbon::Button @onClick={{action 'showNextSection'}} class='pull-right'>
               Next Section
-            </BxButton>
+            </Carbon::Button>
           {{else}}
-            <BxButton @onClick={{Form.onSubmit}} @loading={{loading}} @primary='true' @disabled={{or loading noNewData}} class='pull-right'>
+            <Carbon::Button @onClick={{Form.onSubmit}} @loading={{loading}} @primary='true' @disabled={{or loading noNewData}} class='pull-right'>
               Save
-            </BxButton>
+            </Carbon::Button>
           {{/if}}
 
         {{/if}}

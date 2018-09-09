@@ -1,8 +1,7 @@
-import Ember from 'ember';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import icon from 'carbon-icons';
-import BxClassNames from 'demoapp/src\\utils\\mixins\\bx-class-names';
+import BxClassNames from '../../mixins/bx-class-names';
 
 export default Component.extend(BxClassNames, {
   tagName: '',
@@ -30,3 +29,4 @@ export default Component.extend(BxClassNames, {
     }
   }
 });
+

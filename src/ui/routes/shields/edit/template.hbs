@@ -1,7 +1,7 @@
 <div class="bx--grid">
   <div class='bx--row'>
     <div class='bx--col-sm-6'>
-      <BxTile>
+      <Carbon::Tile>
         <h4>{{shield.name}}</h4>
         <small>{{shield.id}}</small>
         <br>
@@ -12,7 +12,7 @@
             @sections={{formSections}}
           />
         </div>
-      </BxTile>
+      </Carbon::Tile>
     </div>
     <div class='bx--col-sm-6'>
       <section class="bx--structured-list">
@@ -30,18 +30,18 @@
                 <p>{{shieldCode.description}}</p>
               </div>
               <div class="bx--structured-list-td">
-                <BxCheckbox @checked={{shieldCode.enabled}} @onChange={{action (mut shieldCode.enabled)}} />
-                <BxIcon @icon="edit" @info="true" @onClick={{action 'editShieldCode' shieldCode}}/>
+                <Carbon::Checkbox @checked={{shieldCode.enabled}} @onChange={{action (mut shieldCode.enabled)}} />
+                <Carbon::Icon @icon="edit" @info="true" @onClick={{action 'editShieldCode' shieldCode}}/>
                 <span style="width: 10px; display: inline-block;"></span>
-                <BxIcon @icon="delete" @danger="true" @onClick={{action 'deleteShieldCode' shieldCode}}/>
+                <Carbon::Icon @icon="delete" @danger="true" @onClick={{action 'deleteShieldCode' shieldCode}}/>
               </div>
             </div>
           {{/each}}
           <div class="bx--structured-list-row">
             <div class="bx--structured-list-td bx--structured-list-content--nowrap">
-              <BxButton @primary="true" @onClick={{action 'addNew'}}>
-                New <BxIcon @icon="add" />
-              </BxButton>
+              <Carbon::Button @primary="true" @onClick={{action 'addNew'}}>
+                New <Carbon::Icon @icon="add" />
+              </Carbon::Button>
             </div>
             <div class="bx--structured-list-td">
             </div>
