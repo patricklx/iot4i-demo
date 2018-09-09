@@ -27,7 +27,13 @@
   "dependencies": {
     "ember-cli-htmlbars": "*",
     "ember-cli-babel": "*",
+    "ember-component-css": "*",
+    "ember-cli-sass": "*",
+    "ember-auto-import": "*",
     "ember-cli-htmlbars-inline-precompile": "*",
-    "ember-cli-template-lint": "*"
+    "ember-cli-template-lint": "*",
+    "carbon-components": "*",
+    "ember-basic-dropdown": "*",
+    "carbon-icons": "*"
   }
 }

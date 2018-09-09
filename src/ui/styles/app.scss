@@ -1,11 +1,8 @@
 @import 'node_modules/carbon-components/src/globals/scss/styles';
 @import "ember-component-css/pod-styles";
-@import 'ember-paper/ember-paper';
-@import 'sidenav';
-@import "bx-power-select";
+@import "carbon/index.scss";
 @import "ember-power-select/ember-power-select";
-@import "bx-sidenav";
-
+@import "ember-basic-dropdown/ember-basic-dropdown";
 
 
 .bx--checkbox-label {
@@ -32,10 +29,6 @@ span.badge {
   float: right;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-}
-
-.md-chips md-chip {
-  height: initial !important;
 }
 
 body {

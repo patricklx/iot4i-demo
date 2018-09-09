@@ -1,6 +1,7 @@
 import Resolver from 'ember-resolver/resolvers/fallback';
 import buildResolverConfig from 'ember-resolver/ember-config';
 import Ember from 'ember';
+import { computed } from '@ember/object';
 import config from '../config/environment';
 
 const moduleConfig = buildResolverConfig(config.modulePrefix);
@@ -11,6 +12,22 @@ const moduleConfig = buildResolverConfig(config.modulePrefix);
 
 export default Resolver.extend({
   config: moduleConfig,
+
+  init(options) {
+    this._super(options);
+    const lookupAddonComponent = function lookupAddonComponent(parsedName) {
+      if (parsedName.type === 'template') {
+        return `${parsedName.prefix}/${parsedName.fullNameWithoutType}/${parsedName.type}`;
+      }
+      return `${parsedName.prefix}/components/${parsedName.fullNameWithoutType}/${parsedName.type}`;
+    };
+    this._fallback.moduleNameLookupPatterns.push(lookupAddonComponent);
+  },
+
+  normalize(fullName) {
+    return this._fallback.normalize(fullName);
+  },
+
   makeToString(factory, fullName) {
     const name = this._super(factory, fullName);
     if (name.startsWith('@ember') || name === '(unknown)') {
@@ -19,8 +36,9 @@ export default Resolver.extend({
     return name;
   },
   resolve: function resolve(name, referrer) {
+    let result;
     try {
-      var result = this._super(name, referrer);
+      result = this._super(name, referrer);
     } catch (e) {
       console.warn(e);
     }
@@ -33,25 +51,45 @@ const ComponentLookup = Ember.ComponentLookup;
 
 
 ComponentLookup.reopen({
-  componentFor: function componentFor(name, owner, options) {
+  componentFor(name, owner, options) {
+    options = Object.assign({}, options);
     if (name.includes('::')) {
-      name = name.replace('::', '/');
-      name = `/@src/ui/components/${name}`;
+      name = name.replace('::', '@');
     }
-    if (name.includes('/') && options) {
+    if (name.includes('@') && options) {
       options.source = undefined;
     }
-    return this._super.call(this, name, owner, options);
+    const ret = this._super.call(this, name, owner, options);
+    if (ret) {
+      return ret;
+    }
+
+    if (options && options.source) {
+      const namespace = options.source.split(':')[1].split('/')[0];
+      name = `${namespace}@${name}`;
+      options.source = undefined;
+      return this._super.call(this, name, owner, options);
+    }
   },
 
   layoutFor(name, owner, options) {
+    options = Object.assign({}, options);
     if (name.includes('::')) {
-      name = name.replace('::', '/');
-      name = `/@src/ui/components/${name}`;
+      name = name.replace('::', '@');
     }
-    if (name.includes('/') && options) {
+    if (name.includes('@') && options) {
       options.source = undefined;
     }
-    return this._super.call(this, name, owner, options);
+    const ret = this._super.call(this, name, owner, options);
+    if (ret) {
+      return ret;
+    }
+
+    if (options && options.source) {
+      const namespace = options.source.split(':')[1].split('/')[0];
+      name = `${namespace}@${name}`;
+      options.source = undefined;
+      return this._super.call(this, name, owner, options);
+    }
   }
 });

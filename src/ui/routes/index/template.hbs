@@ -2,7 +2,7 @@
   <div class="bx--row">
   {{#each overviewCards as |overview|}}
     <div class="bx--col-sm-3 bx--col-lg-2 bx--col-xs-12" style="cursor: pointer" onclick={{action 'transitionTo' overview.link}}>
-      <BxTile>
+      <Carbon::Tile>
         <div class="bx--grid">
           <div class="bx--row">
             <div class="bx--col-xs-7 bx--col-sm-5">
@@ -12,11 +12,11 @@
               </p>
             </div>
             <div class="bx--col-xs-1">
-              <BxIcon @icon={{overview.icon}} @size=64></BxIcon>
+              <Carbon::Icon @icon={{overview.icon}} @size=64></Carbon::Icon>
             </div>
           </div>
         </div>
-      </BxTile>
+      </Carbon::Tile>
     </div>
   {{/each}}
   </div>

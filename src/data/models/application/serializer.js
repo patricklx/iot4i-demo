@@ -23,6 +23,12 @@ export default DS.RESTSerializer.extend({
     return this._super(store, primaryModelClass, newPayload, id, requestType);
   },
 
+  // serializeAttribute(snapshot, json, key) {
+  //   if (snapshot.changedAttributes()[key] || snapshot.record.get('isNew')) {
+  //     this._super(snapshot, json, key);
+  //   }
+  // },
+
   extractMeta(store, type, payload) {
     if (payload && payload.__meta) {
       store.metaForType(type, payload.__meta);

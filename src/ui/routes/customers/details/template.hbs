@@ -1,0 +1,23 @@
+<div class="bx--tile">
+  <section class="bx--structured-list">
+    <div class="bx--structured-list-thead">
+      <div class="bx--structured-list-row bx--structured-list-row--header-row">
+        <div class="bx--structured-list-th">Customers</div>
+        <div class="bx--structured-list-th"></div>
+      </div>
+    </div>
+    <div class="bx--structured-list-tbody">
+      {{#each model as |user index|}}
+        <div class="bx--structured-list-row">
+          <div class="bx--structured-list-td bx--structured-list-content--nowrap">
+            <h3>{{user.name}}</h3>
+            <h4>{{user.email}}</h4>
+            <p>City: {{user.address.city}}</p>
+          </div>
+          <div class="bx--structured-list-td">
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </section>
+</div>

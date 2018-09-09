@@ -17,12 +17,12 @@
           </div>
           <div class="bx--structured-list-td">
             {{#if hazard.ishandled}}
-              <BxIcon @icon=check" @class="check"/>
+              <Carbon::Icon @icon="checkmark" @size="25" @class="check" style="margin-right: 30px"/>
             {{else}}
-              <BxButton @onClick={{action 'ack' hazard}}>Ack</BxButton>
+              <Carbon::Button @primary="true" @onClick={{action 'ack' hazard}}>Ack</Carbon::Button>
               <span style="width: 10px; display: inline-block;"></span>
             {{/if}}
-            <BxButton @danger="true" @onClick={{action 'delete' hazard}}>Delete</BxButton>
+            <Carbon::Button @danger="true" @onClick={{action 'delete' hazard}}>Delete</Carbon::Button>
           </div>
         </div>
       {{/each}}
