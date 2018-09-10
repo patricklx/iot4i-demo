@@ -10,13 +10,13 @@
     @closeOnSelect={{false}}
   as |option select|
   >
-    <BxCheckbox @onclick='return false;' @readonly='true' @checked={{ember-power-select-is-selected option select.selected}} >
+    <Checkbox @onclick='return false;' @readonly='true' @checked={{ember-power-select-is-selected option select.selected}} >
       {{#if hasBlock}}
         {{yield option}}
       {{else}}
         {{option}}
       {{/if}}
-    </BxCheckbox>
+    </Checkbox>
   </PowerSelectMultiple>
 {{else}}
   <PowerSelect

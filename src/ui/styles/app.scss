@@ -2,10 +2,8 @@
 @import "ember-component-css/pod-styles";
 @import 'ember-paper/ember-paper';
 @import 'sidenav';
-@import "bx-power-select";
+@import "carbon/index.scss";
 @import "ember-power-select/ember-power-select";
-@import "bx-sidenav";
-@import "./carbon/index.scss";
 
 
 .bx--checkbox-label {

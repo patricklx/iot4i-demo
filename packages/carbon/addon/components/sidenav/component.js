@@ -3,7 +3,6 @@ import { computed } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
 
 export default Component.extend({
-  tagName: '',
   searchResultsGlobal: null,
   searchResultsSection: null,
   menuItems: null,

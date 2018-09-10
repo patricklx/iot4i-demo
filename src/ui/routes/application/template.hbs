@@ -4,9 +4,7 @@
     @transitionTo={{action 'transitionTo'}}
     @open={{leftSideBarOpen}}
     @onToggle={{action (mut leftSideBarOpen)}}
-  />
-
-  <div class="container {{if leftSideBarOpen '' 'container--expanded'}}">
+  >
     <div class="page-header">
       <h4 class="page-header__label">{{if currentSubMenu.title currentMenu.title currentSubMenu.title}}</h4>
       <h1 id="page-title" class="page-header__title">{{if currentSubMenu.title currentSubMenu.title currentMenu.title}}</h1>
@@ -33,5 +31,5 @@
       {{outlet}}
     </div>
     <Paper-Toaster/>
-  </div>
+  </Carbon::Sidenav>
 </div>
