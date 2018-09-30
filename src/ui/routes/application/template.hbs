@@ -1,4 +1,4 @@
-  <div class="{{styleNamespace}} main">
+<div class="{{styleNamespace}} main">
   <Carbon::Sidenav
     @menuItems={{menuItems}}
     @transitionTo={{action 'transitionTo'}}
@@ -7,29 +7,32 @@
   >
     <div class="page-header">
       <h4 class="page-header__label">{{if currentSubMenu.title currentMenu.title currentSubMenu.title}}</h4>
-      <h1 id="page-title" class="page-header__title">{{if currentSubMenu.title currentSubMenu.title currentMenu.title}}</h1>
-      <Paper-Toolbar-Tools>
-
+      <h1 id="page-title" class="page-header__title">
+        {{if currentSubMenu.title currentSubMenu.title currentMenu.title}}
+      </h1>
+      <div style="width: 100%">
         <span class="flex"></span>
-
-        <Paper-Button @iconButton=true>
-          <Paper-Menu as |menu|>
-            <menu.trigger>
-              <Paper-Icon @icon="account circle"/>
-            </menu.trigger>
-            <menu.content @width=4 as |content|>
-              <content.menu-item @onClick={{action 'logout'}} >
-                Logout
-              </content.menu-item>
-            </menu.content>
-          </Paper-Menu>
-        </Paper-Button>
-
-      </Paper-Toolbar-Tools>
+        <Carbon::Menu @icon="user" @menu={{userMenu}} @onClick={{action 'onMenuClicked'}}/>
+      </div>
     </div>
+    <nav aria-label="navigation" href="#" class="bx--tabs page-tabs" role="navigation">
+      <div role="listbox" aria-label="listbox" tabindex="0" class="bx--tabs-trigger">
+        <a tabindex="-1" class="bx--tabs-trigger-text" href="#">{{currentTab.title}}</a>
+        <svg fill-rule="evenodd" height="5" role="img" viewBox="0 0 10 5" width="10" aria-label="show menu options"
+             alt="show menu options"><title>show menu options</title>
+          <path d="M0 0l5 4.998L10 0z"></path>
+        </svg>
+      </div>
+      <ul role="tablist" class="bx--tabs__nav {{if smallScreen 'bx--tabs__nav--hidden'}}">
+        {{#each currentMenu.tabs as |tab|}}
+          <li role="presentation" tabindex="-1" class="bx--tabs__nav-item {{if (eq currentTab tab) 'bx--tabs__nav-item--selected'}}">
+            <a class="bx--tabs__nav-link" onclick={{action 'transitionTo' tab.routeName}} href="#" role="tab" tabindex="0" aria-selected="{{if (eq currentMenu.currentTab tab) 'true'}}">{{tab.title}}</a>
+          </li>
+        {{/each}}
+      </ul>
+    </nav>
     <div class="main-content">
       {{outlet}}
     </div>
-    <Paper-Toaster/>
   </Carbon::Sidenav>
 </div>

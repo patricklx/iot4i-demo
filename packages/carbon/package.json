@@ -33,6 +33,7 @@
     "ember-cli-htmlbars-inline-precompile": "*",
     "ember-cli-template-lint": "*",
     "carbon-components": "*",
+    "ember-basic-dropdown": "*",
     "carbon-icons": "*"
   }
 }

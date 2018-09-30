@@ -40,6 +40,11 @@ Router.map(function() {
   this.route('actions', { path: 'actions' });
   this.route('customers', { path: 'customers' });
   this.route('claims', { path: 'claims' });
+  this.route('profile', function () {
+    this.route('index');
+    this.route('shields', { path: 'shields' });
+    this.route('shield-activation-edit', { path: ':shield_activation_id' });
+  });
 });
 
 export default Router;

@@ -3,14 +3,13 @@ import { computed } from '@ember-decorators/object';
 import { service } from '@ember-decorators/service';
 import { dasherize } from '@ember/string';
 import { pluralize } from 'ember-inflector';
-
 import config from 'demoapp/config/environment';
 
 
 export default class extends DS.RESTAdapter {
   @service session;
   @service router;
-  @service paperToaster;
+  @service flashMessages;
   host = config.iotUri;
   namespace = 'api/v1/' + config.tenantId;
 
@@ -31,15 +30,15 @@ export default class extends DS.RESTAdapter {
   deleteRecord(store, type) {
     let p = super.deleteRecord(...arguments);
     return p.then((result) => {
-      this.paperToaster.show(`deleted record ${type.modelName}`, {
-        position: 'bottom right',
-        duration: 4000
+      this.flashMessages.info(`deleted record ${type.modelName}`, {
+        position: 'bottom-right',
+        timeout: 4000
       });
       return result;
     }, (err) => {
-      this.paperToaster.show(`failed to delete record ${type.modelName}: ${err}`, {
-        position: 'bottom right',
-        duration: 4000
+      this.flashMessages.danger(`failed to delete record ${type.modelName}: ${err}`, {
+        position: 'bottom-right',
+        timeout: 4000
       });
       throw err;
     });

@@ -24,6 +24,10 @@ export default Resolver.extend({
     this._fallback.moduleNameLookupPatterns.push(lookupAddonComponent);
   },
 
+  normalize(fullName) {
+    return this._fallback.normalize(fullName);
+  },
+
   makeToString(factory, fullName) {
     const name = this._super(factory, fullName);
     if (name.startsWith('@ember') || name === '(unknown)') {

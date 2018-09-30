@@ -17,9 +17,9 @@
           </div>
           <div class="bx--structured-list-td">
             {{#if hazard.ishandled}}
-              <Carbon::Icon @icon=check" @class="check"/>
+              <Carbon::Icon @icon="checkmark" @size="25" @class="check" style="margin-right: 30px"/>
             {{else}}
-              <Carbon::Button @onClick={{action 'ack' hazard}}>Ack</Carbon::Button>
+              <Carbon::Button @primary="true" @onClick={{action 'ack' hazard}}>Ack</Carbon::Button>
               <span style="width: 10px; display: inline-block;"></span>
             {{/if}}
             <Carbon::Button @danger="true" @onClick={{action 'delete' hazard}}>Delete</Carbon::Button>

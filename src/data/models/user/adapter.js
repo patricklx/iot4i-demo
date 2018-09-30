@@ -1,9 +1,6 @@
-import DS from 'ember-data';
 import config from 'demoapp/config/environment';
-import Ember from 'ember';
+import AppAdapter from '../application/adapter';
 
-export default DS.RESTAdapter.extend({
-  session: Ember.inject.service(),
-  host: config.backendUri,
-  namespace: 'api/v1'
-});
+export default class UserAdapter extends AppAdapter {
+  host = config.backendUri;
+}

@@ -12,11 +12,7 @@
   <div class="side-nav__top-container">
     <a id="skip-to-content" href="#maincontent" class="skip-to-content">Skip to main content</a>
     <a class="side-nav__logo" href="/">{{title}} <span>{{subtitle}}</span></a>
-    <div class="bx--search bx--search--sm" role="search">
-      <svg class="bx--search-magnifier" width="16" height="16" viewBox="0 0 16 16"><path d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z" fill-rule="nonzero"></path></svg>
-      <input type="text" aria-label="Search" class="bx--search-input" placeholder="Search" onchange="{{action 'search' value='target.value'}}">
-      <svg class="bx--search-close bx--search-close--hidden" width="16" height="16" viewBox="0 0 16 16" fill-rule="evenodd"><path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3.5 10.1l-1.4 1.4L8 9.4l-2.1 2.1-1.4-1.4L6.6 8 4.5 5.9l1.4-1.4L8 6.6l2.1-2.1 1.4 1.4L9.4 8l2.1 2.1z"></path></svg>
-    </div>
+    <SearchInput @onSearch={{action 'search'}}/>
   </div>
   <div class="global-search">
     <div class="global-search__results">
@@ -60,7 +56,7 @@
               <ul role="menu" aria-label="{{menu.title}} sub menu" aria-hidden="true" class="main-nav__sub-nav">
                 {{#each menu.submenus as |submenu|}}
                   <li role="menuitem" class="sub-nav__item {{if (eq currentMenu submenu) 'selected'}}" tabindex="-1">
-                    <a class="sub-nav__item-link" aria-label="{{submenu.title}}" tabindex="-1" onclick={{action 'transitionTo' submenu.routeName}}>
+                    <a class="sub-nav__item-link" aria-label="{{submenu.title}}" tabindex="-1" onclick={{action 'transitionTo' submenu}}>
                       <Icon @icon="{{submenu.icon}}" />
                       {{submenu.title}}
                     </a>
@@ -69,9 +65,9 @@
               </ul>
             {{/liquid-if}}
           </li>
-        {{else}}
+        {{else unless menu.hidden}}
           <li role="menuitem" tabindex="{{menuIndex}}" class="main-nav-item {{if (eq currentMenu menu) 'main-nav-item__active'}}">
-            <a aria-label="{{menu.title}}" tabindex="-1" class="main-nav-item__heading" onclick={{action 'transitionTo' menu.routeName}}>
+            <a aria-label="{{menu.title}}" tabindex="-1" class="main-nav-item__heading" onclick={{action 'transitionTo' menu}}>
               <Icon @icon="{{menu.icon}}" />
               {{menu.title}}
             </a>

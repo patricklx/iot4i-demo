@@ -1,0 +1,46 @@
+<div class="bx--tile">
+  <section class="bx--structured-list">
+    <div class="bx--structured-list-thead">
+      <div class="bx--structured-list-row bx--structured-list-row--header-row">
+        <div class="bx--structured-list-th">Shields</div>
+        <div class="bx--structured-list-th">Active</div>
+        <div class="bx--structured-list-th"></div>
+      </div>
+    </div>
+    <div class="bx--structured-list-tbody">
+      {{#each session.user.shieldActivations as |sa index|}}
+        <div class="bx--structured-list-row">
+          <div class="bx--structured-list-td bx--structured-list-content--nowrap">
+            <h3>{{sa.shield.name}}
+              <small>
+                <span class="bx--tag bx--tag--ibm">{{sa.shield.id}}</span>
+                <span class="bx--tag bx--tag--ibm">{{sa.shield.type}}</span>
+              </small>
+            </h3>
+            <b>{{sa.shield.description}}</b>
+          </div>
+          <div class="bx--structured-list-td">
+            <Carbon::Toggle @onChange={{action 'toggleShieldActivation' sa}} @value={{sa.enabled}} />
+          </div>
+          <div class="bx--structured-list-td">
+            <Carbon::Icon @icon="edit" @onClick={{action 'edit' sa}} />
+            <Carbon::Icon @icon="delete" @onClick={{action 'delete' sa}} @danger="true" />
+          </div>
+        </div>
+      {{/each}}
+
+      {{#each allShieldsWithoutActivation as |shield index|}}
+        <div class="bx--structured-list-row">
+          <div class="bx--structured-list-td bx--structured-list-content--nowrap">
+            <h3>{{shield.name}}</h3>
+            <b>{{shield.description}}</b>
+          </div>
+          <div class="bx--structured-list-td">
+            <Carbon::Toggle @onChange={{action 'activateShield' shield}} />
+          </div>
+          <div class="bx--structured-list-td"></div>
+        </div>
+      {{/each}}
+    </div>
+  </section>
+</div>

@@ -9,6 +9,17 @@ export default Controller.extend({
 
   init() {
     this._super(...arguments);
+    this.userMenu = [{
+      title: 'Logout',
+      action() {
+        this.session.logout();
+      }
+    }, {
+      title: 'Profile',
+      action() {
+        this.router.transitionTo('profile');
+      }
+    }];
     this.menuItems = [{
       title: 'Home',
       routeName: 'index',
@@ -43,6 +54,18 @@ export default Controller.extend({
       title: 'Customers',
       routeName: 'customers',
       icon: 'header--user'
+    }, {
+      title: 'Profile',
+      routeName: 'profile',
+      icon: 'header--user',
+      hidden: true,
+      tabs: [{
+        title: 'Info',
+        routeName: 'profile.index'
+      }, {
+        title: 'Shields',
+        routeName: 'profile.shields'
+      }]
     }];
 
     const handler = (event) => {
@@ -83,6 +106,11 @@ export default Controller.extend({
     });
   }),
 
+  currentTab: computed('currentMenu', 'router.currentRouteName', function () {
+    if (!this.currentMenu || !this.currentMenu.tabs) return null;
+    return this.currentMenu.tabs.find(t => this.router.currentRouteName.startsWith(t.routeName));
+  }),
+
   actions: {
     transitionTo(to) {
       this.transitionToRoute(to);
@@ -94,6 +122,10 @@ export default Controller.extend({
     logout() {
       this.get('session').logout();
       this.transitionToRoute('login');
+    },
+
+    onMenuClicked(menu) {
+      menu.action.call(this);
     },
 
     toggleExpandedItem(item, ev) {

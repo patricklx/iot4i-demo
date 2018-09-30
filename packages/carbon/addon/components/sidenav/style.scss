@@ -577,7 +577,6 @@
 
 
 @media screen and (min-width: 1024px) {
-
   .container {
     margin-left: 12.5rem;
     width: calc(100% - 200px);
@@ -587,4 +586,13 @@
 .container--expanded {
   width: 100%;
   margin-left: 0;
+}
+
+
+.bx--search-magnifier {
+  left: 1.75rem;
+}
+
+.bx--search--sm .bx--search-close {
+  right: 1.75rem;
 }

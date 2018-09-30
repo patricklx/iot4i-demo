@@ -13,8 +13,9 @@ export default Component.extend({
 
     },
 
-    transitionTo(to) {
-      this.transitionTo(to);
+    transitionTo(menuItem) {
+      this.set('currentMenu', menuItem);
+      this.transitionTo(menuItem.routeName);
     },
 
     toggleOpen() {
