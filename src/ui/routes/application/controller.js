@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   session: service(),
+  menuTitle: service(),
   router: service(),
   leftSideBarOpen: true,
 
@@ -89,16 +90,26 @@ export default Controller.extend({
     }
   },
 
-  currentMenu: computed('router.currentRouteName', function () {
+  currentMenu: computed('router.currentRouteName', 'menuTitle.currentTitle', function () {
+    if (this.menuTitle.currentTitle) {
+      return {
+        title: this.menuTitle.currentTitle
+      };
+    }
     return this.menuItems.find((i) => {
       if (i.submenus) {
-        return i.submenus.find(sm => this.router.currentRouteName.startsWith(sm.routeName));
+        return i.submenus.find(sm => sm.routeName.startsWith(this.router.currentRouteName.split('.')[0]));
       }
       return this.router.currentRouteName.startsWith(i.routeName);
     });
   }),
 
-  currentSubMenu: computed('router.currentRouteName', function () {
+  currentSubMenu: computed('router.currentRouteName', 'menuTitle.currentSubTitle', function () {
+    if (this.menuTitle.currentSubTitle) {
+      return {
+        title: this.menuTitle.currentSubTitle
+      };
+    }
     return this.menuItems.find((i) => {
       if (i.submenus) {
         return i.submenus.find(sm => sm.routeName.startsWith(this.router.currentRouteName));
